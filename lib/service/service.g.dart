@@ -19,27 +19,23 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<List<Character>> getAllCharacters({
-    required int page,
-    required String name,
-    required String status,
-    required String species,
-    required String type,
-    required String gender,
-  }) async {
+  Future<RickAndMortyDto> getAllCharacters(
+    String name,
+    String species,
+    String gender,
+    String status,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'page': page,
       r'name': name,
-      r'status': status,
       r'species': species,
-      r'type': type,
       r'gender': gender,
+      r'status': status,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RickAndMortyDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -55,9 +51,34 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = RickAndMortyDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RickAndMortyDto> getAllCharacter() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RickAndMortyDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/character',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = RickAndMortyDto.fromJson(_result.data!);
     return value;
   }
 

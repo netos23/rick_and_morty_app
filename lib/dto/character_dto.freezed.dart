@@ -1,0 +1,373 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'character_dto.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+RickAndMortyDto _$RickAndMortyDtoFromJson(Map<String, dynamic> json) {
+  return _RickAndMortyDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RickAndMortyDto {
+  Info get info => throw _privateConstructorUsedError;
+  List<Character> get results => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RickAndMortyDtoCopyWith<RickAndMortyDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RickAndMortyDtoCopyWith<$Res> {
+  factory $RickAndMortyDtoCopyWith(
+          RickAndMortyDto value, $Res Function(RickAndMortyDto) then) =
+      _$RickAndMortyDtoCopyWithImpl<$Res, RickAndMortyDto>;
+  @useResult
+  $Res call({Info info, List<Character> results});
+
+  $InfoCopyWith<$Res> get info;
+}
+
+/// @nodoc
+class _$RickAndMortyDtoCopyWithImpl<$Res, $Val extends RickAndMortyDto>
+    implements $RickAndMortyDtoCopyWith<$Res> {
+  _$RickAndMortyDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? info = null,
+    Object? results = null,
+  }) {
+    return _then(_value.copyWith(
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as Info,
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InfoCopyWith<$Res> get info {
+    return $InfoCopyWith<$Res>(_value.info, (value) {
+      return _then(_value.copyWith(info: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_RickAndMortyDtoCopyWith<$Res>
+    implements $RickAndMortyDtoCopyWith<$Res> {
+  factory _$$_RickAndMortyDtoCopyWith(
+          _$_RickAndMortyDto value, $Res Function(_$_RickAndMortyDto) then) =
+      __$$_RickAndMortyDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Info info, List<Character> results});
+
+  @override
+  $InfoCopyWith<$Res> get info;
+}
+
+/// @nodoc
+class __$$_RickAndMortyDtoCopyWithImpl<$Res>
+    extends _$RickAndMortyDtoCopyWithImpl<$Res, _$_RickAndMortyDto>
+    implements _$$_RickAndMortyDtoCopyWith<$Res> {
+  __$$_RickAndMortyDtoCopyWithImpl(
+      _$_RickAndMortyDto _value, $Res Function(_$_RickAndMortyDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? info = null,
+    Object? results = null,
+  }) {
+    return _then(_$_RickAndMortyDto(
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as Info,
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_RickAndMortyDto implements _RickAndMortyDto {
+  const _$_RickAndMortyDto(
+      {required this.info, required final List<Character> results})
+      : _results = results;
+
+  factory _$_RickAndMortyDto.fromJson(Map<String, dynamic> json) =>
+      _$$_RickAndMortyDtoFromJson(json);
+
+  @override
+  final Info info;
+  final List<Character> _results;
+  @override
+  List<Character> get results {
+    if (_results is EqualUnmodifiableListView) return _results;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_results);
+  }
+
+  @override
+  String toString() {
+    return 'RickAndMortyDto(info: $info, results: $results)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RickAndMortyDto &&
+            (identical(other.info, info) || other.info == info) &&
+            const DeepCollectionEquality().equals(other._results, _results));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, info, const DeepCollectionEquality().hash(_results));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RickAndMortyDtoCopyWith<_$_RickAndMortyDto> get copyWith =>
+      __$$_RickAndMortyDtoCopyWithImpl<_$_RickAndMortyDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_RickAndMortyDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _RickAndMortyDto implements RickAndMortyDto {
+  const factory _RickAndMortyDto(
+      {required final Info info,
+      required final List<Character> results}) = _$_RickAndMortyDto;
+
+  factory _RickAndMortyDto.fromJson(Map<String, dynamic> json) =
+      _$_RickAndMortyDto.fromJson;
+
+  @override
+  Info get info;
+  @override
+  List<Character> get results;
+  @override
+  @JsonKey(ignore: true)
+  _$$_RickAndMortyDtoCopyWith<_$_RickAndMortyDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Info _$InfoFromJson(Map<String, dynamic> json) {
+  return _Info.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Info {
+  int get count => throw _privateConstructorUsedError;
+  int get pages => throw _privateConstructorUsedError;
+  String? get next => throw _privateConstructorUsedError;
+  String? get prev => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InfoCopyWith<Info> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InfoCopyWith<$Res> {
+  factory $InfoCopyWith(Info value, $Res Function(Info) then) =
+      _$InfoCopyWithImpl<$Res, Info>;
+  @useResult
+  $Res call({int count, int pages, String? next, String? prev});
+}
+
+/// @nodoc
+class _$InfoCopyWithImpl<$Res, $Val extends Info>
+    implements $InfoCopyWith<$Res> {
+  _$InfoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? pages = null,
+    Object? next = freezed,
+    Object? prev = freezed,
+  }) {
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      pages: null == pages
+          ? _value.pages
+          : pages // ignore: cast_nullable_to_non_nullable
+              as int,
+      next: freezed == next
+          ? _value.next
+          : next // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prev: freezed == prev
+          ? _value.prev
+          : prev // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_InfoCopyWith<$Res> implements $InfoCopyWith<$Res> {
+  factory _$$_InfoCopyWith(_$_Info value, $Res Function(_$_Info) then) =
+      __$$_InfoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int count, int pages, String? next, String? prev});
+}
+
+/// @nodoc
+class __$$_InfoCopyWithImpl<$Res> extends _$InfoCopyWithImpl<$Res, _$_Info>
+    implements _$$_InfoCopyWith<$Res> {
+  __$$_InfoCopyWithImpl(_$_Info _value, $Res Function(_$_Info) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? pages = null,
+    Object? next = freezed,
+    Object? prev = freezed,
+  }) {
+    return _then(_$_Info(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      pages: null == pages
+          ? _value.pages
+          : pages // ignore: cast_nullable_to_non_nullable
+              as int,
+      next: freezed == next
+          ? _value.next
+          : next // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prev: freezed == prev
+          ? _value.prev
+          : prev // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Info implements _Info {
+  const _$_Info(
+      {required this.count,
+      required this.pages,
+      required this.next,
+      required this.prev});
+
+  factory _$_Info.fromJson(Map<String, dynamic> json) => _$$_InfoFromJson(json);
+
+  @override
+  final int count;
+  @override
+  final int pages;
+  @override
+  final String? next;
+  @override
+  final String? prev;
+
+  @override
+  String toString() {
+    return 'Info(count: $count, pages: $pages, next: $next, prev: $prev)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Info &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.pages, pages) || other.pages == pages) &&
+            (identical(other.next, next) || other.next == next) &&
+            (identical(other.prev, prev) || other.prev == prev));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, count, pages, next, prev);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InfoCopyWith<_$_Info> get copyWith =>
+      __$$_InfoCopyWithImpl<_$_Info>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_InfoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Info implements Info {
+  const factory _Info(
+      {required final int count,
+      required final int pages,
+      required final String? next,
+      required final String? prev}) = _$_Info;
+
+  factory _Info.fromJson(Map<String, dynamic> json) = _$_Info.fromJson;
+
+  @override
+  int get count;
+  @override
+  int get pages;
+  @override
+  String? get next;
+  @override
+  String? get prev;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InfoCopyWith<_$_Info> get copyWith => throw _privateConstructorUsedError;
+}

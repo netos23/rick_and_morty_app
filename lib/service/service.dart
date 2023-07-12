@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:rick_and_morty/dto/character_dto.dart';
 
 import '../model/character.dart';
 
@@ -10,15 +11,15 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET("/api/character")
-  Future<List<Character>> getAllCharacters(
-      {@Query('page') int page,
-        @Query('name') String name,
-        @Query('status') String status,
-        @Query('species') String species,
-        @Query('type') String type,
-        @Query('gender') String gender}
+  Future<RickAndMortyDto> getAllCharacters(
+      @Query("name") String name,
+      @Query("species") String species,
+      @Query("gender") String gender,
+      @Query("status") String status,
       );
 
+  @GET("/api/character")
+  Future<RickAndMortyDto> getAllCharacter();
 
   @GET("/api/character/{id}")
   Future<Character> getCharacter(@Path() int id);

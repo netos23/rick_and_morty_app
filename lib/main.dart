@@ -17,6 +17,8 @@ Future<void> main() async {
 
   final chs =  await api.getCharacters([1, 183]);
   print(chs);
-  List<Character> allchs =  await api.getAllCharacters();
+  final allchs =  await api.getAllCharacter();
   print(allchs);
+  final allchsby =  await api.getAllCharacters('Rick Sanchez', 'Human', 'Male', 'Alive');
+  print(allchsby);
 }
