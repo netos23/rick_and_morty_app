@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/dto/rick_and_morty_dto.dart';
 import 'package:rick_and_morty/model/character.dart';
+import 'package:rick_and_morty/pages/character_page.dart';
+import 'package:rick_and_morty/repositories/character_rep.dart';
 
 class FutureCharacterListBuilder extends StatefulWidget {
   const FutureCharacterListBuilder({
     super.key,
     required this.future,
-    required this.data,
-    required this.fetchDataCallBack,
+    required this.characters,
   });
 
   final Future<RickAndMortyDto> future;
-  final List<Character> data;
-  final VoidCallback fetchDataCallBack;
+  final List<Character> characters;
 
   @override
   State<FutureCharacterListBuilder> createState() =>
@@ -23,6 +23,14 @@ class _FutureCharacterListBuilderState
     extends State<FutureCharacterListBuilder> {
   int page = 1;
 
+  Future<RickAndMortyDto> fetchData() async {
+    var dto = await CharacterRepository().getCharactersByPage(page);
+    setState(() {
+      widget.characters.addAll(dto.results);
+    });
+    page++;
+    return dto;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +47,21 @@ class _FutureCharacterListBuilderState
           );
         } else {
           return ListView.builder(
-            itemCount: widget.data.length,
+            itemCount: widget.characters.length,
             itemBuilder: (context, index) {
-              if (index != widget.data.length - 1) {
-                return Text(widget.data[index].name);
+              if (index != widget.characters.length - 1) {
+                return CharacterCard(
+                  character: widget.characters[index],
+                );
               } else {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.data[index].name),
+                    CharacterCard(character: widget.characters[index]),
                     Center(
                       child: TextButton(
                           onPressed: () {
-                            widget.fetchDataCallBack;
+                            fetchData();
                           },
                           child: const Text("Подгрузить данные")),
                     ),
@@ -63,5 +73,25 @@ class _FutureCharacterListBuilderState
         }
       },
     );
+  }
+}
+
+class CharacterCard extends StatelessWidget {
+  const CharacterCard({
+    super.key,
+    required this.character,
+  });
+
+  final Character character;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => CharacterPage(id: character.id),
+          ));
+        },
+        child: Text(character.name));
   }
 }
