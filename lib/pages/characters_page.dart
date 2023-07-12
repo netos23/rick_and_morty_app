@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/dto/rick_and_morty_dto.dart';
 import 'package:rick_and_morty/model/character.dart';
+import 'package:rick_and_morty/pages/components/filter_button.dart';
+import 'package:rick_and_morty/pages/components/filter_text_form.dart';
 import 'package:rick_and_morty/pages/components/rick_and_morty_app_bar.dart';
 import 'package:rick_and_morty/repositories/character_rep.dart';
 
@@ -14,20 +16,29 @@ class CharactersPage extends StatefulWidget {
 
 class _CharactersPageState extends State<CharactersPage> {
   final List<Character> data = [];
+  final ScrollController _scrollController = ScrollController();
+  late final Future<RickAndMortyDto> future;
   int page = 1;
 
   @override
   void initState() {
     super.initState();
-    CharacterRepository()
-        .getCharactersByPage(page)
-        .then((value) => data.addAll(value.results));
+    future = fetchData();
   }
 
-  Future<RickAndMortyDto> getData() async {
-    page++;
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
-    return CharacterRepository().getCharactersByPage(page);
+  Future<RickAndMortyDto> fetchData() async {
+    var dto = await CharacterRepository().getCharactersByPage(page);
+    setState(() {
+      data.addAll(dto.results);
+    });
+    page++;
+    return dto;
   }
 
   @override
@@ -40,42 +51,31 @@ class _CharactersPageState extends State<CharactersPage> {
         child: RickAndMortyAppBar(),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32),
+            Flexible(
+              flex: 4,
               child: Image.asset('assets/title.png'),
             ),
-            const FilterTextForm(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: FilterButton(onPressedCallBack: () {
-                getData();
-              }),
+            const Spacer(),
+            Flexible(
+                flex: 3,
+                child: FilterTextForm(
+                  onFieldSubmitted: (_) {},
+                )),
+            Flexible(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: FilterButton(onPressedCallBack: () {
+                  fetchData();
+                }),
+              ),
             ),
             Expanded(
-              child: FutureBuilder(
-                future: getData(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return Text(data[index].name);
-                      },
-                    );
-                  } else if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Ошибка загрузки данных'),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
+              flex: 12,
+              child: FutureCharacterListBuilder(future: future, data: data),
             )
           ],
         ),
@@ -84,64 +84,71 @@ class _CharactersPageState extends State<CharactersPage> {
   }
 }
 
-class FilterButton extends StatelessWidget {
-  const FilterButton({
+class FutureCharacterListBuilder extends StatefulWidget {
+  const FutureCharacterListBuilder({
     super.key,
-    required this.onPressedCallBack,
+    required this.future,
+    required this.data,
   });
 
-  final VoidCallback onPressedCallBack;
+  final Future<RickAndMortyDto> future;
+  final List<Character> data;
 
   @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: theme.colorScheme.tertiary,
-        minimumSize: Size.fromHeight(56),
-      ),
-      onPressed: onPressedCallBack,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Icon(
-              Icons.filter_list,
-              color: theme.colorScheme.secondary.withOpacity(0.54),
-            ),
-          ),
-          Align(
-            child: Text(
-              "ADVANCED FILTERS",
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontSize: 14,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  State<FutureCharacterListBuilder> createState() => _FutureCharacterListBuilderState();
 }
 
-class FilterTextForm extends StatelessWidget {
-  const FilterTextForm({
-    super.key,
-  });
+class _FutureCharacterListBuilderState extends State<FutureCharacterListBuilder> {
+  int page = 1;
+
+  Future<RickAndMortyDto> fetchData() async {
+    var dto = await CharacterRepository().getCharactersByPage(page);
+    setState(() {
+      widget.data.addAll(dto.results);
+    });
+    page++;
+    return dto;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onFieldSubmitted: (value) {
-        // при завершении начинаем искать
+    return FutureBuilder(
+      future: widget.future,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Ошибка загрузки данных'),
+          );
+        } else {
+          return ListView.builder(
+            itemCount: widget.data.length,
+            itemBuilder: (context, index) {
+              if (index != widget.data.length - 1) {
+                return Text(widget.data[index].name);
+              } else {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.data[index].name),
+                    Center(
+                      child: TextButton(
+                          onPressed: () {
+                            fetchData();
+                          },
+                          child: const Text("Подгрузить данные")),
+                    ),
+                  ],
+                );
+              }
+            },
+          );
+        }
       },
-      decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.search),
-          hintText: 'Fitler by name...',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)))),
     );
   }
 }
+
