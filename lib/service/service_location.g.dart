@@ -32,7 +32,7 @@ class _LocationService implements LocationService {
     )
             .compose(
               _dio.options,
-              '/location/${id}',
+              '/api/location/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -46,30 +46,28 @@ class _LocationService implements LocationService {
   }
 
   @override
-  Future<List<Location>> getAllLocation({
-    required int page,
-    required String name,
-    required String type,
-    required String dimension,
-  }) async {
+  Future<LocationDto> getAllLocation(
+    String name,
+    String type,
+    String dimension,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'page': page,
       r'name': name,
       r'type': type,
       r'dimension': dimension,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Location>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LocationDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/location',
+              '/api/location',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -78,9 +76,34 @@ class _LocationService implements LocationService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Location.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = LocationDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LocationDto> getAllLocations() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LocationDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/location',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = LocationDto.fromJson(_result.data!);
     return value;
   }
 
@@ -98,7 +121,7 @@ class _LocationService implements LocationService {
     )
             .compose(
               _dio.options,
-              '/location/${ids}',
+              '/api/location/${ids}',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -13,9 +13,10 @@ abstract class RestClient {
   @GET("/api/character")
   Future<RickAndMortyDto> getAllCharacters(
       @Query("name") String name,
+      @Query("status") String status,
       @Query("species") String species,
       @Query("gender") String gender,
-      @Query("status") String status,
+      @Query("type") String type,
       );
 
   @GET("/api/character")

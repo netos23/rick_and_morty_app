@@ -1,5 +1,6 @@
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
+import 'package:rick_and_morty/dto/location_dto.dart';
 import '../model/character.dart';
 
 part 'service_location.g.dart';
@@ -8,16 +9,18 @@ part 'service_location.g.dart';
 abstract class LocationService {
   factory LocationService(Dio dio, {String baseUrl}) = _LocationService;
 
-  @GET('/location/{id}')
+  @GET('/api/location/{id}')
   Future<Location> getLocation(@Path() int id);
 
-  @GET('/location')
-  Future<List<Location>> getAllLocation({@Query('page') int page,
+  @GET('/api/location')
+  Future<LocationDto> getAllLocation(
     @Query('name') String name,
     @Query('type') String type,
     @Query('dimension') String dimension,
-  });
+  );
+  @GET('/api/location')
+  Future<LocationDto> getAllLocations();
 
-  @GET('/location/{ids}')
+  @GET('/api/location/{ids}')
   Future<List<Location>> getLocations(@Path() List<int> ids);
 }

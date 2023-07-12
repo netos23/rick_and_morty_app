@@ -21,16 +21,18 @@ class _RestClient implements RestClient {
   @override
   Future<RickAndMortyDto> getAllCharacters(
     String name,
+    String status,
     String species,
     String gender,
-    String status,
+    String type,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'name': name,
+      r'status': status,
       r'species': species,
       r'gender': gender,
-      r'status': status,
+      r'type': type,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
