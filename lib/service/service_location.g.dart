@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'service.dart';
+part of 'service_location.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RestClient implements RestClient {
-  _RestClient(
+class _LocationService implements LocationService {
+  _LocationService(
     this._dio, {
     this.baseUrl,
   });
@@ -19,34 +19,57 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<List<Character>> getAllCharacters({
+  Future<Location> getLocation(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Location>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/location/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Location.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<Location>> getAllLocation({
     required int page,
     required String name,
-    required String status,
-    required String species,
     required String type,
-    required String gender,
+    required String dimension,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'name': name,
-      r'status': status,
-      r'species': species,
       r'type': type,
-      r'gender': gender,
+      r'dimension': dimension,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Location>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character',
+              '/location',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -56,53 +79,26 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Location.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<Character> getCharacter(int id) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Character>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/character/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Character.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<List<Character>> getCharacters(List<int> ids) async {
+  Future<List<Location>> getLocations(List<int> ids) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Location>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character/${ids}',
+              '/location/${ids}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -112,7 +108,7 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Location.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

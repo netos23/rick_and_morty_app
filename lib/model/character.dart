@@ -26,6 +26,7 @@ abstract class Character with _$Character {
       _$CharacterFromJson(json);
 }
 
+
 @freezed
 abstract class Origin with _$Origin {
   const factory Origin({

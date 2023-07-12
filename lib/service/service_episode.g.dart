@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'service.dart';
+part of 'service_episode.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RestClient implements RestClient {
-  _RestClient(
+class _EpisodeService implements EpisodeService {
+  _EpisodeService(
     this._dio, {
     this.baseUrl,
   });
@@ -19,34 +19,55 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<List<Character>> getAllCharacters({
+  Future<Episode> getEpisode(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Episode>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/episode/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Episode.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<Episode>> getAllEpisode({
     required int page,
     required String name,
-    required String status,
-    required String species,
-    required String type,
-    required String gender,
+    required String episode,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'name': name,
-      r'status': status,
-      r'species': species,
-      r'type': type,
-      r'gender': gender,
+      r'episode': episode,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Episode>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character',
+              '/episode',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -56,53 +77,26 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Episode.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<Character> getCharacter(int id) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Character>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/character/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Character.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<List<Character>> getCharacters(List<int> ids) async {
+  Future<List<Episode>> getEpisodes(List<int> ids) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Episode>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character/${ids}',
+              '/episode/${ids}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -112,7 +106,7 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Episode.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
