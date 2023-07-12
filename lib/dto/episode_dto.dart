@@ -3,7 +3,6 @@ import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
 
 part 'episode_dto.freezed.dart';
-
 part 'episode_dto.g.dart';
 
 @freezed

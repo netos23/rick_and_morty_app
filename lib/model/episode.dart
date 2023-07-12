@@ -7,7 +7,7 @@ abstract class Episode with _$Episode {
   const factory Episode({
     required int id,
     required String name,
-    required String airDate,
+    required String air_date,
     required String episode,
     required List<String> characters,
     required String url,
