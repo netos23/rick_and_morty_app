@@ -24,12 +24,14 @@ class _CharacterPageState extends State<CharacterPage> {
           child: CircularProgressIndicator(),
         ),
         builder: (context, snapshot) {
-          return Column(
-            children: [
-              Image.network('${snapshot?.image}'),
-              Text('${snapshot?.name}'),
-              Text('${snapshot?.status}'),
-            ],
+          return Center(
+            child: Column(
+              children: [
+                Image.network('${snapshot?.image}'),
+                Text('${snapshot?.name}'),
+                Text('${snapshot?.status}'),
+              ],
+            ),
           );
         },
       ),

@@ -26,10 +26,10 @@ class FutureUpdater<T> extends StatefulWidget {
   // Упали с ошибкой, соответсвенно ErrorBuilder
 
   @override
-  State<FutureUpdater> createState() => _FutureUpdaterState();
+  State<FutureUpdater<T>> createState() => _FutureUpdaterState<T>();
 }
 
-class _FutureUpdaterState<T> extends State<FutureUpdater> {
+class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   T? _data;
   dynamic _error;
   bool isLoading = true;
@@ -37,12 +37,13 @@ class _FutureUpdaterState<T> extends State<FutureUpdater> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      widget.future.then((value) {
+
+    widget.future.then((value) {
+      setState(() {
         this._data = value;
         isLoading = false;
-      }).onError((error, stackTrace) => _handleError(error));
-    });
+      });
+    }).onError((error, stackTrace) => _handleError(error));
   }
 
   _handleError(error) {
@@ -54,12 +55,14 @@ class _FutureUpdaterState<T> extends State<FutureUpdater> {
   @override
   void didUpdateWidget(covariant FutureUpdater<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    setState(() {
-      widget.future.then((value) {
+
+    widget.future.then((value) {
+      setState(() {
         this._data = value;
         isLoading = false;
       });
     });
+
     // если конфигурация обновляется, нам его тоже нужно обновить
   }
 
