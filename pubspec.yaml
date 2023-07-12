@@ -15,6 +15,9 @@ dependencies:
   json_annotation: ^4.8.1
   retrofit: ^4.0.1
   dio: ^5.2.1+1
+  elementary: ^2.0.0
+  provider: ^6.0.5
+  google_fonts: ^5.1.0
 
 dev_dependencies:
   flutter_test:

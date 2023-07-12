@@ -30,9 +30,7 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   @override
   void initState() {
     super.initState();
-    widget.future
-        .then((_handleValue))
-        .catchError(_handleError);
+    _throwFuture();
   }
 
   _handleError(error) {
@@ -42,11 +40,12 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   }
 
   _handleValue(value){
-    debugPrint("smth Should happen");
     setState(() {
       _data = value;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,4 +61,21 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
 
     return widget.builder(context, _data);
   }
+
+  void _throwFuture() {
+    widget.future
+        .then((_handleValue))
+        .catchError(_handleError);
+  }
+
+  @override
+  void didUpdateWidget(covariant FutureUpdater<T> oldWidget) {
+
+    super.didUpdateWidget(oldWidget);
+    if(oldWidget.future != widget.future){
+      _throwFuture();
+    }
+  }
+
+
 }
