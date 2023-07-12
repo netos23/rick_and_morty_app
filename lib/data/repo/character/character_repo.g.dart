@@ -19,20 +19,20 @@ class _CharacterRepo implements CharacterRepo {
   String? baseUrl;
 
   @override
-  Future<List<CharacterDto>> getAll() async {
+  Future<ResponseWrapper<CharacterDto>> getPage(int pageNo) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<CharacterDto>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseWrapper<CharacterDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/character',
+              '/character/?page=${pageNo}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -41,9 +41,10 @@ class _CharacterRepo implements CharacterRepo {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => CharacterDto.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = ResponseWrapper<CharacterDto>.fromJson(
+      _result.data!,
+      (json) => CharacterDto.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
