@@ -1,6 +1,6 @@
 # rick_and_morty
 
-A new Flutter project.
+API в погоде уже делал. По нему ревью получил.
 
 ## Getting Started
 
