@@ -32,7 +32,7 @@ class _EpisodeService implements EpisodeService {
     )
             .compose(
               _dio.options,
-              '/episode/${id}',
+              '/api/episode/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -46,28 +46,26 @@ class _EpisodeService implements EpisodeService {
   }
 
   @override
-  Future<List<Episode>> getAllEpisode({
-    required int page,
-    required String name,
-    required String episode,
-  }) async {
+  Future<EpisodeDto> getAllEpisode(
+    String name,
+    String episode,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'page': page,
       r'name': name,
       r'episode': episode,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Episode>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EpisodeDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/episode',
+              '/api/episode',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -76,9 +74,34 @@ class _EpisodeService implements EpisodeService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Episode.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = EpisodeDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<EpisodeDto> getAllEpisodes() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EpisodeDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/episode',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = EpisodeDto.fromJson(_result.data!);
     return value;
   }
 
@@ -96,7 +119,7 @@ class _EpisodeService implements EpisodeService {
     )
             .compose(
               _dio.options,
-              '/episode/${ids}',
+              '/api/episode/${ids}',
               queryParameters: queryParameters,
               data: _data,
             )

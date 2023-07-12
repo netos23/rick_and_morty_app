@@ -1,7 +1,8 @@
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 import 'package:rick_and_morty/dto/location_dto.dart';
-import '../model/character.dart';
+import 'package:rick_and_morty/model/location.dart';
+//import '../model/character.dart';
 
 part 'service_location.g.dart';
 

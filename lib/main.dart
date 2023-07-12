@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:rick_and_morty/service/service_episode.dart';
 import 'package:rick_and_morty/service/service_location.dart';
 
 import 'model/character.dart';
@@ -32,5 +33,16 @@ Future<void> main() async {
   print(allloc);
   final alllocby =  await loc_api.getAllLocation('Testicle Monster Dimension', 'Dimension', 'Testicle Monster Dimension');
   print(alllocby);
+
+  final ep_api = EpisodeService(dio);
+  final ep =  await ep_api.getEpisode(1);
+  print(ep);
+  final eps =  await ep_api.getEpisodes([1, 183]);
+  print(eps);
+  final allep =  await ep_api.getAllEpisodes();
+  print(allep);
+  final allepby =  await ep_api.getAllEpisode('Close Rick-counters of the Rick Kind', 'S01E10');
+  print(allepby);
+
 
 }
