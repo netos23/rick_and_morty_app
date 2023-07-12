@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 typedef LoadingBuilder = Widget Function(BuildContext);
-typedef DataBuilder<T> = Widget Function(BuildContext, dynamic);
+typedef DataBuilder<T> = Widget Function(BuildContext, T?);
 typedef ErrorBuilder<T> = Widget Function(BuildContext, dynamic, dynamic);
 
 class FutureUpdater<T> extends StatefulWidget {
@@ -39,7 +39,7 @@ class _FutureUpdaterState<T> extends State<FutureUpdater> {
     super.initState();
     setState(() {
       widget.future.then((value) {
-        _data = value;
+        this._data = value;
         isLoading = false;
       }).onError((error, stackTrace) => _handleError(error));
     });
@@ -56,7 +56,7 @@ class _FutureUpdaterState<T> extends State<FutureUpdater> {
     super.didUpdateWidget(oldWidget);
     setState(() {
       widget.future.then((value) {
-        _data = value;
+        this._data = value;
         isLoading = false;
       });
     });

@@ -17,14 +17,20 @@ class _CharacterPageState extends State<CharacterPage> {
     return Scaffold(
       body: FutureUpdater<Character>(
         future: CharacterRepository().getCharacterById(widget.id),
-        errorBuilder: (p0, p1, p2) {
+        errorBuilder: (_, __, ___) {
           return const Center(child: Text('Произошла ошибка'));
         },
-        loadingBuilder: (p0) {
-          return const Center(child: CircularProgressIndicator());
-        },
+        loadingBuilder: (_) => const Center(
+          child: CircularProgressIndicator(),
+        ),
         builder: (context, snapshot) {
-          return Text('12');
+          return Column(
+            children: [
+              Image.network('${snapshot?.image}'),
+              Text('${snapshot?.name}'),
+              Text('${snapshot?.status}'),
+            ],
+          );
         },
       ),
     );
