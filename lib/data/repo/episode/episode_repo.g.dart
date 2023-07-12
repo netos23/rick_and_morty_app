@@ -19,20 +19,20 @@ class _EpisodeRepo implements EpisodeRepo {
   String? baseUrl;
 
   @override
-  Future<EpisodeDto> getAll() async {
+  Future<ResponseWrapper<EpisodeDto>> getPage(int pageNo) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EpisodeDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseWrapper<EpisodeDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/episode',
+              '/episode/?page=${pageNo}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -41,7 +41,10 @@ class _EpisodeRepo implements EpisodeRepo {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = EpisodeDto.fromJson(_result.data!);
+    final value = ResponseWrapper<EpisodeDto>.fromJson(
+      _result.data!,
+      (json) => EpisodeDto.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 

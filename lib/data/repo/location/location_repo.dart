@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:rick_and_morty/data/dto/wrapper/response_wrapper.dart';
 import 'package:rick_and_morty/data/dto/location/location_dto.dart';
 
 part 'location_repo.g.dart';
@@ -8,9 +9,9 @@ part 'location_repo.g.dart';
 abstract class LocationRepo {
   factory LocationRepo(Dio dio, {String baseUrl}) = _LocationRepo;
 
-  @GET('/character')
-  Future<LocationDto> getAll();
+  @GET('/location/?page={pageNo}')
+  Future<ResponseWrapper<LocationDto>> getPage(@Path() int pageNo);
 
-  @GET('/character/{id}')
+  @GET('/location/{id}')
   Future<LocationDto> get(@Path() int id);
 }

@@ -19,20 +19,20 @@ class _LocationRepo implements LocationRepo {
   String? baseUrl;
 
   @override
-  Future<LocationDto> getAll() async {
+  Future<ResponseWrapper<LocationDto>> getPage(int pageNo) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LocationDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseWrapper<LocationDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/character',
+              '/location/?page=${pageNo}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -41,7 +41,10 @@ class _LocationRepo implements LocationRepo {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = LocationDto.fromJson(_result.data!);
+    final value = ResponseWrapper<LocationDto>.fromJson(
+      _result.data!,
+      (json) => LocationDto.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
@@ -59,7 +62,7 @@ class _LocationRepo implements LocationRepo {
     )
             .compose(
               _dio.options,
-              '/character/${id}',
+              '/location/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
