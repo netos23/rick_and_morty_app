@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
   String _currentSearchStr = '';
 
   final RefreshController refreshController = RefreshController();
-  bool _isPagination = false;
+  bool _isPagination = true;
 
   Timer? searchDebounce;
 
