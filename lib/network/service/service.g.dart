@@ -46,13 +46,13 @@ class _RestService implements RestService {
   }
 
   @override
-  Future<List<Character>> getCharacters() async {
+  Future<CharacterList> getCharacters() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CharacterList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -68,9 +68,7 @@ class _RestService implements RestService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = CharacterList.fromJson(_result.data!);
     return value;
   }
 
@@ -102,13 +100,13 @@ class _RestService implements RestService {
   }
 
   @override
-  Future<List<Location>> getLocations() async {
+  Future<LocationList> getLocations() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Location>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LocationList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -124,9 +122,7 @@ class _RestService implements RestService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Location.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = LocationList.fromJson(_result.data!);
     return value;
   }
 
@@ -158,13 +154,13 @@ class _RestService implements RestService {
   }
 
   @override
-  Future<List<Episode>> getEpisodes() async {
+  Future<EpisodeList> getEpisodes() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Episode>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EpisodeList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -180,9 +176,7 @@ class _RestService implements RestService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Episode.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = EpisodeList.fromJson(_result.data!);
     return value;
   }
 

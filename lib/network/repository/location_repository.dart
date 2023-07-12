@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:rick_and_morty/network/dto/location/location_list.dart';
 import 'package:rick_and_morty/network/model/location/location.dart';
 import 'package:rick_and_morty/network/service/service.dart';
 
@@ -19,7 +20,7 @@ class LocationRepository{
     }
   }
 
-  Future<List<Location>> getLocations() async {
+  Future<LocationList> getLocations() async {
     try {
       final result = await _restService.getLocations();
       return result;

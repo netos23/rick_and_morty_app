@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:rick_and_morty/network/dto/episode/episode_list.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/service/service.dart';
 
@@ -19,7 +20,7 @@ class EpisodeRepository{
     }
   }
 
-  Future<List<Episode>> getEpisodes() async {
+  Future<EpisodeList> getEpisodes() async {
     try {
       final result = await _restService.getEpisodes();
       return result;
