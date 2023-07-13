@@ -3,7 +3,7 @@ import 'package:rick_and_morty/network/dto/character/character_list.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
 import 'package:rick_and_morty/network/service/service.dart';
 
-class CharacterRepository{
+class CharacterRepository {
   CharacterRepository(this._restService);
 
   final RestService _restService;
@@ -23,7 +23,8 @@ class CharacterRepository{
     try {
       final result = await _restService.getCharacters();
       return result;
-    } on DioException catch (error) {
+    } on DioException catch (error, stackTrace) {
+      print(stackTrace);
       throw Exception(
         error.response?.data['message'],
       );

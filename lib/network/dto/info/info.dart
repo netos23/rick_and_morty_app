@@ -9,8 +9,8 @@ class Info with _$Info {
   const factory Info({
     required int count,
     required int pages,
-    required String? next,
-    required String? prev,
+     String? next,
+     String? prev,
   }) = _Info;
 
   factory Info.fromJson(Map<String, dynamic> json) => _$InfoFromJson(json);

@@ -125,10 +125,7 @@ class __$$_InfoCopyWithImpl<$Res> extends _$InfoCopyWithImpl<$Res, _$_Info>
 @JsonSerializable()
 class _$_Info implements _Info {
   const _$_Info(
-      {required this.count,
-      required this.pages,
-      required this.next,
-      required this.prev});
+      {required this.count, required this.pages, this.next, this.prev});
 
   factory _$_Info.fromJson(Map<String, dynamic> json) => _$$_InfoFromJson(json);
 
@@ -179,8 +176,8 @@ abstract class _Info implements Info {
   const factory _Info(
       {required final int count,
       required final int pages,
-      required final String? next,
-      required final String? prev}) = _$_Info;
+      final String? next,
+      final String? prev}) = _$_Info;
 
   factory _Info.fromJson(Map<String, dynamic> json) = _$_Info.fromJson;
 

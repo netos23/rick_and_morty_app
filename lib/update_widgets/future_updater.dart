@@ -12,7 +12,6 @@ class FutureUpdater<T> extends StatefulWidget {
     required this.future,
     required this.initialValue,
     required this.builder,
-
   });
 
   final LoadingBuilder? loadingBuilder;
@@ -21,7 +20,6 @@ class FutureUpdater<T> extends StatefulWidget {
   final Future<T> future;
   final T initialValue;
   final DataBuilder<T> builder;
-
 
   @override
   State<FutureUpdater> createState() => _FutureUpdaterState();
@@ -32,8 +30,12 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   dynamic _error;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
+    initData();
+  }
+
+  void initData() async {
     _data = await widget.future.catchError(_handleError);
   }
 

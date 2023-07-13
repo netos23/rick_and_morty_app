@@ -22,7 +22,8 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) {
 mixin _$Episode {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get air_date => throw _privateConstructorUsedError;
+  @JsonKey(name: 'air_date')
+  String get airDate => throw _privateConstructorUsedError;
   String get episode => throw _privateConstructorUsedError;
   List<String> get characters => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -41,7 +42,7 @@ abstract class $EpisodeCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      String air_date,
+      @JsonKey(name: 'air_date') String airDate,
       String episode,
       List<String> characters,
       String url,
@@ -63,7 +64,7 @@ class _$EpisodeCopyWithImpl<$Res, $Val extends Episode>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? air_date = null,
+    Object? airDate = null,
     Object? episode = null,
     Object? characters = null,
     Object? url = null,
@@ -78,9 +79,9 @@ class _$EpisodeCopyWithImpl<$Res, $Val extends Episode>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      air_date: null == air_date
-          ? _value.air_date
-          : air_date // ignore: cast_nullable_to_non_nullable
+      airDate: null == airDate
+          ? _value.airDate
+          : airDate // ignore: cast_nullable_to_non_nullable
               as String,
       episode: null == episode
           ? _value.episode
@@ -112,7 +113,7 @@ abstract class _$$_EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      String air_date,
+      @JsonKey(name: 'air_date') String airDate,
       String episode,
       List<String> characters,
       String url,
@@ -131,7 +132,7 @@ class __$$_EpisodeCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? air_date = null,
+    Object? airDate = null,
     Object? episode = null,
     Object? characters = null,
     Object? url = null,
@@ -146,9 +147,9 @@ class __$$_EpisodeCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      air_date: null == air_date
-          ? _value.air_date
-          : air_date // ignore: cast_nullable_to_non_nullable
+      airDate: null == airDate
+          ? _value.airDate
+          : airDate // ignore: cast_nullable_to_non_nullable
               as String,
       episode: null == episode
           ? _value.episode
@@ -176,7 +177,7 @@ class _$_Episode implements _Episode {
   const _$_Episode(
       {required this.id,
       required this.name,
-      required this.air_date,
+      @JsonKey(name: 'air_date') required this.airDate,
       required this.episode,
       required final List<String> characters,
       required this.url,
@@ -191,7 +192,8 @@ class _$_Episode implements _Episode {
   @override
   final String name;
   @override
-  final String air_date;
+  @JsonKey(name: 'air_date')
+  final String airDate;
   @override
   final String episode;
   final List<String> _characters;
@@ -209,7 +211,7 @@ class _$_Episode implements _Episode {
 
   @override
   String toString() {
-    return 'Episode(id: $id, name: $name, air_date: $air_date, episode: $episode, characters: $characters, url: $url, created: $created)';
+    return 'Episode(id: $id, name: $name, airDate: $airDate, episode: $episode, characters: $characters, url: $url, created: $created)';
   }
 
   @override
@@ -219,8 +221,7 @@ class _$_Episode implements _Episode {
             other is _$_Episode &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.air_date, air_date) ||
-                other.air_date == air_date) &&
+            (identical(other.airDate, airDate) || other.airDate == airDate) &&
             (identical(other.episode, episode) || other.episode == episode) &&
             const DeepCollectionEquality()
                 .equals(other._characters, _characters) &&
@@ -230,7 +231,7 @@ class _$_Episode implements _Episode {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, air_date, episode,
+  int get hashCode => Object.hash(runtimeType, id, name, airDate, episode,
       const DeepCollectionEquality().hash(_characters), url, created);
 
   @JsonKey(ignore: true)
@@ -251,7 +252,7 @@ abstract class _Episode implements Episode {
   const factory _Episode(
       {required final int id,
       required final String name,
-      required final String air_date,
+      @JsonKey(name: 'air_date') required final String airDate,
       required final String episode,
       required final List<String> characters,
       required final String url,
@@ -264,7 +265,8 @@ abstract class _Episode implements Episode {
   @override
   String get name;
   @override
-  String get air_date;
+  @JsonKey(name: 'air_date')
+  String get airDate;
   @override
   String get episode;
   @override
