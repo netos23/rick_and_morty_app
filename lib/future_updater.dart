@@ -18,7 +18,7 @@ class FutureUpdater<T> extends StatefulWidget {
   final LoadingBuilder? loadingBuilder;
   final DataBuilder<T> builder;
   final ErrorBuilder<T>? errorBuilder;
-  final Future<T> future;
+  final Future<T>? future;
 
   @override
   State<FutureUpdater<T>> createState() => _FutureUpdaterState<T>();
@@ -27,7 +27,6 @@ class FutureUpdater<T> extends StatefulWidget {
 class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   T? _data;
   dynamic _error;
-  bool _loading = true;
 
   @override
   void initState() {
@@ -36,16 +35,14 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   }
 
   void _onUpdate() {
-    widget.future.then(
+    widget.future?.then(
       (data) {
         setState(() {
-          _loading = false;
           _data = data;
         });
       },
       onError: (error) {
         setState(() {
-          _loading = false;
           _error = error;
         });
       },
@@ -54,7 +51,7 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
 
   @override
   void didUpdateWidget(covariant FutureUpdater<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
+    super.didUpdateWidget(oldWidget); // как проверить, что future обновилась?
     _onUpdate();
   }
 
@@ -66,7 +63,7 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
     }
 
     final loadingBuilder = widget.loadingBuilder;
-    if (_loading && loadingBuilder != null) {
+    if (_data == null && loadingBuilder != null) {
       return loadingBuilder(context);
     }
 

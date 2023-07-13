@@ -12,8 +12,8 @@ Future<Character> getCharacter(int id) async {
   try {
     final character = await api.getCharacter(id);
     return character;
-  } catch (error) {
-    throw Exception('Failed to get character: $error');
+  } catch (error, stackTrace) {
+    throw Exception('Failed to get character: $error, $stackTrace');
   }
 }
 
@@ -31,13 +31,13 @@ class RickAndMortyApp extends StatelessWidget {
           FutureUpdater<Character>(
             future: getCharacter(2),
             loadingBuilder: (context) => const CircularProgressIndicator(),
-            errorBuilder: (context, error, data) => Text('Error: $error'),
+            errorBuilder: (context, error, data) => Text('$error'),
             builder: (context, data) {
               final character = data;
               return ListTile(
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(
-                      character!.image), // force легален, тк данные точно есть
+                      character!.image),
                 ),
                 title: Text(character.name),
                 subtitle: Text('Status: ${character.status}'),
