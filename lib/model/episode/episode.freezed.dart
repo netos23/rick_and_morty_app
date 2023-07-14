@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'location.dart';
+part of 'episode.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,45 +14,44 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Location _$LocationFromJson(Map<String, dynamic> json) {
-  return _Location.fromJson(json);
+Episode _$EpisodeFromJson(Map<String, dynamic> json) {
+  return _Episode.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Location {
+mixin _$Episode {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String get dimension => throw _privateConstructorUsedError;
-  List<String> get residents => throw _privateConstructorUsedError;
+  String get air_date => throw _privateConstructorUsedError;
+  String get episode => throw _privateConstructorUsedError;
+  List<String> get characters => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get created => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LocationCopyWith<Location> get copyWith =>
-      throw _privateConstructorUsedError;
+  $EpisodeCopyWith<Episode> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LocationCopyWith<$Res> {
-  factory $LocationCopyWith(Location value, $Res Function(Location) then) =
-      _$LocationCopyWithImpl<$Res, Location>;
+abstract class $EpisodeCopyWith<$Res> {
+  factory $EpisodeCopyWith(Episode value, $Res Function(Episode) then) =
+      _$EpisodeCopyWithImpl<$Res, Episode>;
   @useResult
   $Res call(
       {int id,
       String name,
-      String type,
-      String dimension,
-      List<String> residents,
+      String air_date,
+      String episode,
+      List<String> characters,
       String url,
       String created});
 }
 
 /// @nodoc
-class _$LocationCopyWithImpl<$Res, $Val extends Location>
-    implements $LocationCopyWith<$Res> {
-  _$LocationCopyWithImpl(this._value, this._then);
+class _$EpisodeCopyWithImpl<$Res, $Val extends Episode>
+    implements $EpisodeCopyWith<$Res> {
+  _$EpisodeCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,9 +63,9 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = null,
-    Object? dimension = null,
-    Object? residents = null,
+    Object? air_date = null,
+    Object? episode = null,
+    Object? characters = null,
     Object? url = null,
     Object? created = null,
   }) {
@@ -79,17 +78,17 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      air_date: null == air_date
+          ? _value.air_date
+          : air_date // ignore: cast_nullable_to_non_nullable
               as String,
-      dimension: null == dimension
-          ? _value.dimension
-          : dimension // ignore: cast_nullable_to_non_nullable
+      episode: null == episode
+          ? _value.episode
+          : episode // ignore: cast_nullable_to_non_nullable
               as String,
-      residents: null == residents
-          ? _value.residents
-          : residents // ignore: cast_nullable_to_non_nullable
+      characters: null == characters
+          ? _value.characters
+          : characters // ignore: cast_nullable_to_non_nullable
               as List<String>,
       url: null == url
           ? _value.url
@@ -104,28 +103,27 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
 }
 
 /// @nodoc
-abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
-  factory _$$_LocationCopyWith(
-          _$_Location value, $Res Function(_$_Location) then) =
-      __$$_LocationCopyWithImpl<$Res>;
+abstract class _$$_EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
+  factory _$$_EpisodeCopyWith(
+          _$_Episode value, $Res Function(_$_Episode) then) =
+      __$$_EpisodeCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int id,
       String name,
-      String type,
-      String dimension,
-      List<String> residents,
+      String air_date,
+      String episode,
+      List<String> characters,
       String url,
       String created});
 }
 
 /// @nodoc
-class __$$_LocationCopyWithImpl<$Res>
-    extends _$LocationCopyWithImpl<$Res, _$_Location>
-    implements _$$_LocationCopyWith<$Res> {
-  __$$_LocationCopyWithImpl(
-      _$_Location _value, $Res Function(_$_Location) _then)
+class __$$_EpisodeCopyWithImpl<$Res>
+    extends _$EpisodeCopyWithImpl<$Res, _$_Episode>
+    implements _$$_EpisodeCopyWith<$Res> {
+  __$$_EpisodeCopyWithImpl(_$_Episode _value, $Res Function(_$_Episode) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -133,13 +131,13 @@ class __$$_LocationCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = null,
-    Object? dimension = null,
-    Object? residents = null,
+    Object? air_date = null,
+    Object? episode = null,
+    Object? characters = null,
     Object? url = null,
     Object? created = null,
   }) {
-    return _then(_$_Location(
+    return _then(_$_Episode(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -148,17 +146,17 @@ class __$$_LocationCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      air_date: null == air_date
+          ? _value.air_date
+          : air_date // ignore: cast_nullable_to_non_nullable
               as String,
-      dimension: null == dimension
-          ? _value.dimension
-          : dimension // ignore: cast_nullable_to_non_nullable
+      episode: null == episode
+          ? _value.episode
+          : episode // ignore: cast_nullable_to_non_nullable
               as String,
-      residents: null == residents
-          ? _value._residents
-          : residents // ignore: cast_nullable_to_non_nullable
+      characters: null == characters
+          ? _value._characters
+          : characters // ignore: cast_nullable_to_non_nullable
               as List<String>,
       url: null == url
           ? _value.url
@@ -174,34 +172,34 @@ class __$$_LocationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Location with DiagnosticableTreeMixin implements _Location {
-  const _$_Location(
+class _$_Episode with DiagnosticableTreeMixin implements _Episode {
+  const _$_Episode(
       {required this.id,
       required this.name,
-      required this.type,
-      required this.dimension,
-      required final List<String> residents,
+      required this.air_date,
+      required this.episode,
+      required final List<String> characters,
       required this.url,
       required this.created})
-      : _residents = residents;
+      : _characters = characters;
 
-  factory _$_Location.fromJson(Map<String, dynamic> json) =>
-      _$$_LocationFromJson(json);
+  factory _$_Episode.fromJson(Map<String, dynamic> json) =>
+      _$$_EpisodeFromJson(json);
 
   @override
   final int id;
   @override
   final String name;
   @override
-  final String type;
+  final String air_date;
   @override
-  final String dimension;
-  final List<String> _residents;
+  final String episode;
+  final List<String> _characters;
   @override
-  List<String> get residents {
-    if (_residents is EqualUnmodifiableListView) return _residents;
+  List<String> get characters {
+    if (_characters is EqualUnmodifiableListView) return _characters;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_residents);
+    return EqualUnmodifiableListView(_characters);
   }
 
   @override
@@ -211,19 +209,19 @@ class _$_Location with DiagnosticableTreeMixin implements _Location {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Location(id: $id, name: $name, type: $type, dimension: $dimension, residents: $residents, url: $url, created: $created)';
+    return 'Episode(id: $id, name: $name, air_date: $air_date, episode: $episode, characters: $characters, url: $url, created: $created)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Location'))
+      ..add(DiagnosticsProperty('type', 'Episode'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('dimension', dimension))
-      ..add(DiagnosticsProperty('residents', residents))
+      ..add(DiagnosticsProperty('air_date', air_date))
+      ..add(DiagnosticsProperty('episode', episode))
+      ..add(DiagnosticsProperty('characters', characters))
       ..add(DiagnosticsProperty('url', url))
       ..add(DiagnosticsProperty('created', created));
   }
@@ -232,65 +230,65 @@ class _$_Location with DiagnosticableTreeMixin implements _Location {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Location &&
+            other is _$_Episode &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.dimension, dimension) ||
-                other.dimension == dimension) &&
+            (identical(other.air_date, air_date) ||
+                other.air_date == air_date) &&
+            (identical(other.episode, episode) || other.episode == episode) &&
             const DeepCollectionEquality()
-                .equals(other._residents, _residents) &&
+                .equals(other._characters, _characters) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.created, created) || other.created == created));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, dimension,
-      const DeepCollectionEquality().hash(_residents), url, created);
+  int get hashCode => Object.hash(runtimeType, id, name, air_date, episode,
+      const DeepCollectionEquality().hash(_characters), url, created);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LocationCopyWith<_$_Location> get copyWith =>
-      __$$_LocationCopyWithImpl<_$_Location>(this, _$identity);
+  _$$_EpisodeCopyWith<_$_Episode> get copyWith =>
+      __$$_EpisodeCopyWithImpl<_$_Episode>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LocationToJson(
+    return _$$_EpisodeToJson(
       this,
     );
   }
 }
 
-abstract class _Location implements Location {
-  const factory _Location(
+abstract class _Episode implements Episode {
+  const factory _Episode(
       {required final int id,
       required final String name,
-      required final String type,
-      required final String dimension,
-      required final List<String> residents,
+      required final String air_date,
+      required final String episode,
+      required final List<String> characters,
       required final String url,
-      required final String created}) = _$_Location;
+      required final String created}) = _$_Episode;
 
-  factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
+  factory _Episode.fromJson(Map<String, dynamic> json) = _$_Episode.fromJson;
 
   @override
   int get id;
   @override
   String get name;
   @override
-  String get type;
+  String get air_date;
   @override
-  String get dimension;
+  String get episode;
   @override
-  List<String> get residents;
+  List<String> get characters;
   @override
   String get url;
   @override
   String get created;
   @override
   @JsonKey(ignore: true)
-  _$$_LocationCopyWith<_$_Location> get copyWith =>
+  _$$_EpisodeCopyWith<_$_Episode> get copyWith =>
       throw _privateConstructorUsedError;
 }
