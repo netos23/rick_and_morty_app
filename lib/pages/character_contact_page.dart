@@ -1,12 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/future_updater.dart';
-import 'package:rick_and_morty/model/character.dart';
-import 'package:rick_and_morty/rick_and_morty_app.dart';
+import 'package:rick_and_morty/dto/character/character_list.dart';
+import 'package:rick_and_morty/repository/character_repository.dart';
+import 'package:rick_and_morty/util/dio_util.dart';
+import 'package:rick_and_morty/widgets/future_updater.dart';
+import 'package:rick_and_morty/model/character/character.dart';
 
-class CharacterContact extends StatelessWidget {
-  const CharacterContact({
+class CharacterPage extends StatefulWidget {
+  const CharacterPage({
     super.key,
   });
+
+  @override
+  State<CharacterPage> createState() => _CharacterPageState();
+}
+
+class _CharacterPageState extends State<CharacterPage> {
+  final CharacterRepository _characterRepository =
+      DioUtil().characterRepository;
+
+  late Future<Character> _character;
+
+   @override
+  void initState() {
+    super.initState();
+    _character = getCharacter(2);
+  }
+
+  Future<Character> getCharacter(int id) async {
+    final res = await _characterRepository.getCharacter(id);
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +40,17 @@ class CharacterContact extends StatelessWidget {
       body: Column(
         children: [
           FutureUpdater<Character>(
-            future: getCharacter(2),
+            future: _character,
             loadingBuilder: (context) => const CircularProgressIndicator(),
             errorBuilder: (context, error, data) => Text('$error'),
             builder: (context, data) {
               final character = data;
               return ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      character!.image),
+                  backgroundImage: NetworkImage(character?.image ?? ''),
                 ),
-                title: Text(character.name),
-                subtitle: Text('Status: ${character.status}'),
+                title: Text(character?.name ?? "Name"),
+                subtitle: Text('Status: ${character?.status ?? 'Status'}'),
               );
             },
           ),

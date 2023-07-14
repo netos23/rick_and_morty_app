@@ -13,7 +13,7 @@ abstract class Character with _$Character {
     required String type,
     required String gender,
     required Origin origin,
-    required Location location,
+    required CharacterLocation location,
     required String image,
     required List<String> episode,
     required String url,
@@ -35,12 +35,12 @@ abstract class Origin with _$Origin {
 }
 
 @freezed
-abstract class Location with _$Location {
-  const factory Location({
+abstract class CharacterLocation with _$CharacterLocation {
+  const factory CharacterLocation({
     required String name,
     required String url,
-  }) = _Location;
+  }) = _CharacterLocation;
 
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
+  factory CharacterLocation.fromJson(Map<String, dynamic> json) =>
+      _$CharacterLocationFromJson(json);
 }

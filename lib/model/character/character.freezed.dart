@@ -27,7 +27,7 @@ mixin _$Character {
   String get type => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   Origin get origin => throw _privateConstructorUsedError;
-  Location get location => throw _privateConstructorUsedError;
+  CharacterLocation get location => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   List<String> get episode => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -52,14 +52,14 @@ abstract class $CharacterCopyWith<$Res> {
       String type,
       String gender,
       Origin origin,
-      Location location,
+      CharacterLocation location,
       String image,
       List<String> episode,
       String url,
       String created});
 
   $OriginCopyWith<$Res> get origin;
-  $LocationCopyWith<$Res> get location;
+  $CharacterLocationCopyWith<$Res> get location;
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as Location,
+              as CharacterLocation,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -150,8 +150,8 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res> get location {
-    return $LocationCopyWith<$Res>(_value.location, (value) {
+  $CharacterLocationCopyWith<$Res> get location {
+    return $CharacterLocationCopyWith<$Res>(_value.location, (value) {
       return _then(_value.copyWith(location: value) as $Val);
     });
   }
@@ -172,7 +172,7 @@ abstract class _$$_CharacterCopyWith<$Res> implements $CharacterCopyWith<$Res> {
       String type,
       String gender,
       Origin origin,
-      Location location,
+      CharacterLocation location,
       String image,
       List<String> episode,
       String url,
@@ -181,7 +181,7 @@ abstract class _$$_CharacterCopyWith<$Res> implements $CharacterCopyWith<$Res> {
   @override
   $OriginCopyWith<$Res> get origin;
   @override
-  $LocationCopyWith<$Res> get location;
+  $CharacterLocationCopyWith<$Res> get location;
 }
 
 /// @nodoc
@@ -240,7 +240,7 @@ class __$$_CharacterCopyWithImpl<$Res>
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as Location,
+              as CharacterLocation,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -297,7 +297,7 @@ class _$_Character implements _Character {
   @override
   final Origin origin;
   @override
-  final Location location;
+  final CharacterLocation location;
   @override
   final String image;
   final List<String> _episode;
@@ -378,7 +378,7 @@ abstract class _Character implements Character {
       required final String type,
       required final String gender,
       required final Origin origin,
-      required final Location location,
+      required final CharacterLocation location,
       required final String image,
       required final List<String> episode,
       required final String url,
@@ -402,7 +402,7 @@ abstract class _Character implements Character {
   @override
   Origin get origin;
   @override
-  Location get location;
+  CharacterLocation get location;
   @override
   String get image;
   @override
@@ -564,33 +564,34 @@ abstract class _Origin implements Origin {
       throw _privateConstructorUsedError;
 }
 
-Location _$LocationFromJson(Map<String, dynamic> json) {
-  return _Location.fromJson(json);
+CharacterLocation _$CharacterLocationFromJson(Map<String, dynamic> json) {
+  return _CharacterLocation.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Location {
+mixin _$CharacterLocation {
   String get name => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LocationCopyWith<Location> get copyWith =>
+  $CharacterLocationCopyWith<CharacterLocation> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LocationCopyWith<$Res> {
-  factory $LocationCopyWith(Location value, $Res Function(Location) then) =
-      _$LocationCopyWithImpl<$Res, Location>;
+abstract class $CharacterLocationCopyWith<$Res> {
+  factory $CharacterLocationCopyWith(
+          CharacterLocation value, $Res Function(CharacterLocation) then) =
+      _$CharacterLocationCopyWithImpl<$Res, CharacterLocation>;
   @useResult
   $Res call({String name, String url});
 }
 
 /// @nodoc
-class _$LocationCopyWithImpl<$Res, $Val extends Location>
-    implements $LocationCopyWith<$Res> {
-  _$LocationCopyWithImpl(this._value, this._then);
+class _$CharacterLocationCopyWithImpl<$Res, $Val extends CharacterLocation>
+    implements $CharacterLocationCopyWith<$Res> {
+  _$CharacterLocationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -617,21 +618,22 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
 }
 
 /// @nodoc
-abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
-  factory _$$_LocationCopyWith(
-          _$_Location value, $Res Function(_$_Location) then) =
-      __$$_LocationCopyWithImpl<$Res>;
+abstract class _$$_CharacterLocationCopyWith<$Res>
+    implements $CharacterLocationCopyWith<$Res> {
+  factory _$$_CharacterLocationCopyWith(_$_CharacterLocation value,
+          $Res Function(_$_CharacterLocation) then) =
+      __$$_CharacterLocationCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String url});
 }
 
 /// @nodoc
-class __$$_LocationCopyWithImpl<$Res>
-    extends _$LocationCopyWithImpl<$Res, _$_Location>
-    implements _$$_LocationCopyWith<$Res> {
-  __$$_LocationCopyWithImpl(
-      _$_Location _value, $Res Function(_$_Location) _then)
+class __$$_CharacterLocationCopyWithImpl<$Res>
+    extends _$CharacterLocationCopyWithImpl<$Res, _$_CharacterLocation>
+    implements _$$_CharacterLocationCopyWith<$Res> {
+  __$$_CharacterLocationCopyWithImpl(
+      _$_CharacterLocation _value, $Res Function(_$_CharacterLocation) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -640,7 +642,7 @@ class __$$_LocationCopyWithImpl<$Res>
     Object? name = null,
     Object? url = null,
   }) {
-    return _then(_$_Location(
+    return _then(_$_CharacterLocation(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -655,11 +657,11 @@ class __$$_LocationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Location implements _Location {
-  const _$_Location({required this.name, required this.url});
+class _$_CharacterLocation implements _CharacterLocation {
+  const _$_CharacterLocation({required this.name, required this.url});
 
-  factory _$_Location.fromJson(Map<String, dynamic> json) =>
-      _$$_LocationFromJson(json);
+  factory _$_CharacterLocation.fromJson(Map<String, dynamic> json) =>
+      _$$_CharacterLocationFromJson(json);
 
   @override
   final String name;
@@ -668,14 +670,14 @@ class _$_Location implements _Location {
 
   @override
   String toString() {
-    return 'Location(name: $name, url: $url)';
+    return 'CharacterLocation(name: $name, url: $url)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Location &&
+            other is _$_CharacterLocation &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url));
   }
@@ -687,22 +689,25 @@ class _$_Location implements _Location {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LocationCopyWith<_$_Location> get copyWith =>
-      __$$_LocationCopyWithImpl<_$_Location>(this, _$identity);
+  _$$_CharacterLocationCopyWith<_$_CharacterLocation> get copyWith =>
+      __$$_CharacterLocationCopyWithImpl<_$_CharacterLocation>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LocationToJson(
+    return _$$_CharacterLocationToJson(
       this,
     );
   }
 }
 
-abstract class _Location implements Location {
-  const factory _Location(
-      {required final String name, required final String url}) = _$_Location;
+abstract class _CharacterLocation implements CharacterLocation {
+  const factory _CharacterLocation(
+      {required final String name,
+      required final String url}) = _$_CharacterLocation;
 
-  factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
+  factory _CharacterLocation.fromJson(Map<String, dynamic> json) =
+      _$_CharacterLocation.fromJson;
 
   @override
   String get name;
@@ -710,6 +715,6 @@ abstract class _Location implements Location {
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_LocationCopyWith<_$_Location> get copyWith =>
+  _$$_CharacterLocationCopyWith<_$_CharacterLocation> get copyWith =>
       throw _privateConstructorUsedError;
 }

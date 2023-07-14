@@ -14,7 +14,8 @@ _$_Character _$$_CharacterFromJson(Map<String, dynamic> json) => _$_Character(
       type: json['type'] as String,
       gender: json['gender'] as String,
       origin: Origin.fromJson(json['origin'] as Map<String, dynamic>),
-      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      location:
+          CharacterLocation.fromJson(json['location'] as Map<String, dynamic>),
       image: json['image'] as String,
       episode:
           (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
@@ -48,12 +49,14 @@ Map<String, dynamic> _$$_OriginToJson(_$_Origin instance) => <String, dynamic>{
       'url': instance.url,
     };
 
-_$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
+_$_CharacterLocation _$$_CharacterLocationFromJson(Map<String, dynamic> json) =>
+    _$_CharacterLocation(
       name: json['name'] as String,
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
+Map<String, dynamic> _$$_CharacterLocationToJson(
+        _$_CharacterLocation instance) =>
     <String, dynamic>{
       'name': instance.name,
       'url': instance.url,
