@@ -46,13 +46,13 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<RickAndMortyDto> getAllCharacter() async {
+  Future<RickAndMortyDto<Character>> getAllCharacter() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RickAndMortyDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<RickAndMortyDto<Character>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -68,18 +68,21 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = RickAndMortyDto.fromJson(_result.data!);
+    final value = RickAndMortyDto<Character>.fromJson(
+      _result.data!,
+      (json) => Character.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
   @override
-  Future<RickAndMortyDto> getAllCharacterByPage(int page) async {
+  Future<RickAndMortyDto<Character>> getAllCharacterByPage(int page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RickAndMortyDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<RickAndMortyDto<Character>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -95,12 +98,15 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = RickAndMortyDto.fromJson(_result.data!);
+    final value = RickAndMortyDto<Character>.fromJson(
+      _result.data!,
+      (json) => Character.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
   @override
-  Future<RickAndMortyDto> getAllCharacterByFilter(
+  Future<RickAndMortyDto<Character>> getAllCharacterByFilter(
     String name,
     String species,
     String gender,
@@ -115,8 +121,8 @@ class _RestClient implements RestClient {
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RickAndMortyDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<RickAndMortyDto<Character>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -132,7 +138,10 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = RickAndMortyDto.fromJson(_result.data!);
+    final value = RickAndMortyDto<Character>.fromJson(
+      _result.data!,
+      (json) => Character.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 

@@ -21,7 +21,7 @@ class CharacterRepository {
     return _api.getCharacter(id);
   }
 
-  Future<RickAndMortyDto> getCharactersByPage(int page) {
+  Future<RickAndMortyDto<Character>> getCharactersByPage(int page) {
     return _api.getAllCharacterByPage(page);
   }
 

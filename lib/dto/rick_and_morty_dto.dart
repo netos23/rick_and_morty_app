@@ -5,15 +5,21 @@ part 'rick_and_morty_dto.freezed.dart';
 
 part 'rick_and_morty_dto.g.dart';
 
-@freezed
-abstract class RickAndMortyDto with _$RickAndMortyDto {
+@Freezed(
+  fromJson: true,
+  genericArgumentFactories: true,
+)
+class RickAndMortyDto<T> with _$RickAndMortyDto<T> {
   const factory RickAndMortyDto({
     required Info info,
-    required List<Character> results,
+    required List<T> results,
   }) = _RickAndMortyDto;
 
-  factory RickAndMortyDto.fromJson(Map<String, dynamic> json) =>
-      _$RickAndMortyDtoFromJson(json);
+  factory RickAndMortyDto.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object?) converter,
+  ) =>
+      _$RickAndMortyDtoFromJson(json, converter);
 }
 
 @freezed

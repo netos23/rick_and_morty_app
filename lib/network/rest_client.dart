@@ -13,13 +13,14 @@ abstract class RestClient {
   Future<Character> getCharacter(@Path() int id);
 
   @GET("/api/character")
-  Future<RickAndMortyDto> getAllCharacter();
+  Future<RickAndMortyDto<Character>> getAllCharacter();
 
   @GET("/api/character")
-  Future<RickAndMortyDto> getAllCharacterByPage(@Query("page") int page);
+  Future<RickAndMortyDto<Character>> getAllCharacterByPage(
+      @Query("page") int page);
 
   @GET("/api/character")
-  Future<RickAndMortyDto> getAllCharacterByFilter(
+  Future<RickAndMortyDto<Character>> getAllCharacterByFilter(
     @Query("name") String name,
     @Query("species") String species,
     @Query("gender") String gender,

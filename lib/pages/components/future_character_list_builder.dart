@@ -4,6 +4,7 @@ import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/pages/character_page.dart';
 import 'package:rick_and_morty/repositories/character_rep.dart';
 
+@Deprecated('Старая реализация пагинации') // ну deprecated это же удобно...
 class FutureCharacterListBuilder extends StatefulWidget {
   const FutureCharacterListBuilder({
     super.key,
@@ -26,7 +27,7 @@ class _FutureCharacterListBuilderState
   Future<RickAndMortyDto> fetchData() async {
     var dto = await CharacterRepository().getCharactersByPage(page);
     setState(() {
-      widget.characters.addAll(dto.results);
+      widget.characters.addAll(dto.results as Iterable<Character>);
     });
     page++;
     return dto;

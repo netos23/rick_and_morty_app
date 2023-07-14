@@ -6,18 +6,22 @@ part of 'rick_and_morty_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RickAndMortyDto _$$_RickAndMortyDtoFromJson(Map<String, dynamic> json) =>
-    _$_RickAndMortyDto(
+_$_RickAndMortyDto<T> _$$_RickAndMortyDtoFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    _$_RickAndMortyDto<T>(
       info: Info.fromJson(json['info'] as Map<String, dynamic>),
-      results: (json['results'] as List<dynamic>)
-          .map((e) => Character.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      results: (json['results'] as List<dynamic>).map(fromJsonT).toList(),
     );
 
-Map<String, dynamic> _$$_RickAndMortyDtoToJson(_$_RickAndMortyDto instance) =>
+Map<String, dynamic> _$$_RickAndMortyDtoToJson<T>(
+  _$_RickAndMortyDto<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
     <String, dynamic>{
       'info': instance.info,
-      'results': instance.results,
+      'results': instance.results.map(toJsonT).toList(),
     };
 
 _$_Info _$$_InfoFromJson(Map<String, dynamic> json) => _$_Info(

@@ -14,35 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-RickAndMortyDto _$RickAndMortyDtoFromJson(Map<String, dynamic> json) {
-  return _RickAndMortyDto.fromJson(json);
+RickAndMortyDto<T> _$RickAndMortyDtoFromJson<T>(
+    Map<String, dynamic> json, T Function(Object?) fromJsonT) {
+  return _RickAndMortyDto<T>.fromJson(json, fromJsonT);
 }
 
 /// @nodoc
-mixin _$RickAndMortyDto {
+mixin _$RickAndMortyDto<T> {
   Info get info => throw _privateConstructorUsedError;
-  List<Character> get results => throw _privateConstructorUsedError;
+  List<T> get results => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
+      throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RickAndMortyDtoCopyWith<RickAndMortyDto> get copyWith =>
+  $RickAndMortyDtoCopyWith<T, RickAndMortyDto<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RickAndMortyDtoCopyWith<$Res> {
+abstract class $RickAndMortyDtoCopyWith<T, $Res> {
   factory $RickAndMortyDtoCopyWith(
-          RickAndMortyDto value, $Res Function(RickAndMortyDto) then) =
-      _$RickAndMortyDtoCopyWithImpl<$Res, RickAndMortyDto>;
+          RickAndMortyDto<T> value, $Res Function(RickAndMortyDto<T>) then) =
+      _$RickAndMortyDtoCopyWithImpl<T, $Res, RickAndMortyDto<T>>;
   @useResult
-  $Res call({Info info, List<Character> results});
+  $Res call({Info info, List<T> results});
 
   $InfoCopyWith<$Res> get info;
 }
 
 /// @nodoc
-class _$RickAndMortyDtoCopyWithImpl<$Res, $Val extends RickAndMortyDto>
-    implements $RickAndMortyDtoCopyWith<$Res> {
+class _$RickAndMortyDtoCopyWithImpl<T, $Res, $Val extends RickAndMortyDto<T>>
+    implements $RickAndMortyDtoCopyWith<T, $Res> {
   _$RickAndMortyDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -64,7 +66,7 @@ class _$RickAndMortyDtoCopyWithImpl<$Res, $Val extends RickAndMortyDto>
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Character>,
+              as List<T>,
     ) as $Val);
   }
 
@@ -78,25 +80,25 @@ class _$RickAndMortyDtoCopyWithImpl<$Res, $Val extends RickAndMortyDto>
 }
 
 /// @nodoc
-abstract class _$$_RickAndMortyDtoCopyWith<$Res>
-    implements $RickAndMortyDtoCopyWith<$Res> {
-  factory _$$_RickAndMortyDtoCopyWith(
-          _$_RickAndMortyDto value, $Res Function(_$_RickAndMortyDto) then) =
-      __$$_RickAndMortyDtoCopyWithImpl<$Res>;
+abstract class _$$_RickAndMortyDtoCopyWith<T, $Res>
+    implements $RickAndMortyDtoCopyWith<T, $Res> {
+  factory _$$_RickAndMortyDtoCopyWith(_$_RickAndMortyDto<T> value,
+          $Res Function(_$_RickAndMortyDto<T>) then) =
+      __$$_RickAndMortyDtoCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({Info info, List<Character> results});
+  $Res call({Info info, List<T> results});
 
   @override
   $InfoCopyWith<$Res> get info;
 }
 
 /// @nodoc
-class __$$_RickAndMortyDtoCopyWithImpl<$Res>
-    extends _$RickAndMortyDtoCopyWithImpl<$Res, _$_RickAndMortyDto>
-    implements _$$_RickAndMortyDtoCopyWith<$Res> {
+class __$$_RickAndMortyDtoCopyWithImpl<T, $Res>
+    extends _$RickAndMortyDtoCopyWithImpl<T, $Res, _$_RickAndMortyDto<T>>
+    implements _$$_RickAndMortyDtoCopyWith<T, $Res> {
   __$$_RickAndMortyDtoCopyWithImpl(
-      _$_RickAndMortyDto _value, $Res Function(_$_RickAndMortyDto) _then)
+      _$_RickAndMortyDto<T> _value, $Res Function(_$_RickAndMortyDto<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +107,7 @@ class __$$_RickAndMortyDtoCopyWithImpl<$Res>
     Object? info = null,
     Object? results = null,
   }) {
-    return _then(_$_RickAndMortyDto(
+    return _then(_$_RickAndMortyDto<T>(
       info: null == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
@@ -113,26 +115,26 @@ class __$$_RickAndMortyDtoCopyWithImpl<$Res>
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Character>,
+              as List<T>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_RickAndMortyDto implements _RickAndMortyDto {
-  const _$_RickAndMortyDto(
-      {required this.info, required final List<Character> results})
+@JsonSerializable(genericArgumentFactories: true)
+class _$_RickAndMortyDto<T> implements _RickAndMortyDto<T> {
+  const _$_RickAndMortyDto({required this.info, required final List<T> results})
       : _results = results;
 
-  factory _$_RickAndMortyDto.fromJson(Map<String, dynamic> json) =>
-      _$$_RickAndMortyDtoFromJson(json);
+  factory _$_RickAndMortyDto.fromJson(
+          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
+      _$$_RickAndMortyDtoFromJson(json, fromJsonT);
 
   @override
   final Info info;
-  final List<Character> _results;
+  final List<T> _results;
   @override
-  List<Character> get results {
+  List<T> get results {
     if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_results);
@@ -140,14 +142,14 @@ class _$_RickAndMortyDto implements _RickAndMortyDto {
 
   @override
   String toString() {
-    return 'RickAndMortyDto(info: $info, results: $results)';
+    return 'RickAndMortyDto<$T>(info: $info, results: $results)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RickAndMortyDto &&
+            other is _$_RickAndMortyDto<T> &&
             (identical(other.info, info) || other.info == info) &&
             const DeepCollectionEquality().equals(other._results, _results));
   }
@@ -160,32 +162,32 @@ class _$_RickAndMortyDto implements _RickAndMortyDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RickAndMortyDtoCopyWith<_$_RickAndMortyDto> get copyWith =>
-      __$$_RickAndMortyDtoCopyWithImpl<_$_RickAndMortyDto>(this, _$identity);
+  _$$_RickAndMortyDtoCopyWith<T, _$_RickAndMortyDto<T>> get copyWith =>
+      __$$_RickAndMortyDtoCopyWithImpl<T, _$_RickAndMortyDto<T>>(
+          this, _$identity);
 
   @override
-  Map<String, dynamic> toJson() {
-    return _$$_RickAndMortyDtoToJson(
-      this,
-    );
+  Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
+    return _$$_RickAndMortyDtoToJson<T>(this, toJsonT);
   }
 }
 
-abstract class _RickAndMortyDto implements RickAndMortyDto {
+abstract class _RickAndMortyDto<T> implements RickAndMortyDto<T> {
   const factory _RickAndMortyDto(
       {required final Info info,
-      required final List<Character> results}) = _$_RickAndMortyDto;
+      required final List<T> results}) = _$_RickAndMortyDto<T>;
 
-  factory _RickAndMortyDto.fromJson(Map<String, dynamic> json) =
-      _$_RickAndMortyDto.fromJson;
+  factory _RickAndMortyDto.fromJson(
+          Map<String, dynamic> json, T Function(Object?) fromJsonT) =
+      _$_RickAndMortyDto<T>.fromJson;
 
   @override
   Info get info;
   @override
-  List<Character> get results;
+  List<T> get results;
   @override
   @JsonKey(ignore: true)
-  _$$_RickAndMortyDtoCopyWith<_$_RickAndMortyDto> get copyWith =>
+  _$$_RickAndMortyDtoCopyWith<T, _$_RickAndMortyDto<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
