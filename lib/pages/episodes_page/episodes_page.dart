@@ -1,17 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/episode.dart';
 import 'package:rick_and_morty/util/pagination_builder.dart';
 
-class EpisodesPage extends StatelessWidget {
+class EpisodesPage extends StatefulWidget {
   const EpisodesPage({
     super.key,
-    required this.episodeClient,
   });
 
-  final EpisodeClient episodeClient;
+  @override
+  State<EpisodesPage> createState() => _EpisodesPageState();
+}
+
+class _EpisodesPageState extends State<EpisodesPage> {
+  EpisodeClient get episodeClient => context.read();
 
   Future<(List<Episode>, bool)> _loadEpisodes(int page) async {
     try {
@@ -28,7 +33,6 @@ class EpisodesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: PaginationBuilder<Episode>(
@@ -50,7 +54,17 @@ class EpisodesPage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final episode = episodes[index];
-                return EpisodeCard(episode: episode);
+                return GestureDetector(
+                    onTap: () async {
+                      // before
+                      await Navigator.pushNamed(
+                        context,
+                        '/episode',
+                        arguments: episode.id,
+                      );
+                      // after
+                    },
+                    child: EpisodeCard(episode: episode));
               },
               itemCount: episodes.length,
             );

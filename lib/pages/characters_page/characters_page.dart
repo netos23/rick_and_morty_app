@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
@@ -11,15 +12,19 @@ import 'package:rick_and_morty/util/path_id.dart';
 
 import 'widgets/character_card.dart';
 
-class CharactersPage extends StatelessWidget {
+class CharactersPage extends StatefulWidget {
   const CharactersPage({
     super.key,
-    required this.characterClient,
-    required this.episodeClient,
   });
 
-  final CharacterClient characterClient;
-  final EpisodeClient episodeClient;
+  @override
+  State<CharactersPage> createState() => _CharactersPageState();
+}
+
+class _CharactersPageState extends State<CharactersPage> {
+  CharacterClient get characterClient => context.read();
+
+  EpisodeClient get episodeClient => context.read();
 
   Future<(List<Character>, bool)> _loadCharacters(int page) async {
     try {
@@ -83,8 +88,19 @@ class CharactersPage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final character = characters[index];
-                return CharacterCard(
-                  character: character,
+                return GestureDetector(
+                  onTap: () async {
+                    // before
+                    await Navigator.pushNamed(
+                      context,
+                      '/character',
+                      arguments: character.id,
+                    );
+                    // after
+                  },
+                  child: CharacterCard(
+                    character: character,
+                  ),
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(

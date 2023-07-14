@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/navigation/generate_navigator.dart';
 import 'package:rick_and_morty/pages/characters_page/characters_page.dart';
 import 'package:rick_and_morty/pages/episodes_page/episodes_page.dart';
+import 'package:rick_and_morty/pages/home_page/home_page.dart';
 import 'package:rick_and_morty/pages/location_page/location_page.dart';
 
 import 'assets/color_schemes.g.dart';
@@ -27,11 +29,17 @@ class RickAndMortyApp extends StatelessWidget {
         colorScheme: darkColorScheme,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      home: CharacterPage(
-        id: 1,
-        characterClient: context.read(),
-        episodeClient: context.read(),
-      ),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case '/':
+            return CupertinoPageRoute(
+              settings: settings,
+              builder: (context) =>  HomePage(
+                key: GenerateNavigator.tabNavigator,
+              ),
+            );
+        }
+      },
       // home: LocationsPage(
       //   locationClient: context.read(),
       // ),

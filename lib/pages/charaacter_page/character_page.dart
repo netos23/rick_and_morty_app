@@ -5,6 +5,7 @@ import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/generate_navigator.dart';
 import 'package:rick_and_morty/pages/episodes_page/episodes_page.dart';
 import 'package:rick_and_morty/util/path_id.dart';
 
@@ -140,7 +141,11 @@ class CharacterPage extends StatelessWidget {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
-                          // TODO(netos23): implement
+                          GenerateNavigator.tabNavigator.currentState?.tab = 2;
+                          GenerateNavigator.currentNavigator()?.pushNamed(
+                            '/location',
+                            arguments: character.origin.url.id,
+                          );
                         },
                       ),
                       const Divider(),
@@ -158,7 +163,10 @@ class CharacterPage extends StatelessWidget {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
-                          // TODO(netos23): implement
+                          Navigator.of(context).pushNamed(
+                            '/location',
+                            arguments: character.location.url.id,
+                          );
                         },
                       ),
                       const Divider(),
@@ -187,9 +195,7 @@ class CharacterPage extends StatelessWidget {
 
                       return SliverPadding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 20
-                        ),
+                            horizontal: 16, vertical: 20),
                         sliver: SliverGrid.builder(
                           gridDelegate:
                               const SliverGridDelegateWithMaxCrossAxisExtent(
