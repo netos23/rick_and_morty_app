@@ -1,20 +1,27 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/location_client.dart';
 import 'package:rick_and_morty/model/location.dart';
 
-class LocationPage extends StatelessWidget {
+@RoutePage()
+class LocationPage extends StatefulWidget {
   const LocationPage({
     super.key,
-    required this.locationClient,
     this.preview,
     required this.id,
   });
 
-  final LocationClient locationClient;
-
   final Location? preview;
   final int id;
+
+  @override
+  State<LocationPage> createState() => _LocationPageState();
+}
+
+class _LocationPageState extends State<LocationPage> {
+  LocationClient get locationClient => context.read();
 
   Future<Location> _loadCharacter(int id) async {
     try {
@@ -32,8 +39,8 @@ class LocationPage extends StatelessWidget {
 
     return Scaffold(
       body: FutureBuilder(
-        initialData: preview,
-        future: _loadCharacter(id),
+        initialData: widget.preview,
+        future: _loadCharacter(widget.id),
         builder: (context, snapshot) {
           final location = snapshot.data;
           if (location == null) {

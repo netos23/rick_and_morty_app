@@ -1,11 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/util/pagination_builder.dart';
 
+@RoutePage()
 class EpisodesPage extends StatefulWidget {
   const EpisodesPage({
     super.key,
@@ -57,11 +60,17 @@ class _EpisodesPageState extends State<EpisodesPage> {
                 return GestureDetector(
                     onTap: () async {
                       // before
-                      await Navigator.pushNamed(
-                        context,
-                        '/episode',
-                        arguments: episode.id,
+                      context.router.push(
+                        EpisodeRoute(
+                          id: episode.id,
+                        ),
                       );
+                      context.router.push(
+                        EpisodeRoute(
+                          id: episode.id,
+                        ),
+                      );
+
                       // after
                     },
                     child: EpisodeCard(episode: episode));

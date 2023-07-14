@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,11 +8,13 @@ import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/util/pagination_builder.dart';
 import 'package:rick_and_morty/util/path_id.dart';
 
 import 'widgets/character_card.dart';
 
+@RoutePage()
 class CharactersPage extends StatefulWidget {
   const CharactersPage({
     super.key,
@@ -91,10 +94,11 @@ class _CharactersPageState extends State<CharactersPage> {
                 return GestureDetector(
                   onTap: () async {
                     // before
-                    await Navigator.pushNamed(
-                      context,
-                      '/character',
-                      arguments: character.id,
+                    context.router.push(
+                      CharacterRoute(
+                        id: character.id,
+                        preview: character,
+                      ),
                     );
                     // after
                   },
