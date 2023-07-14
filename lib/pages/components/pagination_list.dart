@@ -18,10 +18,13 @@ class PaginationList<T> extends StatefulWidget {
   State<PaginationList<T>> createState() => _PaginationListState();
 }
 
+const int elementInPage = 20;
+
 class _PaginationListState<T> extends State<PaginationList<T>> {
   final StreamController<List<T>> _streamController = StreamController();
   List<T> lastPagesData = [];
   int _page = 1;
+  int? _count;
 
   @override
   void initState() {
@@ -37,10 +40,12 @@ class _PaginationListState<T> extends State<PaginationList<T>> {
 
   Future<void> getData() async {
     final pageData = await widget.fetchData(_page++);
+    if (_count == null) {
+      _count = pageData.info.count;
+      print(_count);
+    }
     lastPagesData.addAll(pageData.results);
     _streamController.add(lastPagesData);
-    // _streamController.add(pageData.results);
-
   }
 
   @override
@@ -55,9 +60,9 @@ class _PaginationListState<T> extends State<PaginationList<T>> {
           }
           return ListView.separated(
               itemBuilder: (context, index) {
-                if (index == data.length - 1) {
+                if (index == data.length - 1 && index + 1 != _count) {
                   return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       widget.cardBuilder(context, lastPagesData[index]),
                       Center(

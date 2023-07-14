@@ -20,6 +20,9 @@ class _CharactersPageState extends State<CharactersPage> {
   final List<Character> characters = [];
   final ScrollController _scrollController = ScrollController();
   late final Future<RickAndMortyDto> future;
+  String species = '';
+  String gender = '';
+  String status = '';
   int page = 1;
 
   @override
@@ -67,22 +70,54 @@ class _CharactersPageState extends State<CharactersPage> {
                   onFieldSubmitted: (_) {},
                 )),
             Flexible(
-              flex: 3,
+              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: FilterButton(onPressedCallBack: () {
-
-                }),
+                child: FilterButton(onPressedCallBack: () {}),
               ),
             ),
             Expanded(
               flex: 12,
               child: PaginationList<Character>(
-                cardBuilder: (context, data) {
-                  return Text(data.name);
-                },
-                fetchData: CharacterRepository().getCharactersByPage
-              ),
+                  cardBuilder: (context, data) {
+                    return Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4))),
+                        elevation: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 1.2,
+                              child: Image.network(
+                                data.image,
+                                fit: BoxFit.fitWidth,
+                                errorBuilder: (_, __, ___) =>
+                                    Image.asset('assets/noPic.jpeg'),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data.name,
+                                    style: theme.textTheme.headlineSmall,
+                                  ),
+                                  Text(
+                                    data.species,
+                                    style: theme.textTheme.bodySmall,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ));
+                  },
+                  fetchData: CharacterRepository().getCharactersByPage),
             )
           ],
         ),

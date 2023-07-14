@@ -26,8 +26,9 @@ class RickAndMortyApp extends StatelessWidget {
             ),
             headlineSmall: GoogleFonts.roboto(
               fontWeight: FontWeight.w500,
+              height: 30 / 20,
               fontSize: 20,
-              color: const Color(0xFF8E8E93),
+              color: const Color(0xFF000000),
             ),
             bodyLarge: GoogleFonts.roboto(
               fontWeight: FontWeight.w700,
@@ -35,6 +36,7 @@ class RickAndMortyApp extends StatelessWidget {
             ),
             bodySmall: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
+              height: 21 / 14,
               fontSize: 14,
             ),
           )),
