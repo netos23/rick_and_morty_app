@@ -13,7 +13,22 @@ abstract class CharacterClient {
   }) = _CharacterClient;
 
   @GET("/api/character")
-  Future<Pagination<Character>> getCharacters(
-    @Query('page') String? page,
+  Future<Pagination<Character>> getCharacters({
+    @Query('page') int? page,
+    @Query('name') String? name,
+    @Query('status') CharacterStatus? status,
+    @Query('species') String? species,
+    @Query('type') String? type,
+    @Query('gender') CharacterGender? gender,
+  });
+
+  @GET("/api/character/{id}")
+  Future<Character> getCharacter(
+    @Path() int id,
+  );
+
+  @GET("/api/character/{ids}")
+  Future<List<Character>> getMultipleCharacters(
+    @Path() String ids,
   );
 }

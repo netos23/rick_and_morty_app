@@ -10,6 +10,7 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
       id: json['id'] as int,
       name: json['name'] as String,
       type: json['type'] as String,
+      image: json['image'] as String?,
       dimension: json['dimension'] as String,
       residents:
           (json['residents'] as List<dynamic>).map((e) => e as String).toList(),
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
       'id': instance.id,
       'name': instance.name,
       'type': instance.type,
+      'image': instance.image,
       'dimension': instance.dimension,
       'residents': instance.residents,
       'url': instance.url,

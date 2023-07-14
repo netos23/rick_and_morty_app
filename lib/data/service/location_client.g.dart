@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'character_client.dart';
+part of 'location_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'character_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _CharacterClient implements CharacterClient {
-  _CharacterClient(
+class _LocationClient implements LocationClient {
+  _LocationClient(
     this._dio, {
     this.baseUrl,
   });
@@ -19,35 +19,31 @@ class _CharacterClient implements CharacterClient {
   String? baseUrl;
 
   @override
-  Future<Pagination<Character>> getCharacters({
+  Future<Pagination<Location>> getLocations({
     int? page,
     String? name,
-    CharacterStatus? status,
-    String? species,
     String? type,
-    CharacterGender? gender,
+    String? dimension,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'name': name,
-      r'status': status?.name,
-      r'species': species,
       r'type': type,
-      r'gender': gender?.name,
+      r'dimension': dimension,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Pagination<Character>>(Options(
+        _setStreamType<Pagination<Location>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character',
+              '/api/location',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -56,28 +52,28 @@ class _CharacterClient implements CharacterClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Pagination<Character>.fromJson(
+    final value = Pagination<Location>.fromJson(
       _result.data!,
-      (json) => Character.fromJson(json as Map<String, dynamic>),
+      (json) => Location.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<Character> getCharacter(int id) async {
+  Future<Location> getLocation(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Character>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Location>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character/${id}',
+              '/api/location/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -86,25 +82,25 @@ class _CharacterClient implements CharacterClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Character.fromJson(_result.data!);
+    final value = Location.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<List<Character>> getMultipleCharacters(String ids) async {
+  Future<List<Location>> getMultipleLocation(String ids) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Location>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/character/${ids}',
+              '/api/location/{id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -114,7 +110,7 @@ class _CharacterClient implements CharacterClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Location.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

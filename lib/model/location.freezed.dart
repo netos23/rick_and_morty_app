@@ -23,6 +23,7 @@ mixin _$Location {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   String get dimension => throw _privateConstructorUsedError;
   List<String> get residents => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $LocationCopyWith<$Res> {
       {int id,
       String name,
       String type,
+      String? image,
       String dimension,
       List<String> residents,
       String url,
@@ -65,6 +67,7 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
     Object? id = null,
     Object? name = null,
     Object? type = null,
+    Object? image = freezed,
     Object? dimension = null,
     Object? residents = null,
     Object? url = null,
@@ -83,6 +86,10 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
       dimension: null == dimension
           ? _value.dimension
           : dimension // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
       {int id,
       String name,
       String type,
+      String? image,
       String dimension,
       List<String> residents,
       String url,
@@ -134,6 +142,7 @@ class __$$_LocationCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? type = null,
+    Object? image = freezed,
     Object? dimension = null,
     Object? residents = null,
     Object? url = null,
@@ -152,6 +161,10 @@ class __$$_LocationCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
       dimension: null == dimension
           ? _value.dimension
           : dimension // ignore: cast_nullable_to_non_nullable
@@ -179,6 +192,7 @@ class _$_Location implements _Location {
       {required this.id,
       required this.name,
       required this.type,
+      this.image,
       required this.dimension,
       required final List<String> residents,
       required this.url,
@@ -194,6 +208,8 @@ class _$_Location implements _Location {
   final String name;
   @override
   final String type;
+  @override
+  final String? image;
   @override
   final String dimension;
   final List<String> _residents;
@@ -211,7 +227,7 @@ class _$_Location implements _Location {
 
   @override
   String toString() {
-    return 'Location(id: $id, name: $name, type: $type, dimension: $dimension, residents: $residents, url: $url, created: $created)';
+    return 'Location(id: $id, name: $name, type: $type, image: $image, dimension: $dimension, residents: $residents, url: $url, created: $created)';
   }
 
   @override
@@ -222,6 +238,7 @@ class _$_Location implements _Location {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.dimension, dimension) ||
                 other.dimension == dimension) &&
             const DeepCollectionEquality()
@@ -232,7 +249,7 @@ class _$_Location implements _Location {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, dimension,
+  int get hashCode => Object.hash(runtimeType, id, name, type, image, dimension,
       const DeepCollectionEquality().hash(_residents), url, created);
 
   @JsonKey(ignore: true)
@@ -254,6 +271,7 @@ abstract class _Location implements Location {
       {required final int id,
       required final String name,
       required final String type,
+      final String? image,
       required final String dimension,
       required final List<String> residents,
       required final String url,
@@ -267,6 +285,8 @@ abstract class _Location implements Location {
   String get name;
   @override
   String get type;
+  @override
+  String? get image;
   @override
   String get dimension;
   @override

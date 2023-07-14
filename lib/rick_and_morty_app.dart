@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:rick_and_morty/pages/character_list_page.dart';
+import 'package:rick_and_morty/pages/characters_page/characters_page.dart';
+import 'package:rick_and_morty/pages/episodes_page/episodes_page.dart';
+import 'package:rick_and_morty/pages/location_page/location_page.dart';
+
+import 'assets/color_schemes.g.dart';
+import 'pages/charaacter_page/character_page.dart';
+import 'pages/locations_page/locations_page.dart';
 
 class RickAndMortyApp extends StatelessWidget {
   const RickAndMortyApp({super.key});
@@ -9,76 +16,32 @@ class RickAndMortyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          primary: Colors.green,
-          seedColor: Colors.green,
-        ),
+        useMaterial3: true,
+        colorScheme: lightColorScheme,
+        textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      home: CharacterListPage(
-        client: context.read(),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: darkColorScheme,
+        textTheme: GoogleFonts.montserratTextTheme(),
       ),
+      home: CharacterPage(
+        id: 1,
+        characterClient: context.read(),
+        episodeClient: context.read(),
+      ),
+      // home: LocationsPage(
+      //   locationClient: context.read(),
+      // ),
+      // home: EpisodesPage(
+      //   episodeClient: context.read(),
+      // ),
+      // home: CharactersPage(
+      //   characterClient: context.read(),
+      //   episodeClient: context.read(),
+      // ),
     );
-  }
-}
-
-class TestScreen extends StatefulWidget {
-  const TestScreen({super.key});
-
-  @override
-  State<TestScreen> createState() => _TestScreenState();
-}
-
-class _TestScreenState extends State<TestScreen> {
-  final String imageUrlA =
-      'https://avatars.mds.yandex.net/i?id=a14641668e97ca5adc7e9511e84c459cdb10dd51-9197564-images-thumbs&n=13';
-  final String? imageUrl = null;
-
-  @override
-  Widget build(BuildContext context) {
-    var themeData = Theme.of(context);
-    return Theme(
-      data: themeData.copyWith(
-        colorScheme: themeData.colorScheme.copyWith(
-          primary: Colors.red,
-        ),
-      ),
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          onPressed: a,
-          child: const Icon(Icons.dangerous_outlined),
-        ),
-        body: Image.network(
-          imageUrl ?? '',
-          errorBuilder: (_, __, ___) => Image.network(imageUrlA),
-        ),
-      ),
-    );
-  }
-
-  void a() {
-    b();
-  }
-
-  void b() {
-    c();
-  }
-
-  void c() {
-    try {
-      d();
-    } catch (e, stackTrace) {
-      print(e);
-      Error.throwWithStackTrace(Exception('c'), stackTrace);
-    }
-  }
-
-  void d() {
-    e();
-  }
-
-  void e() {
-    throw Exception('e');
   }
 }

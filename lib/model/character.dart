@@ -17,6 +17,7 @@ abstract class Character with _$Character {
     required CharacterLocation location,
     required String image,
     required List<String> episode,
+    required String? firstEpisodeName,
     required String url,
     required String created,
   }) = _Character;
@@ -36,35 +37,24 @@ class CharacterLocation with _$CharacterLocation {
       _$CharacterLocationFromJson(json);
 }
 
-enum CharacterSpecies {
-  @JsonValue('Humanoid')
-  humanoid,
-  @JsonValue('Human')
-  human,
-  @JsonValue('Alien')
-  alien,
-  @JsonValue('')
-  empty,
-}
-
 enum CharacterStatus {
-  @JsonValue('Alive')
+  @JsonValue('alive')
   alive,
   @JsonValue('unknown')
   unknown,
-  @JsonValue('Dead')
+  @JsonValue('dead')
   dead,
   @JsonValue('')
   empty;
 }
 
 enum CharacterGender {
-  @JsonValue('Male')
+  @JsonValue('male')
   male,
-  @JsonValue('Female')
+  @JsonValue('female')
   female,
   @JsonValue('unknown')
   unknown,
-  @JsonValue('')
-  empty,
+  @JsonValue('genderless')
+  genderless,
 }
