@@ -1,43 +1,22 @@
-/* Еее,
-* */
 /*
+ Постарался реализовать FutureUpdater
+ через StreamUpdater, который на лекции
+ представили
+ P.S. Я учусь, не бейте тапком please
+ */
+
+
 import 'dart:async';
 import 'package:flutter/material.dart';
-class FutureWidget<T> extends StatelessWidget {
-  final Future<T> futureData;
-
-  FutureWidget({required this.futureData});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<T>(
-      future: futureData,
-      builder: (BuildContext context, AsyncSnapshot<T> aShot) { //Азхазхвазвхазх, переменная Ашот, что за мем
-        if (aShot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (aShot.hasError) {
-          return Text('${aShot.error}');
-        } else if (aShot.hasData) {
-          return Text('${aShot.data}');
-        } else {
-          return const Text('NO DATA');
-        }
-      },
-    );
-  }
-}
-
-
-
 
 typedef LoadingBuilder = Widget Function(BuildContext);
 typedef DataBuilder<T> = Widget Function(BuildContext, T?);
 typedef ErrorBuilder<T> = Widget Function(BuildContext, dynamic, T?);
 
-class StreamUpdater<T> extends StatefulWidget {
-  const StreamUpdater({
+class FutureUpdater<T> extends StatefulWidget {
+  const FutureUpdater({
     super.key,
-    required this.stream,
+    required this.future,
     required this.builder,
     this.loadingBuilder,
     this.errorBuilder,
@@ -46,24 +25,19 @@ class StreamUpdater<T> extends StatefulWidget {
   final LoadingBuilder? loadingBuilder;
   final DataBuilder<T> builder;
   final ErrorBuilder<T>? errorBuilder;
-  final Stream<T> stream;
+  final Future<T> future;
 
   @override
-  State<StreamUpdater<T>> createState() => _StreamUpdaterState<T>();
+  State<FutureUpdater<T>> createState() => _FutureUpdaterState<T>();
 }
 
-class _StreamUpdaterState<T> extends State<StreamUpdater<T>> {
+class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
   T? _data;
   dynamic _error;
-  StreamSubscription? _subscription;
 
   @override
   void initState() {
     super.initState();
-    _subscription = widget.stream.listen(
-      _handleEvent,
-      onError: _handleError,
-    );
   }
 
   _handleError(error) {
@@ -72,26 +46,22 @@ class _StreamUpdaterState<T> extends State<StreamUpdater<T>> {
     });
   }
 
-  void _handleEvent(event) {
+  void _handleVal(val) {
     setState(() {
-      _data = event;
+      _data = val;
     });
   }
 
-  @override
-  void didUpdateWidget(covariant StreamUpdater<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _subscription?.cancel();
-    _subscription = widget.stream.listen(
-      _handleEvent,
-      onError: _handleError,
-    );
+  void changeFuture() {
+    widget.future.then(_handleVal).catchError(_handleError);
   }
 
   @override
-  void dispose() {
-    _subscription?.cancel();
-    super.dispose();
+  void didUpdateWidget(covariant FutureUpdater<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.future != widget.future) {
+      changeFuture();
+    }
   }
 
   @override
@@ -109,4 +79,3 @@ class _StreamUpdaterState<T> extends State<StreamUpdater<T>> {
     return widget.builder(context, _data);
   }
 }
-*/

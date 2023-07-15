@@ -5,7 +5,7 @@ import 'package:rick_and_morty/data/repositories/character_repo.dart';
 import 'package:rick_and_morty/ui/pages/search_page.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key, required this.title}) : super(key: key);
+  HomePage({super.key, required this.title});
 
   final String title;
   final repository = CharacterRepo();
