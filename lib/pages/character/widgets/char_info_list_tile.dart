@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
 
-class CharInfoListTile extends StatelessWidget {
-  const CharInfoListTile({Key? key, required this.character}) : super(key: key);
+class CharInfoList extends StatelessWidget {
+  const CharInfoList({super.key, required this.character});
 
   final Character character;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    final themeData = Theme.of(context);
+    return SliverList.list(
       children: [
+        Container(
+          margin: const EdgeInsets.only(top: 32, bottom: 25),
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Informations',
+            style: themeData.textTheme.titleMedium,
+          ),
+        ),
         ListTile(title: const Text('Gender'), subtitle: Text(character.gender)),
         ListTile(title: const Text('Status'), subtitle: Text(character.status)),
         ListTile(
@@ -20,6 +29,14 @@ class CharInfoListTile extends StatelessWidget {
         ListTile(
             title: const Text('Location'),
             subtitle: Text(character.location.name)),
+        Container(
+          margin: const EdgeInsets.only(top: 52, bottom: 26),
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Episodes',
+            style: themeData.textTheme.titleMedium,
+          ),
+        ),
       ],
     );
   }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-import 'package:rick_and_morty/network/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/network/data/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/model/location/location.dart';

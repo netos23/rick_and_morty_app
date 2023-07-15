@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/network/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/network/data/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/network/data/repository/character_repository.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
-import 'package:rick_and_morty/network/repository/character_repository.dart';
 import 'package:rick_and_morty/network/util/dio_util.dart';
 import 'package:rick_and_morty/pages/character/character_item_page.dart';
 import 'package:rick_and_morty/pages/character/widgets/character_list.dart';
@@ -18,7 +18,6 @@ class _CharacterPageState extends State<CharacterPage> {
   final CharacterRepository _characterRepository =
       DioUtil().characterRepository;
 
-
   @override
   void initState() {
     super.initState();
@@ -28,7 +27,6 @@ class _CharacterPageState extends State<CharacterPage> {
     final res = await _characterRepository.getCharacters();
     return res;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +58,16 @@ class _CharacterPageState extends State<CharacterPage> {
                     itemBuilder: (BuildContext context, int index) {
                       final char = characters.results[index];
                       return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    CharacterItemPage(character: char),
-                              ),
-                            );
-                          },
-                          child: CharacterItem(character: char));
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  CharacterItemPage(character: char),
+                            ),
+                          );
+                        },
+                        child: CharacterItem(character: char),
+                      );
                     },
                   ),
                 ),

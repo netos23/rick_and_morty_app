@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty/network/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/network/data/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/network/data/service/service.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
-import 'package:rick_and_morty/network/service/service.dart';
 
 
 class EpisodeRepository{
@@ -13,10 +13,8 @@ class EpisodeRepository{
     try {
       final result = await _restService.getEpisode(id);
       return result;
-    } on DioException catch (error) {
-      throw Exception(
-        error.response?.data['message'],
-      );
+    } on DioException catch (error, stackTrace) {
+      Error.throwWithStackTrace(error, stackTrace);
     }
   }
 
@@ -24,10 +22,8 @@ class EpisodeRepository{
     try {
       final result = await _restService.getEpisodes();
       return result;
-    } on DioException catch (error) {
-      throw Exception(
-        error.response?.data['message'],
-      );
+    } on DioException catch (error, stackTrace) {
+      Error.throwWithStackTrace(error, stackTrace);
     }
   }
 
@@ -35,10 +31,8 @@ class EpisodeRepository{
     try {
       final result = await _restService.getMultipleEpisode(ids);
       return result;
-    } on DioException catch (error) {
-      throw Exception(
-        error.response?.data['message'],
-      );
+    } on DioException catch (error, stackTrace) {
+      Error.throwWithStackTrace(error, stackTrace);
     }
   }
 }

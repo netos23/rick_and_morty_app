@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rick_and_morty/network/dto/info/info.dart';
+import 'package:rick_and_morty/network/data/dto/info/info.dart';
 
 
 part 'pagination.freezed.dart';
