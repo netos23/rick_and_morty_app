@@ -107,18 +107,12 @@ class _RestClient implements RestClient {
 
   @override
   Future<RickAndMortyDto<Character>> getAllCharacterByFilter(
-    String name,
-    String species,
-    String gender,
-    String status,
+    int page,
+    Map<String, String> params,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'name': name,
-      r'species': species,
-      r'gender': gender,
-      r'status': status,
-    };
+    final queryParameters = <String, dynamic>{r'page': page};
+    queryParameters.addAll(params);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(

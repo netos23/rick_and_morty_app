@@ -15,16 +15,6 @@ class RickAndMortyAppBar extends StatelessWidget {
         offset: const Offset(16, 4),
         child: Image.asset('assets/logo.png'),
       ),
-      actions: [
-        IconButton(
-            onPressed: () {
-              // TODO показывать Menu open
-            },
-            icon: Icon(
-              Icons.format_list_bulleted,
-              color: theme.colorScheme.secondary.withOpacity(0.54),
-            ))
-      ],
     );
   }
 }

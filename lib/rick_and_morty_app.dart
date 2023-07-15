@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rick_and_morty/pages/characters_page.dart';
+import 'package:rick_and_morty/pages/character_page/characters_page.dart';
+import 'package:rick_and_morty/route/app_router.dart';
 
 class RickAndMortyApp extends StatelessWidget {
-  const RickAndMortyApp({super.key});
+  RickAndMortyApp({super.key});
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _appRouter.config(),
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color(0xFFFFFFFF),
@@ -41,7 +44,7 @@ class RickAndMortyApp extends StatelessWidget {
             ),
           )),
       debugShowCheckedModeBanner: false, // да, мы в матрице
-      home: const CharactersPage(),
+
     );
   }
 }

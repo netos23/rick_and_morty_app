@@ -1,9 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'character.freezed.dart';
+
 part 'character.g.dart';
-
-
 
 @freezed
 class Character with _$Character {
@@ -24,6 +23,21 @@ class Character with _$Character {
 
   factory Character.fromJson(Map<String, dynamic> json) =>
       _$CharacterFromJson(json);
+}
+
+@freezed
+class Episode with _$Episode {
+  const factory Episode(
+      {required int id,
+      required String name,
+      required String airDate,
+      required String episode,
+      required List<String> characters,
+      required String url,
+      required String created}) = _Episode;
+
+  factory Episode.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeFromJson(json);
 }
 
 @freezed

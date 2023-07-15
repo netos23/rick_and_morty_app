@@ -25,12 +25,8 @@ class CharacterRepository {
     return _api.getAllCharacterByPage(page);
   }
 
-  Future<RickAndMortyDto> getCharactersByFilter({
-    String name = '',
-    String species = '',
-    String gender = '',
-    String status = '',
-  }) {
-    return _api.getAllCharacterByFilter(name, species, gender, status);
+  Future<RickAndMortyDto<Character>> getCharactersByFilter(
+      int page, Map<String, String> queries) {
+    return _api.getAllCharacterByFilter(page, queries);
   }
 }

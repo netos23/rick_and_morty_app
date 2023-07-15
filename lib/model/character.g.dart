@@ -38,6 +38,29 @@ Map<String, dynamic> _$$_CharacterToJson(_$_Character instance) =>
       'created': instance.created,
     };
 
+_$_Episode _$$_EpisodeFromJson(Map<String, dynamic> json) => _$_Episode(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      airDate: json['airDate'] as String,
+      episode: json['episode'] as String,
+      characters: (json['characters'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      url: json['url'] as String,
+      created: json['created'] as String,
+    );
+
+Map<String, dynamic> _$$_EpisodeToJson(_$_Episode instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'airDate': instance.airDate,
+      'episode': instance.episode,
+      'characters': instance.characters,
+      'url': instance.url,
+      'created': instance.created,
+    };
+
 _$_Origin _$$_OriginFromJson(Map<String, dynamic> json) => _$_Origin(
       name: json['name'] as String,
       url: json['url'] as String,

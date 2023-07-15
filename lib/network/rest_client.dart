@@ -19,11 +19,11 @@ abstract class RestClient {
   Future<RickAndMortyDto<Character>> getAllCharacterByPage(
       @Query("page") int page);
 
+  /// Фильтрует по name, species, gender, status
   @GET("/api/character")
   Future<RickAndMortyDto<Character>> getAllCharacterByFilter(
-    @Query("name") String name,
-    @Query("species") String species,
-    @Query("gender") String gender,
-    @Query("status") String status,
+
+  @Query("page") int page,
+      @Queries(encoded: false) Map<String, String> params
   );
 }

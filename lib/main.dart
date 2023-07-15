@@ -6,7 +6,7 @@ import 'rick_and_morty_app.dart';
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();  // TODO удалить перед пушем
-  runApp(const RickAndMortyApp());
+  runApp(RickAndMortyApp());
 }
 
 class MyHttpOverrides extends HttpOverrides{
