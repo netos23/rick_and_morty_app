@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
-import 'package:rick_and_morty/network/repository/episode_repository.dart';
-import 'package:rick_and_morty/network/utils/dio_util.dart';
 import 'package:rick_and_morty/pages/character/widgets/arrow_back_tile.dart';
 import 'package:rick_and_morty/pages/character/widgets/char_episodes_list_tile.dart';
 import 'package:rick_and_morty/pages/character/widgets/circle_avatar.dart';
@@ -21,21 +19,7 @@ class CharacterItemPage extends StatefulWidget {
 }
 
 class _CharacterItemPageState extends State<CharacterItemPage> {
-  final EpisodeRepository _episodeRepository = DioUtil().episodeRepository;
 
-  // late final Future<List<Episode>> _episodes;
-
-
-  // Future<List<Episode>> getCharacterEpisodes() async {
-  //   List<Episode> episodesList = [];
-  //   for (final episode in widget.character.episode) {
-  //     final res = (await _episodeRepository
-  //         .getEpisode(int.parse(episode[episode.length - 1])));
-  //     episodesList.add(res);
-  //   }
-  //   print('a');
-  //   return episodesList;
-  // }
 
   @override
   void initState() {

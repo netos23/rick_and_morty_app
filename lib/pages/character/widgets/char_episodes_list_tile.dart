@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/repository/episode_repository.dart';
-import 'package:rick_and_morty/network/utils/dio_util.dart';
-import 'package:rick_and_morty/network/utils/path_id.dart';
+import 'package:rick_and_morty/network/util/dio_util.dart';
+import 'package:rick_and_morty/network/util/path_id.dart';
 
 class CharEpisodesListTile extends StatelessWidget {
    CharEpisodesListTile({super.key, required this.episodes});

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/network/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
-import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/repository/character_repository.dart';
-import 'package:rick_and_morty/network/utils/dio_util.dart';
+import 'package:rick_and_morty/network/util/dio_util.dart';
 import 'package:rick_and_morty/pages/character/character_item_page.dart';
 import 'package:rick_and_morty/pages/character/widgets/character_list.dart';
 import 'package:rick_and_morty/pages/widgets/app_bar_widget.dart';
-import 'package:rick_and_morty/network/utils/path_id.dart';
 
 class CharacterPage extends StatefulWidget {
   const CharacterPage({Key? key}) : super(key: key);
@@ -20,7 +18,6 @@ class _CharacterPageState extends State<CharacterPage> {
   final CharacterRepository _characterRepository =
       DioUtil().characterRepository;
 
-  late Pagination<Character> _characterList;
 
   @override
   void initState() {
