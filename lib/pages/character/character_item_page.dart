@@ -40,7 +40,6 @@ class _CharacterItemPageState extends State<CharacterItemPage> {
   @override
   void initState() {
     super.initState();
-    // _episodes = getCharacterEpisodes();
   }
 
   @override

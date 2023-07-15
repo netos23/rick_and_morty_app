@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty/network/dto/episode/episode_list.dart';
+import 'package:rick_and_morty/network/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/service/service.dart';
 
@@ -20,9 +20,20 @@ class EpisodeRepository{
     }
   }
 
-  Future<EpisodeList> getEpisodes() async {
+  Future<Pagination<Episode>> getEpisodes() async {
     try {
       final result = await _restService.getEpisodes();
+      return result;
+    } on DioException catch (error) {
+      throw Exception(
+        error.response?.data['message'],
+      );
+    }
+  }
+
+  Future<List<Episode>> getMultipleEpisode(String ids) async {
+    try {
+      final result = await _restService.getMultipleEpisode(ids);
       return result;
     } on DioException catch (error) {
       throw Exception(

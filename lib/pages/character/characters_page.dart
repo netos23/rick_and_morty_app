@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/network/dto/character/character_list.dart';
+import 'package:rick_and_morty/network/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/network/model/character/character.dart';
+import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/repository/character_repository.dart';
 import 'package:rick_and_morty/network/utils/dio_util.dart';
 import 'package:rick_and_morty/pages/character/character_item_page.dart';
 import 'package:rick_and_morty/pages/character/widgets/character_list.dart';
 import 'package:rick_and_morty/pages/widgets/app_bar_widget.dart';
+import 'package:rick_and_morty/network/utils/path_id.dart';
 
 class CharacterPage extends StatefulWidget {
   const CharacterPage({Key? key}) : super(key: key);
@@ -17,15 +20,14 @@ class _CharacterPageState extends State<CharacterPage> {
   final CharacterRepository _characterRepository =
       DioUtil().characterRepository;
 
-  late Future<CharacterList> _characterList;
+  late Pagination<Character> _characterList;
 
   @override
   void initState() {
     super.initState();
-    _characterList = getCharacters();
   }
 
-  Future<CharacterList> getCharacters() async {
+  Future<Pagination<Character>> getCharacters() async {
     final res = await _characterRepository.getCharacters();
     return res;
   }
@@ -35,12 +37,13 @@ class _CharacterPageState extends State<CharacterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarWidget(),
-      body: FutureBuilder<CharacterList>(
-        future: _characterList,
+      body: FutureBuilder<Pagination<Character>>(
+        future: getCharacters(),
         builder: (context, snapshot) {
+          final characters = snapshot.data;
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
-          } else if (!snapshot.hasData && !snapshot.hasError) {
+          } else if (characters == null) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -56,9 +59,9 @@ class _CharacterPageState extends State<CharacterPage> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: snapshot.data!.results.length,
+                    itemCount: characters.results.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final char = snapshot.data!.results[index];
+                      final char = characters.results[index];
                       return GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
