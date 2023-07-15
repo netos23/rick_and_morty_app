@@ -1,14 +1,8 @@
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '';
 
 part 'character.freezed.dart';
-part 'character.g.dart';
 
-List<Character> characterFromJson(String str) {
-  return List<Character>.from(json.decode(str).map((x) => Character.fromJson(x)));
-}
+part 'character.g.dart';
 
 @freezed
 abstract class Character with _$Character {
@@ -19,10 +13,11 @@ abstract class Character with _$Character {
     required String species,
     required String type,
     required String gender,
-    required Origin origin,
-    required Location location,
+    required CharacterLocation origin,
+    required CharacterLocation location,
     required String image,
     required List<String> episode,
+    required String? firstEpisodeName,
     required String url,
     required String created,
   }) = _Character;
@@ -32,22 +27,34 @@ abstract class Character with _$Character {
 }
 
 @freezed
-abstract class Origin with _$Origin {
-  const factory Origin({
+class CharacterLocation with _$CharacterLocation {
+  factory CharacterLocation({
     required String name,
     required String url,
-  }) = _Origin;
+  }) = _CharacterLocation;
 
-  factory Origin.fromJson(Map<String, dynamic> json) => _$OriginFromJson(json);
+  factory CharacterLocation.fromJson(Map<String, dynamic> json) =>
+      _$CharacterLocationFromJson(json);
 }
 
-@freezed
-abstract class Location with _$Location {
-  const factory Location({
-    required String name,
-    required String url,
-  }) = _Location;
+enum CharacterStatus {
+  @JsonValue('alive')
+  alive,
+  @JsonValue('unknown')
+  unknown,
+  @JsonValue('dead')
+  dead,
+  @JsonValue('')
+  empty;
+}
 
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
+enum CharacterGender {
+  @JsonValue('male')
+  male,
+  @JsonValue('female')
+  female,
+  @JsonValue('unknown')
+  unknown,
+  @JsonValue('genderless')
+  genderless,
 }

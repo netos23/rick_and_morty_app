@@ -13,11 +13,14 @@ _$_Character _$$_CharacterFromJson(Map<String, dynamic> json) => _$_Character(
       species: json['species'] as String,
       type: json['type'] as String,
       gender: json['gender'] as String,
-      origin: Origin.fromJson(json['origin'] as Map<String, dynamic>),
-      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      origin:
+          CharacterLocation.fromJson(json['origin'] as Map<String, dynamic>),
+      location:
+          CharacterLocation.fromJson(json['location'] as Map<String, dynamic>),
       image: json['image'] as String,
       episode:
           (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
+      firstEpisodeName: json['firstEpisodeName'] as String?,
       url: json['url'] as String,
       created: json['created'] as String,
     );
@@ -34,26 +37,19 @@ Map<String, dynamic> _$$_CharacterToJson(_$_Character instance) =>
       'location': instance.location,
       'image': instance.image,
       'episode': instance.episode,
+      'firstEpisodeName': instance.firstEpisodeName,
       'url': instance.url,
       'created': instance.created,
     };
 
-_$_Origin _$$_OriginFromJson(Map<String, dynamic> json) => _$_Origin(
+_$_CharacterLocation _$$_CharacterLocationFromJson(Map<String, dynamic> json) =>
+    _$_CharacterLocation(
       name: json['name'] as String,
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$_OriginToJson(_$_Origin instance) => <String, dynamic>{
-      'name': instance.name,
-      'url': instance.url,
-    };
-
-_$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
-      name: json['name'] as String,
-      url: json['url'] as String,
-    );
-
-Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
+Map<String, dynamic> _$$_CharacterLocationToJson(
+        _$_CharacterLocation instance) =>
     <String, dynamic>{
       'name': instance.name,
       'url': instance.url,
