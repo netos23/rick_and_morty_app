@@ -6,7 +6,9 @@ import 'package:rick_and_morty/model/location/location.dart';
 class LocationRepository{
   LocationRepository(this._restService);
 
-  final CharacterClient _restService;
+  final AppClient _restService;
+
+  //TODO: доделать get для Pagination
 
   Future<Location> getLocation(int id) async {
     try {

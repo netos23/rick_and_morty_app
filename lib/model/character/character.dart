@@ -16,6 +16,7 @@ abstract class Character with _$Character {
     required CharacterLocation location,
     required String image,
     required List<String> episode,
+    required String? firstEpisodeName,
     required String url,
     required String created,
   }) = _Character;

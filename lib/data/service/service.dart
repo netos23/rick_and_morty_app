@@ -10,8 +10,8 @@ import 'package:rick_and_morty/url/location_url.dart';
 part 'service.g.dart';
 
 @RestApi()
-abstract class CharacterClient {
-  factory CharacterClient(Dio dio, {String baseUrl}) = _CharacterClient;
+abstract class AppClient {
+  factory AppClient(Dio dio, {String baseUrl}) = _AppClient;
 
   /* Character */
 

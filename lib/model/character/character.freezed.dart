@@ -30,6 +30,7 @@ mixin _$Character {
   CharacterLocation get location => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   List<String> get episode => throw _privateConstructorUsedError;
+  String? get firstEpisodeName => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get created => throw _privateConstructorUsedError;
 
@@ -55,6 +56,7 @@ abstract class $CharacterCopyWith<$Res> {
       CharacterLocation location,
       String image,
       List<String> episode,
+      String? firstEpisodeName,
       String url,
       String created});
 
@@ -85,6 +87,7 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
     Object? location = null,
     Object? image = null,
     Object? episode = null,
+    Object? firstEpisodeName = freezed,
     Object? url = null,
     Object? created = null,
   }) {
@@ -129,6 +132,10 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
           ? _value.episode
           : episode // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      firstEpisodeName: freezed == firstEpisodeName
+          ? _value.firstEpisodeName
+          : firstEpisodeName // ignore: cast_nullable_to_non_nullable
+              as String?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -175,6 +182,7 @@ abstract class _$$_CharacterCopyWith<$Res> implements $CharacterCopyWith<$Res> {
       CharacterLocation location,
       String image,
       List<String> episode,
+      String? firstEpisodeName,
       String url,
       String created});
 
@@ -205,6 +213,7 @@ class __$$_CharacterCopyWithImpl<$Res>
     Object? location = null,
     Object? image = null,
     Object? episode = null,
+    Object? firstEpisodeName = freezed,
     Object? url = null,
     Object? created = null,
   }) {
@@ -249,6 +258,10 @@ class __$$_CharacterCopyWithImpl<$Res>
           ? _value._episode
           : episode // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      firstEpisodeName: freezed == firstEpisodeName
+          ? _value.firstEpisodeName
+          : firstEpisodeName // ignore: cast_nullable_to_non_nullable
+              as String?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -275,6 +288,7 @@ class _$_Character implements _Character {
       required this.location,
       required this.image,
       required final List<String> episode,
+      required this.firstEpisodeName,
       required this.url,
       required this.created})
       : _episode = episode;
@@ -309,13 +323,15 @@ class _$_Character implements _Character {
   }
 
   @override
+  final String? firstEpisodeName;
+  @override
   final String url;
   @override
   final String created;
 
   @override
   String toString() {
-    return 'Character(id: $id, name: $name, status: $status, species: $species, type: $type, gender: $gender, origin: $origin, location: $location, image: $image, episode: $episode, url: $url, created: $created)';
+    return 'Character(id: $id, name: $name, status: $status, species: $species, type: $type, gender: $gender, origin: $origin, location: $location, image: $image, episode: $episode, firstEpisodeName: $firstEpisodeName, url: $url, created: $created)';
   }
 
   @override
@@ -334,6 +350,8 @@ class _$_Character implements _Character {
                 other.location == location) &&
             (identical(other.image, image) || other.image == image) &&
             const DeepCollectionEquality().equals(other._episode, _episode) &&
+            (identical(other.firstEpisodeName, firstEpisodeName) ||
+                other.firstEpisodeName == firstEpisodeName) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.created, created) || other.created == created));
   }
@@ -352,6 +370,7 @@ class _$_Character implements _Character {
       location,
       image,
       const DeepCollectionEquality().hash(_episode),
+      firstEpisodeName,
       url,
       created);
 
@@ -381,6 +400,7 @@ abstract class _Character implements Character {
       required final CharacterLocation location,
       required final String image,
       required final List<String> episode,
+      required final String? firstEpisodeName,
       required final String url,
       required final String created}) = _$_Character;
 
@@ -407,6 +427,8 @@ abstract class _Character implements Character {
   String get image;
   @override
   List<String> get episode;
+  @override
+  String? get firstEpisodeName;
   @override
   String get url;
   @override

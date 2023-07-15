@@ -6,7 +6,9 @@ import 'package:rick_and_morty/model/character/character.dart';
 class CharacterRepository {
   CharacterRepository(this._restService);
 
-  final CharacterClient _restService;
+  final AppClient _restService;
+
+  //TODO: доделать get для Pagination
 
   Future<Character> getCharacter(int id) async {
     try {
