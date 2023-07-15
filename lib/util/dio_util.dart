@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/repository/character_repository.dart';
 import 'package:rick_and_morty/repository/episode_repository.dart';
 import 'package:rick_and_morty/repository/location_repository.dart';
-import 'package:rick_and_morty/service/service.dart';
 
 
 class DioUtil {

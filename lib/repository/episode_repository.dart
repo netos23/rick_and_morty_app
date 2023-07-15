@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/data/dto/pagination/pagination.dart';
+import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';
-import 'package:rick_and_morty/service/service.dart';
 
 class EpisodeRepository {
   EpisodeRepository(this._restService);

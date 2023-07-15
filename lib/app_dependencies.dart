@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:provider/provider.dart';
-import 'package:rick_and_morty/service/service.dart';
+import 'package:rick_and_morty/data/service/service.dart';
 
 class AppDependencies extends StatelessWidget {
   const AppDependencies({
