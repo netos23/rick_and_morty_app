@@ -7,8 +7,8 @@ class RickAndMortyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: const CupertinoThemeData(
-        brightness: Brightness.light,
+      theme: const CupertinoThemeData(/*
+        brightness: Brightness.light,*/
         primaryColor: Colors.green,
       ),
       routes: {
