@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/dto/character/character_list.dart';
 import 'package:rick_and_morty/repository/character_repository.dart';
 import 'package:rick_and_morty/util/dio_util.dart';
 import 'package:rick_and_morty/widgets/future_updater.dart';

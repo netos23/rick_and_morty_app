@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty/dto/character/character_list.dart';
+import 'package:rick_and_morty/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/model/character/character.dart';
 import 'package:rick_and_morty/service/service.dart';
 
@@ -19,7 +19,7 @@ class CharacterRepository {
     }
   }
 
-  Future<CharacterList> getCharacters() async {
+  Future<Pagination<Character>> getCharacters() async {
     try {
       final result = await _restService.getCharacters();
       return result;

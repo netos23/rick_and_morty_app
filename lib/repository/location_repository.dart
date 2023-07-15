@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty/dto/location/location_list.dart';
+import 'package:rick_and_morty/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/model/location/location.dart';
 import 'package:rick_and_morty/service/service.dart';
-
 
 class LocationRepository{
   LocationRepository(this._restService);
@@ -20,7 +19,7 @@ class LocationRepository{
     }
   }
 
-  Future<LocationList> getLocations() async {
+  Future<Pagination<Location>> getLocations() async {
     try {
       final result = await _restService.getLocations();
       return result;

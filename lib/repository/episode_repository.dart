@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty/dto/episode/episode_list.dart';
+import 'package:rick_and_morty/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';
 import 'package:rick_and_morty/service/service.dart';
 
@@ -19,7 +19,7 @@ class EpisodeRepository {
     }
   }
 
-  Future<EpisodeList> getEpisodes() async {
+  Future<Pagination<Episode>> getEpisodes() async {
     try {
       final result = await _restService.getEpisodes();
       return result;
