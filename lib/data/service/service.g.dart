@@ -19,36 +19,23 @@ class _CharacterClient implements CharacterClient {
   String? baseUrl;
 
   @override
-  Future<Character> getCharacter(int id) async {
+  Future<Pagination<Character>> getCharacters({
+    int? page,
+    String? name,
+    CharacterStatus? status,
+    String? species,
+    String? type,
+    CharacterGender? gender,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Character>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/character/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Character.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<Pagination<Character>> getCharacters({int? page}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'name': name,
+      r'status': status?.name,
+      r'species': species,
+      r'type': type,
+      r'gender': gender?.name,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
@@ -77,13 +64,40 @@ class _CharacterClient implements CharacterClient {
   }
 
   @override
-  Future<List<Episode>> getMultipleCharacter(String ids) async {
+  Future<Character> getCharacter(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<Character>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/character/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Character.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<Character>> getMultipleCharacters(String ids) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Episode>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Character>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -100,8 +114,49 @@ class _CharacterClient implements CharacterClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Episode.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Character.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<Pagination<Location>> getLocations({
+    int? page,
+    String? name,
+    String? type,
+    String? dimension,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'name': name,
+      r'type': type,
+      r'dimension': dimension,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Pagination<Location>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/location',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Pagination<Location>.fromJson(
+      _result.data!,
+      (json) => Location.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
@@ -133,44 +188,13 @@ class _CharacterClient implements CharacterClient {
   }
 
   @override
-  Future<Pagination<Location>> getLocations({int? page}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Pagination<Location>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/location',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Pagination<Location>.fromJson(
-      _result.data!,
-      (json) => Location.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
-  }
-
-  @override
-  Future<List<Episode>> getMultipleLocation(String ids) async {
+  Future<List<Location>> getMultipleLocation(String ids) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Episode>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Location>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -187,8 +211,47 @@ class _CharacterClient implements CharacterClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Episode.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Location.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<Pagination<Episode>> getEpisodes({
+    int? page,
+    String? name,
+    String? episode,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'name': name,
+      r'episode': episode,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Pagination<Episode>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/episode',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Pagination<Episode>.fromJson(
+      _result.data!,
+      (json) => Episode.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
@@ -216,37 +279,6 @@ class _CharacterClient implements CharacterClient {
               baseUrl,
             ))));
     final value = Episode.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<Pagination<Episode>> getEpisodes({int? page}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Pagination<Episode>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/episode',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Pagination<Episode>.fromJson(
-      _result.data!,
-      (json) => Episode.fromJson(json as Map<String, dynamic>),
-    );
     return value;
   }
 

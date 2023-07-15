@@ -13,39 +13,61 @@ part 'service.g.dart';
 abstract class CharacterClient {
   factory CharacterClient(Dio dio, {String baseUrl}) = _CharacterClient;
 
-  @GET("${CharacterUrl.character}/{id}")
-  Future<Character> getCharacter(@Path() int id);
+  /* Character */
 
   @GET(CharacterUrl.character)
   Future<Pagination<Character>> getCharacters({
     @Query('page') int? page,
+    @Query('name') String? name,
+    @Query('status') CharacterStatus? status,
+    @Query('species') String? species,
+    @Query('type') String? type,
+    @Query('gender') CharacterGender? gender,
   });
 
+  @GET("${CharacterUrl.character}/{id}")
+  Future<Character> getCharacter(
+    @Path() int id,
+  );
+
   @GET("${CharacterUrl.character}/{ids}")
-  Future<List<Episode>> getMultipleCharacter(
+  Future<List<Character>> getMultipleCharacters(
     @Path() String ids,
   );
 
-  @GET("${LocationUrl.location}/{id}")
-  Future<Location> getLocation(@Path() int id);
+  /* Location */
 
   @GET(LocationUrl.location)
   Future<Pagination<Location>> getLocations({
     @Query('page') int? page,
+    @Query('name') String? name,
+    @Query('type') String? type,
+    @Query('dimension') String? dimension,
   });
 
+  @GET("${LocationUrl.location}/{id}")
+  Future<Location> getLocation(
+    @Path() int id,
+  );
+
   @GET("${LocationUrl.location}/{ids}")
-  Future<List<Episode>> getMultipleLocation(
+  Future<List<Location>> getMultipleLocation(
     @Path() String ids,
   );
 
-  @GET("${EpisodeUrl.episode}/{id}")
-  Future<Episode> getEpisode(@Path() int id);
+  /* Episode */
 
   @GET(EpisodeUrl.episode)
   Future<Pagination<Episode>> getEpisodes({
     @Query('page') int? page,
+    @Query('name') String? name,
+    @Query('episode') String? episode,
   });
+
+  @GET("${EpisodeUrl.episode}/{id}")
+  Future<Episode> getEpisode(
+    @Path() int id,
+  );
 
   @GET("${EpisodeUrl.episode}/{ids}")
   Future<List<Episode>> getMultipleEpisode(

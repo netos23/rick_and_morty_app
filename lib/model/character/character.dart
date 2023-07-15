@@ -44,3 +44,25 @@ abstract class CharacterLocation with _$CharacterLocation {
   factory CharacterLocation.fromJson(Map<String, dynamic> json) =>
       _$CharacterLocationFromJson(json);
 }
+
+enum CharacterStatus {
+  @JsonValue('alive')
+  alive,
+  @JsonValue('unknown')
+  unknown,
+  @JsonValue('dead')
+  dead,
+  @JsonValue('')
+  empty;
+}
+
+enum CharacterGender {
+  @JsonValue('male')
+  male,
+  @JsonValue('female')
+  female,
+  @JsonValue('unknown')
+  unknown,
+  @JsonValue('genderless')
+  genderless,
+}
