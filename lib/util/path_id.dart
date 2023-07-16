@@ -1,5 +1,5 @@
 extension PathId on String {
-  String get id {
-    return substring(lastIndexOf('/') + 1);
+  int get id {
+    return int.parse(substring(lastIndexOf('/') + 1));
   }
 }

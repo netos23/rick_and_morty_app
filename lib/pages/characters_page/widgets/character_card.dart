@@ -25,7 +25,7 @@ class CharacterCard extends StatelessWidget {
         ),
         margin: EdgeInsets.zero,
         child: DefaultTextStyle(
-          style: TextStyle(),
+          style: const TextStyle(),
           child: Column(
             children: [
               Expanded(
