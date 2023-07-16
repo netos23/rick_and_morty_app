@@ -8,3 +8,4 @@ export 'package:rick_and_morty/pages/episode/episodes_page.dart';
 export 'package:rick_and_morty/pages/home/home_page.dart';
 export 'package:rick_and_morty/pages/location/locations_item_page.dart';
 export 'package:rick_and_morty/pages/location/locations_page.dart';
+export 'package:rick_and_morty/network/data/repository/character_repository.dart';

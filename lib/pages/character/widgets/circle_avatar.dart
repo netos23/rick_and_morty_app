@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CircleAvatarWidget extends StatelessWidget {
   const CircleAvatarWidget({super.key, required this.image});
 
-  final String image;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,12 @@ class CircleAvatarWidget extends StatelessWidget {
         ),
       ),
       child: ClipOval(
-        child: Image.network(
-          image,
-          fit: BoxFit.cover,
-        ),
+        child: image != null
+            ? Image.network(
+                image!,
+                fit: BoxFit.cover,
+              )
+            : Image.asset('assets/images/rick_and_morty.png'),
       ),
     );
   }

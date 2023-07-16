@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/network/data/repository/episode_repository.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/util/dio_util.dart';
 import 'package:rick_and_morty/network/util/path_id.dart';
+import 'package:rick_and_morty/router/app_router.dart';
 
 class CharEpisodesListTile extends StatelessWidget {
   CharEpisodesListTile({super.key, required this.episodes});
@@ -33,16 +35,34 @@ class CharEpisodesListTile extends StatelessWidget {
             ),
           );
         }
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+        return DividerTheme(
+          data: const DividerThemeData(
+            indent: 15,
+            endIndent: 15,
+          ),
+          child: SliverList.separated(
+            itemBuilder: (BuildContext context, int index) {
               final episode = episodes[index];
               return ListTile(
+                trailing: IconButton(
+                  onPressed: () {
+                    context.router.navigate(
+                      EpisodeTab(children: [
+                        EpisodeItemPageRoute(id: episode.id, episode: episode),
+                      ]),
+                    );
+                    // не работает, спросить, как сделать в этой же табе
+                    // context.router.navigate(
+                    //   EpisodeItemPageRoute(episode: episode),
+                    // );
+                  },
+                  icon: const Icon(Icons.keyboard_arrow_right_outlined),
+                ),
                 title: Text(episode.episode),
                 subtitle: Text(episode.name),
               );
             },
-            childCount: episodes.length,
+            separatorBuilder: (_, __) => const Divider(),
           ),
         );
       },

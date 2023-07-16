@@ -4,10 +4,8 @@ import 'package:rick_and_morty/network/data/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/network/data/repository/episode_repository.dart';
 import 'package:rick_and_morty/network/model/episode/episode.dart';
 import 'package:rick_and_morty/network/util/dio_util.dart';
-import 'package:rick_and_morty/pages/episode/episodes_item_page.dart';
 import 'package:rick_and_morty/pages/widgets/app_bar_widget.dart';
 import 'package:rick_and_morty/router/app_router.dart';
-
 
 @RoutePage()
 class EpisodesPage extends StatefulWidget {
@@ -62,7 +60,12 @@ class _EpisodesPageState extends State<EpisodesPage> {
                       final episode = episodes.results[index];
                       return GestureDetector(
                           onTap: () {
-                            context.router.push(EpisodeItemPageRoute(episode: episode));
+                            context.router.push(
+                              EpisodeItemPageRoute(
+                                id: episode.id,
+                                episode: episode,
+                              ),
+                            );
                           },
                           child: Card(
                             margin: const EdgeInsets.symmetric(vertical: 10),

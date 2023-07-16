@@ -50,9 +50,12 @@ class _CharactersPageState extends State<CharactersPage> {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: Image.asset(
-                    'assets/images/rick_and_morty.png',
-                    fit: BoxFit.fitWidth,
+                  child: Hero(
+                    tag: 'character_image',
+                    child: Image.asset(
+                      'assets/images/rick_and_morty.png',
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
                 SliverList(
@@ -61,7 +64,12 @@ class _CharactersPageState extends State<CharactersPage> {
                       final char = characters.results[index];
                       return GestureDetector(
                         onTap: () {
-                          context.router.push(CharacterItemPageRoute(character: char));
+                          context.router.push(
+                            CharacterItemPageRoute(
+                              id: char.id,
+                              preview: char,
+                            ),
+                          );
                         },
                         child: CharacterItem(
                           character: char,

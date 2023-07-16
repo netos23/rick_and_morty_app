@@ -55,7 +55,11 @@ class _LocationsPageState extends State<LocationsPage> {
                         return GestureDetector(
                           onTap: () {
                             context.router.push(
-                                LocationItemPageRoute(location: location));
+                              LocationItemPageRoute(
+                                id: location.id,
+                                location: location,
+                              ),
+                            );
                           },
                           child: Card(
                             margin: const EdgeInsets.symmetric(vertical: 10),

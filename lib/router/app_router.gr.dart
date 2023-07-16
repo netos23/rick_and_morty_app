@@ -33,6 +33,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: EpisodeItemPage(
           key: args.key,
+          id: args.id,
           episode: args.episode,
         ),
       );
@@ -49,7 +50,8 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: CharacterItemPage(
           key: args.key,
-          character: args.character,
+          id: args.id,
+          preview: args.preview,
         ),
       );
     },
@@ -65,6 +67,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: LocationItemPage(
           key: args.key,
+          id: args.id,
           location: args.location,
         ),
       );
@@ -123,12 +126,14 @@ class EpisodesPageRoute extends PageRouteInfo<void> {
 class EpisodeItemPageRoute extends PageRouteInfo<EpisodeItemPageRouteArgs> {
   EpisodeItemPageRoute({
     Key? key,
-    required Episode episode,
+    required int id,
+    Episode? episode,
     List<PageRouteInfo>? children,
   }) : super(
           EpisodeItemPageRoute.name,
           args: EpisodeItemPageRouteArgs(
             key: key,
+            id: id,
             episode: episode,
           ),
           initialChildren: children,
@@ -143,16 +148,19 @@ class EpisodeItemPageRoute extends PageRouteInfo<EpisodeItemPageRouteArgs> {
 class EpisodeItemPageRouteArgs {
   const EpisodeItemPageRouteArgs({
     this.key,
-    required this.episode,
+    required this.id,
+    this.episode,
   });
 
   final Key? key;
 
-  final Episode episode;
+  final int id;
+
+  final Episode? episode;
 
   @override
   String toString() {
-    return 'EpisodeItemPageRouteArgs{key: $key, episode: $episode}';
+    return 'EpisodeItemPageRouteArgs{key: $key, id: $id, episode: $episode}';
   }
 }
 
@@ -175,13 +183,15 @@ class CharactersPageRoute extends PageRouteInfo<void> {
 class CharacterItemPageRoute extends PageRouteInfo<CharacterItemPageRouteArgs> {
   CharacterItemPageRoute({
     Key? key,
-    required Character character,
+    required int id,
+    Character? preview,
     List<PageRouteInfo>? children,
   }) : super(
           CharacterItemPageRoute.name,
           args: CharacterItemPageRouteArgs(
             key: key,
-            character: character,
+            id: id,
+            preview: preview,
           ),
           initialChildren: children,
         );
@@ -195,16 +205,19 @@ class CharacterItemPageRoute extends PageRouteInfo<CharacterItemPageRouteArgs> {
 class CharacterItemPageRouteArgs {
   const CharacterItemPageRouteArgs({
     this.key,
-    required this.character,
+    required this.id,
+    this.preview,
   });
 
   final Key? key;
 
-  final Character character;
+  final int id;
+
+  final Character? preview;
 
   @override
   String toString() {
-    return 'CharacterItemPageRouteArgs{key: $key, character: $character}';
+    return 'CharacterItemPageRouteArgs{key: $key, id: $id, preview: $preview}';
   }
 }
 
@@ -227,12 +240,14 @@ class LocationsPageRoute extends PageRouteInfo<void> {
 class LocationItemPageRoute extends PageRouteInfo<LocationItemPageRouteArgs> {
   LocationItemPageRoute({
     Key? key,
-    required Location location,
+    required int id,
+    Location? location,
     List<PageRouteInfo>? children,
   }) : super(
           LocationItemPageRoute.name,
           args: LocationItemPageRouteArgs(
             key: key,
+            id: id,
             location: location,
           ),
           initialChildren: children,
@@ -247,16 +262,19 @@ class LocationItemPageRoute extends PageRouteInfo<LocationItemPageRouteArgs> {
 class LocationItemPageRouteArgs {
   const LocationItemPageRouteArgs({
     this.key,
-    required this.location,
+    required this.id,
+    this.location,
   });
 
   final Key? key;
 
-  final Location location;
+  final int id;
+
+  final Location? location;
 
   @override
   String toString() {
-    return 'LocationItemPageRouteArgs{key: $key, location: $location}';
+    return 'LocationItemPageRouteArgs{key: $key, id: $id, location: $location}';
   }
 }
 
