@@ -17,9 +17,9 @@ class CharacterRepository {
     }
   }
 
-  Future<Pagination<Character>> getCharacters() async {
+  Future<Pagination<Character>> getCharacters({int? page}) async {
     try {
-      final result = await _restService.getCharacters();
+      final result = await _restService.getCharacters(page: page);
       return result;
     } on DioException catch (error, stackTrace) {
       Error.throwWithStackTrace(error, stackTrace);

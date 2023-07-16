@@ -7,6 +7,7 @@ import 'package:rick_and_morty/network/util/dio_util.dart';
 import 'package:rick_and_morty/pages/character/widgets/character_list.dart';
 import 'package:rick_and_morty/pages/widgets/app_bar_widget.dart';
 import 'package:rick_and_morty/router/app_router.dart';
+import 'package:rick_and_morty/util/pagination_builder.dart';
 
 @RoutePage()
 class CharactersPage extends StatefulWidget {
@@ -25,43 +26,55 @@ class _CharactersPageState extends State<CharactersPage> {
     super.initState();
   }
 
-  Future<Pagination<Character>> getCharacters() async {
-    final res = await _characterRepository.getCharacters();
-    return res;
+  Future<(List<Character>, bool)> _loadCharacters(int page) async {
+    try {
+      final pagination = await _characterRepository.getCharacters(
+        page: page,
+      );
+      return (pagination.results, pagination.info.next != null);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return (<Character>[], false);
   }
+
+  // Future<Pagination<Character>> getCharacters(int page) async {
+  //   final res = await _characterRepository.getCharacters(page: page);
+  //   return res;
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarWidget(),
-      body: FutureBuilder<Pagination<Character>>(
-        future: getCharacters(),
-        builder: (context, snapshot) {
-          final characters = snapshot.data;
-          if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
-          } else if (characters == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Hero(
-                    tag: 'character_image',
-                    child: Image.asset(
-                      'assets/images/rick_and_morty.png',
-                      fit: BoxFit.fitWidth,
+      body: SafeArea(
+        child: PaginationBuilder<Character>(
+          paginationCallback: _loadCharacters,
+          builder: (context, controller, snapshot) {
+            final characters = snapshot.data;
+            if (snapshot.hasError) {
+              return Center(child: Text(snapshot.error.toString()));
+            } else if (characters == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Hero(
+                      tag: 'character_image',
+                      child: Image.asset(
+                        'assets/images/rick_and_morty.png',
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                   ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      final char = characters.results[index];
+                  SliverList.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      final char = characters[index];
                       return GestureDetector(
                         onTap: () {
                           context.router.push(
@@ -76,12 +89,13 @@ class _CharactersPageState extends State<CharactersPage> {
                         ),
                       );
                     },
+                    itemCount: characters.length,
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

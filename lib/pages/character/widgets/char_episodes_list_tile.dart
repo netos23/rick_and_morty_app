@@ -14,9 +14,14 @@ class CharEpisodesListTile extends StatelessWidget {
   final EpisodeRepository _episodeRepository = DioUtil().episodeRepository;
 
   Future<List<Episode>> getCharacterEpisodes() async {
-    final ids = episodes.map((e) => e.id).join(',');
-    List<Episode> episodesList =
-        await _episodeRepository.getMultipleEpisode(ids);
+    List<Episode> episodesList = [];
+    if (episodes.length > 1) {
+      final ids = episodes.map((e) => e.id).join(',');
+      episodesList = await _episodeRepository.getMultipleEpisode(ids);
+    } else {
+      final episode = await _episodeRepository.getEpisode(episodes.first.id);
+      episodesList.add(episode);
+    }
     return episodesList;
   }
 
@@ -27,8 +32,8 @@ class CharEpisodesListTile extends StatelessWidget {
       builder: (context, snapshot) {
         final episodes = snapshot.data;
         if (snapshot.hasError) {
-          return Center(child: Text(snapshot.error.toString()));
-        } else if (episodes == null || episodes.isEmpty) {
+          return SliverToBoxAdapter(child: Center(child: Text(snapshot.error.toString())));
+        } else if (episodes == null) {
           return const SliverToBoxAdapter(
             child: Center(
               child: CircularProgressIndicator(),
@@ -39,13 +44,13 @@ class CharEpisodesListTile extends StatelessWidget {
             ? const SliverToBoxAdapter(
                 child: Text(
                     'episodes are missing'))
-        // нужно ли это, ловил пару раз ошибку "'element._lifeCycleState == _ElementLifeCycle.active' is not true"
             : DividerTheme(
                 data: const DividerThemeData(
                   indent: 15,
                   endIndent: 15,
                 ),
                 child: SliverList.separated(
+                  itemCount: episodes.length,
                   itemBuilder: (BuildContext context, int index) {
                     final episode = episodes[index];
                     return ListTile(
