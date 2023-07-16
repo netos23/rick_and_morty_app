@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/model/character/character.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';

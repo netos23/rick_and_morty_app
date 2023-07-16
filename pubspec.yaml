@@ -21,6 +21,7 @@ dependencies:
   google_fonts: ^5.1.0
   cached_network_image: ^3.2.3
   auto_route: ^7.7.0
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -35,3 +36,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/model/character/character.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';
@@ -7,18 +8,25 @@ import 'package:rick_and_morty/pages/characters_page/widgets/character_card.dart
 import 'package:rick_and_morty/util/network/path_id.dart';
 
 @RoutePage()
-class EpisodePage extends StatelessWidget {
+class EpisodePage extends StatefulWidget {
   const EpisodePage({
     super.key,
-    required this.appClient,
     this.preview,
     required this.id,
   });
 
-  final AppClient appClient;
 
   final Episode? preview;
   final int id;
+
+  @override
+  State<EpisodePage> createState() => _EpisodePageState();
+}
+
+class _EpisodePageState extends State<EpisodePage> {
+
+
+   AppClient get appClient => context.read();
 
   Future<List<Character>> _loadCharacter(List<String> characters) async {
     final ids = characters.map((ch) => ch.id).join(',');
@@ -47,8 +55,8 @@ class EpisodePage extends StatelessWidget {
 
     return Scaffold(
       body: FutureBuilder(
-        initialData: preview,
-        future: _loadEpisode(id),
+        initialData: widget.preview,
+        future: _loadEpisode(widget.id),
         builder: (context, snapshot) {
           final episode = snapshot.data;
           if (episode == null) {

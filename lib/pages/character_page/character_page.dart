@@ -1,13 +1,16 @@
+// ignore_for_file: unused_import
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/model/character/character.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/pages/episodes_page/episodes_page.dart';
 import 'package:rick_and_morty/repository/character_repository.dart';
 import 'package:rick_and_morty/repository/episode_repository.dart';
 import 'package:rick_and_morty/util/network/dio_util.dart';
-
+import 'package:rick_and_morty/util/network/path_id.dart';
 
 @RoutePage()
 class CharacterPage extends StatelessWidget {
@@ -102,9 +105,13 @@ class CharacterPage extends StatelessWidget {
                           tileMode: TileMode.mirror,
                         ).createShader(bounds),
                         //TODO: Hero
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: character.image,
+                        //делаю все по доке, но все равно не робит, интересно в чем дело
+                        child: Hero(
+                          tag: character.id,
+                          child: CachedNetworkImage(
+                            fit: BoxFit.fill,
+                            imageUrl: character.image,
+                          ),
                         ),
                       ),
                     ),
@@ -142,7 +149,13 @@ class CharacterPage extends StatelessWidget {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
-                          // TODO(netos23): implement
+                          context.router.navigate(
+                            LocationTab(children: [
+                              LocationRoute(
+                                id: character.origin.url.id,
+                              ),
+                            ]),
+                          );
                         },
                       ),
                       const Divider(),
@@ -160,7 +173,13 @@ class CharacterPage extends StatelessWidget {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
-                          // TODO(netos23): implement
+                          context.router.navigate(
+                            LocationTab(children: [
+                              LocationRoute(
+                                id: character.origin.url.id,
+                              ),
+                            ]),
+                          );
                         },
                       ),
                       const Divider(),
@@ -198,7 +217,18 @@ class CharacterPage extends StatelessWidget {
                           ),
                           itemBuilder: (context, index) {
                             final episode = episodes[index];
-                            return EpisodeCard(episode: episode);
+                            return GestureDetector(
+                              onTap: () {
+                                context.router.navigate(
+                                  EpisodeTab(children: [
+                                    EpisodeRoute(
+                                      id: episode.url.id,
+                                    ),
+                                  ]),
+                                );
+                              },
+                              child: EpisodeCard(episode: episode),
+                            );
                           },
                           itemCount: episodes.length,
                         ),

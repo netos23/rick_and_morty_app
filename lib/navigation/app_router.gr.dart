@@ -62,7 +62,6 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: EpisodePage(
           key: args.key,
-          appClient: args.appClient,
           preview: args.preview,
           id: args.id,
         ),
@@ -80,7 +79,6 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: LocationPage(
           key: args.key,
-          appClient: args.appClient,
           preview: args.preview,
           id: args.id,
         ),
@@ -213,7 +211,6 @@ class EpisodesRoute extends PageRouteInfo<void> {
 class EpisodeRoute extends PageRouteInfo<EpisodeRouteArgs> {
   EpisodeRoute({
     Key? key,
-    required AppClient appClient,
     Episode? preview,
     required int id,
     List<PageRouteInfo>? children,
@@ -221,7 +218,6 @@ class EpisodeRoute extends PageRouteInfo<EpisodeRouteArgs> {
           EpisodeRoute.name,
           args: EpisodeRouteArgs(
             key: key,
-            appClient: appClient,
             preview: preview,
             id: id,
           ),
@@ -237,14 +233,11 @@ class EpisodeRoute extends PageRouteInfo<EpisodeRouteArgs> {
 class EpisodeRouteArgs {
   const EpisodeRouteArgs({
     this.key,
-    required this.appClient,
     this.preview,
     required this.id,
   });
 
   final Key? key;
-
-  final AppClient appClient;
 
   final Episode? preview;
 
@@ -252,7 +245,7 @@ class EpisodeRouteArgs {
 
   @override
   String toString() {
-    return 'EpisodeRouteArgs{key: $key, appClient: $appClient, preview: $preview, id: $id}';
+    return 'EpisodeRouteArgs{key: $key, preview: $preview, id: $id}';
   }
 }
 
@@ -275,7 +268,6 @@ class LocationsRoute extends PageRouteInfo<void> {
 class LocationRoute extends PageRouteInfo<LocationRouteArgs> {
   LocationRoute({
     Key? key,
-    required AppClient appClient,
     Location? preview,
     required int id,
     List<PageRouteInfo>? children,
@@ -283,7 +275,6 @@ class LocationRoute extends PageRouteInfo<LocationRouteArgs> {
           LocationRoute.name,
           args: LocationRouteArgs(
             key: key,
-            appClient: appClient,
             preview: preview,
             id: id,
           ),
@@ -299,14 +290,11 @@ class LocationRoute extends PageRouteInfo<LocationRouteArgs> {
 class LocationRouteArgs {
   const LocationRouteArgs({
     this.key,
-    required this.appClient,
     this.preview,
     required this.id,
   });
 
   final Key? key;
-
-  final AppClient appClient;
 
   final Location? preview;
 
@@ -314,7 +302,7 @@ class LocationRouteArgs {
 
   @override
   String toString() {
-    return 'LocationRouteArgs{key: $key, appClient: $appClient, preview: $preview, id: $id}';
+    return 'LocationRouteArgs{key: $key, preview: $preview, id: $id}';
   }
 }
 

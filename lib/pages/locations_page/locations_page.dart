@@ -62,7 +62,6 @@ class _LocationsPageState extends State<LocationsPage> {
                           // before
                           context.router.push(
                             LocationRoute(
-                              appClient: appClient,
                               id: location.id,
                             ),
                           );
