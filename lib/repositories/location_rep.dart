@@ -29,6 +29,11 @@ class LocationRepository {
     return _api.getAllLocationsByFilter(page, queries);
   }
 
+  Future<Location> getLocationByUrl(String url) async {
+    var id = url.substring(url.lastIndexOf('/') + 1);
+    return _api.getLocation(int.parse(id));
+  }
+
   Future<List<Location>> getLocationsByUrl(List<String> urls) {
     var ids =
         urls.map((url) => url.substring(url.lastIndexOf('/') + 1)).join(',');

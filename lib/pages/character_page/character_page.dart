@@ -5,6 +5,8 @@ import 'package:rick_and_morty/model/episode.dart';
 import 'package:rick_and_morty/pages/components/default_app_bar.dart';
 import 'package:rick_and_morty/pages/components/information_list_tile.dart';
 import 'package:rick_and_morty/repositories/episode_rep.dart';
+import 'package:rick_and_morty/repositories/location_rep.dart';
+import 'package:rick_and_morty/route/app_router.dart';
 
 @RoutePage()
 class CharacterPage extends StatelessWidget {
@@ -55,6 +57,13 @@ class CharacterPage extends StatelessWidget {
                     return InformationListTile(
                       title: episodes[index].episode,
                       subtitle: episodes[index].name,
+                      redirectCallBack: () {
+                        AutoRouter.of(context).navigate(
+                          EpisodeTab(
+                            children: [EpisodeRoute(episode: episodes[index])],
+                          ),
+                        );
+                      },
                     );
                   },
                 ));
@@ -115,14 +124,39 @@ class CharacterInformation extends StatelessWidget {
             InformationListTile(title: 'Specie', subtitle: character.species),
             const Divider(height: 0),
             InformationListTile(
-                title: 'Origin', subtitle: character.origin.name),
+                title: 'Origin', subtitle: character.origin.name,
+              redirectCallBack: () async {
+                AutoRouter.of(context).navigate(
+                  LocationTab(
+                    children: [
+                      LocationRoute(
+                          location: await LocationRepository()
+                              .getLocationByUrl(character.origin.url)),
+                    ],
+                  ),
+                );
+              },
+            ),
             const Divider(height: 0),
             InformationListTile(
                 title: 'Type',
                 subtitle: character.type == '' ? 'Unknown' : character.type),
             const Divider(height: 0),
             InformationListTile(
-                title: 'Location', subtitle: character.location.name),
+              title: 'Location',
+              subtitle: character.location.name,
+              redirectCallBack: () async {
+                AutoRouter.of(context).navigate(
+                  LocationTab(
+                    children: [
+                      LocationRoute(
+                          location: await LocationRepository()
+                              .getLocationByUrl(character.location.url)),
+                    ],
+                  ),
+                );
+              },
+            ),
           ],
         ),
         Text(

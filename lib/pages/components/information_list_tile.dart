@@ -1,30 +1,36 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-typedef Redirect = void Function(BuildContext, AutoRoute);
-
 class InformationListTile extends StatelessWidget {
-  const InformationListTile(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      this.redirectCallBack,
-      this.trailing});
+  const InformationListTile({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    this.redirectCallBack,
+  });
 
   final String title;
   final String subtitle;
-  final Redirect? redirectCallBack;
-  final String? trailing;
+  final VoidCallback? redirectCallBack;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return ListTile(
-      isThreeLine: trailing != null,
-      trailing: Text(
-        trailing ?? '',
-        style: theme.textTheme.bodySmall,
-      ),
+      trailing: redirectCallBack != null
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 20,
+                  ),
+                  onPressed: redirectCallBack,
+                ),
+              ],
+            )
+          : null,
       title: Text(
         title,
         style: theme.textTheme.bodyLarge,

@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/model/character.dart';
+import 'package:rick_and_morty/model/episode.dart';
 import 'package:rick_and_morty/model/location.dart';
 import 'package:rick_and_morty/pages/character_page/character_page.dart';
 import 'package:rick_and_morty/pages/character_page/characters_page.dart';
 import 'package:rick_and_morty/pages/dashboard_page.dart';
+import 'package:rick_and_morty/pages/episode_page/episode_page.dart';
 import 'package:rick_and_morty/pages/episode_page/episodes_page.dart';
 import 'package:rick_and_morty/pages/location_page/location_page.dart';
 import 'package:rick_and_morty/pages/location_page/locations_page.dart';
@@ -29,6 +31,7 @@ class AppRouter extends _$AppRouter {
           ]),
           AutoRoute(page: EpisodeTab.page, children: [
             AutoRoute(page: EpisodesRoute.page),
+            AutoRoute(page: EpisodeRoute.page),
           ]),
         ]),
       ];

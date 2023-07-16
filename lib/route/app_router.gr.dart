@@ -77,6 +77,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    EpisodeRoute.name: (routeData) {
+      final args = routeData.argsAs<EpisodeRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EpisodePage(
+          key: args.key,
+          episode: args.episode,
+        ),
+      );
+    },
   };
 }
 
@@ -251,5 +261,43 @@ class LocationRouteArgs {
   @override
   String toString() {
     return 'LocationRouteArgs{key: $key, location: $location}';
+  }
+}
+
+/// generated route for
+/// [EpisodePage]
+class EpisodeRoute extends PageRouteInfo<EpisodeRouteArgs> {
+  EpisodeRoute({
+    Key? key,
+    required Episode episode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EpisodeRoute.name,
+          args: EpisodeRouteArgs(
+            key: key,
+            episode: episode,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EpisodeRoute';
+
+  static const PageInfo<EpisodeRouteArgs> page =
+      PageInfo<EpisodeRouteArgs>(name);
+}
+
+class EpisodeRouteArgs {
+  const EpisodeRouteArgs({
+    this.key,
+    required this.episode,
+  });
+
+  final Key? key;
+
+  final Episode episode;
+
+  @override
+  String toString() {
+    return 'EpisodeRouteArgs{key: $key, episode: $episode}';
   }
 }
