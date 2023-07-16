@@ -10,25 +10,37 @@ class RickAndMortyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: lightColorScheme,
-        textTheme: GoogleFonts.montserratTextTheme(),
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: darkColorScheme,
-        textTheme: GoogleFonts.montserratTextTheme(),
-      ),
-      onGenerateRoute: (settings) {
-        return CupertinoPageRoute(
-          settings: settings,
-          builder: (context) => HomePage(
-            key: NavigationGenerator.tabNavigator,
+    final ValueNotifier<ThemeMode> themeNotifier =
+        ValueNotifier(ThemeMode.light);
+    return ValueListenableBuilder(
+      valueListenable: themeNotifier,
+      builder: (BuildContext context, dynamic value, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: themeNotifier.value,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightColorScheme,
+            textTheme: GoogleFonts.montserratTextTheme(),
           ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: darkColorScheme,
+            textTheme: GoogleFonts.montserratTextTheme(),
+          ),
+          onGenerateRoute: (settings) {
+            return CupertinoPageRoute(
+              settings: settings,
+              builder: (context) => HomePage(
+                theme: (mode) {
+                  (mode == true)
+                      ? themeNotifier.value = ThemeMode.dark
+                      : themeNotifier.value = ThemeMode.light;
+                },
+                key: NavigationGenerator.tabNavigator,
+              ),
+            );
+          },
         );
       },
     );
