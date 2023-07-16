@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import '/api/data_state.dart';
 import '/models/character.dart';
 import '../utils/person_list.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPage = 1;
+  int maxPage = 42;
   late Future<DataState<List<Character>>> _dataFuture;
   String searchQuery = '';
   String selectedStatus = '';
@@ -163,6 +166,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              TextButton(
+                onPressed: () {},
+                child: PopupMenuButton<String>(
+                  onSelected: handlePageSelection,
+                  itemBuilder: (BuildContext context) {
+                    return List.generate(maxPage, (index) {
+                      final pageNumber = index + 1;
+                      return PopupMenuItem<String>(
+                        value: pageNumber.toString(),
+                        child: Text('Page $pageNumber'),
+                      );
+                    });
+                  },
+                ),
+              ),
+              Text('$currentPage'),
+
             ],
           ),
           const SizedBox(height: 8),
@@ -183,54 +203,15 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
+
         ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 56.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (currentPage != 1)
-                IconButton(
-                  onPressed: () {
-                    changePage(currentPage - 1);
-                  },
-                  icon: const Icon(Icons.arrow_left),
-                ),
-              TextButton(
-                onPressed: () {},
-                child: PopupMenuButton<String>(
-                  onSelected: handlePageSelection,
-                  itemBuilder: (BuildContext context) {
-                    return List.generate(42, (index) {
-                      final pageNumber = index + 1;
-                      return PopupMenuItem<String>(
-                        value: pageNumber.toString(),
-                        child: Text('Page $pageNumber'),
-                      );
-                    });
-                  },
-                ),
-              ),
-              Text('Page $currentPage'),
-              if (currentPage != 42)
-                IconButton(
-                  onPressed: () {
-                    changePage(currentPage + 1);
-                  },
-                  icon: const Icon(Icons.arrow_right),
-                ),
-            ],
-          ),
-        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: refreshData,
         shape: const CircleBorder(),
         child: const Icon(Icons.refresh),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
     );
   }
 }

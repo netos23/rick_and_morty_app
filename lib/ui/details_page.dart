@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:rick_and_morty/models/episode.dart';
 import '../../api/api_service.dart';
 import '../../models/character.dart';
 
+@RoutePage()
 class DetailsPage extends StatefulWidget {
   final Character character;
 
