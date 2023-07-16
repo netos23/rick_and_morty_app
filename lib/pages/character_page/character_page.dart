@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/model/character/character.dart';
@@ -7,8 +8,10 @@ import 'package:rick_and_morty/repository/character_repository.dart';
 import 'package:rick_and_morty/repository/episode_repository.dart';
 import 'package:rick_and_morty/util/network/dio_util.dart';
 
-class CharacterPage extends StatefulWidget {
-  const CharacterPage({
+
+@RoutePage()
+class CharacterPage extends StatelessWidget {
+  CharacterPage({
     super.key,
     this.preview,
     required this.id,
@@ -17,27 +20,17 @@ class CharacterPage extends StatefulWidget {
   final Character? preview;
   final int id;
 
-  @override
-  State<CharacterPage> createState() => _CharacterPageState();
-}
-
 // TODO: package:rick_and_morty/repository доделать виджеты
 // в этом классе, привел пример как в конечном итоге должно выглядеть
 // вероятно не успею до дедлайна, хочу пошаманить с интерфейсом и навигацией
 
-class _CharacterPageState extends State<CharacterPage> {
   final CharacterRepository _characterRepository =
       DioUtil().characterRepository;
 
   final EpisodeRepository _episodeRepository = DioUtil().episodeRepository;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   Future<Character> getCharacter() async {
-    final res = await _characterRepository.getCharacter(widget.id);
+    final res = await _characterRepository.getCharacter(id);
     return res;
   }
 
@@ -60,7 +53,7 @@ class _CharacterPageState extends State<CharacterPage> {
 
     return Scaffold(
       body: FutureBuilder(
-        initialData: widget.preview,
+        initialData: preview,
         future: _loadCharacter(),
         builder: (context, snapshot) {
           final character = snapshot.data;
@@ -108,6 +101,7 @@ class _CharacterPageState extends State<CharacterPage> {
                           ],
                           tileMode: TileMode.mirror,
                         ).createShader(bounds),
+                        //TODO: Hero
                         child: CachedNetworkImage(
                           fit: BoxFit.fill,
                           imageUrl: character.image,

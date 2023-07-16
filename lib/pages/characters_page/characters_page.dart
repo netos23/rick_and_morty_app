@@ -1,21 +1,29 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/model/character/character.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/util/builder/pagination_builder.dart';
 import 'package:rick_and_morty/util/network/path_id.dart';
 
 import 'widgets/character_card.dart';
 
-class CharactersPage extends StatelessWidget {
+@RoutePage()
+class CharactersPage extends StatefulWidget {
   const CharactersPage({
     super.key,
-    required this.appClient,
   });
 
-  final AppClient appClient;
+  @override
+  State<CharactersPage> createState() => _CharactersPageState();
+}
+
+class _CharactersPageState extends State<CharactersPage> {
+  AppClient get appClient => context.read();
 
   Future<(List<Character>, bool)> _loadCharacters(int page) async {
     try {
@@ -79,8 +87,20 @@ class CharactersPage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final character = characters[index];
-                return CharacterCard(
-                  character: character,
+                return GestureDetector(
+                  onTap: () async {
+                    // before
+                    context.router.push(
+                      CharacterRoute(
+                        id: character.id,
+                        preview: character,
+                      ),
+                    );
+                    // after
+                  },
+                  child: CharacterCard(
+                    character: character,
+                  ),
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(

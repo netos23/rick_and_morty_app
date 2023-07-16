@@ -6,7 +6,7 @@ import 'package:rick_and_morty/util/network/dio_util.dart';
 void main() async {
   await DioUtil().init();
   runApp(
-    const AppDependencies(
+    AppDependencies(
       child: RickAndMortyApp(),
     ),
   );

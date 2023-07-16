@@ -1,16 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/model/episode/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/util/builder/pagination_builder.dart';
 
-class EpisodesPage extends StatelessWidget {
+@RoutePage()
+class EpisodesPage extends StatefulWidget {
   const EpisodesPage({
     super.key,
-    required this.appClient,
   });
 
-  final AppClient appClient;
+  @override
+  State<EpisodesPage> createState() => _EpisodesPageState();
+}
+
+class _EpisodesPageState extends State<EpisodesPage> {
+  AppClient get appClient => context.read();
 
   Future<(List<Episode>, bool)> _loadEpisodes(int page) async {
     try {
@@ -27,7 +35,6 @@ class EpisodesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: PaginationBuilder<Episode>(
@@ -49,7 +56,25 @@ class EpisodesPage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final episode = episodes[index];
-                return EpisodeCard(episode: episode);
+                return GestureDetector(
+                    onTap: () async {
+                      // before
+                      context.router.push(
+                        EpisodeRoute(
+                          appClient: appClient,
+                          id: episode.id,
+                        ),
+                      );
+                      context.router.push(
+                        EpisodeRoute(
+                          appClient: appClient,
+                          id: episode.id,
+                        ),
+                      );
+
+                      // after
+                    },
+                    child: EpisodeCard(episode: episode));
               },
               itemCount: episodes.length,
             );

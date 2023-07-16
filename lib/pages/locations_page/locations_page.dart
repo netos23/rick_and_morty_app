@@ -1,17 +1,24 @@
-
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/service.dart';
 import 'package:rick_and_morty/model/location/location.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/util/builder/pagination_builder.dart';
 
-class LocationsPage extends StatelessWidget {
+@RoutePage()
+class LocationsPage extends StatefulWidget {
   const LocationsPage({
     super.key,
-    required this.appClient,
   });
 
-  final AppClient appClient;
+  @override
+  State<LocationsPage> createState() => _LocationsPageState();
+}
+
+class _LocationsPageState extends State<LocationsPage> {
+  AppClient get appClient => context.read();
 
   Future<(List<Location>, bool)> _loadLocations(int page) async {
     try {
@@ -48,12 +55,24 @@ class LocationsPage extends StatelessWidget {
                 final location = locations[index];
                 return Column(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 4,
-                      child: CircleAvatar(
-                        radius: 150,
-                        backgroundImage: CachedNetworkImageProvider(
-                          'https://avatars.mds.yandex.net/i?id=03de0d2774b19c136ca3a844fb0d8b7fdb4ee783-9151390-images-thumbs&n=13',
+                      child: GestureDetector(
+                        onTap: () async {
+                          // before
+                          context.router.push(
+                            LocationRoute(
+                              appClient: appClient,
+                              id: location.id,
+                            ),
+                          );
+                          // after
+                        },
+                        child: const CircleAvatar(
+                          radius: 150,
+                          backgroundImage: CachedNetworkImageProvider(
+                            'https://avatars.mds.yandex.net/i?id=03de0d2774b19c136ca3a844fb0d8b7fdb4ee783-9151390-images-thumbs&n=13',
+                          ),
                         ),
                       ),
                     ),
