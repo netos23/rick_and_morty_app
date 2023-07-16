@@ -35,36 +35,42 @@ class CharEpisodesListTile extends StatelessWidget {
             ),
           );
         }
-        return DividerTheme(
-          data: const DividerThemeData(
-            indent: 15,
-            endIndent: 15,
-          ),
-          child: SliverList.separated(
-            itemBuilder: (BuildContext context, int index) {
-              final episode = episodes[index];
-              return ListTile(
-                trailing: IconButton(
-                  onPressed: () {
-                    context.router.navigate(
-                      EpisodeTab(children: [
-                        EpisodeItemPageRoute(id: episode.id, episode: episode),
-                      ]),
-                    );
-                    // не работает, спросить, как сделать в этой же табе
-                    // context.router.navigate(
-                    //   EpisodeItemPageRoute(episode: episode),
-                    // );
-                  },
-                  icon: const Icon(Icons.keyboard_arrow_right_outlined),
+        return episodes.isEmpty
+            ? const SliverToBoxAdapter(
+                child: Text(
+                    'episodes are missing'))
+        // нужно ли это, ловил пару раз ошибку "'element._lifeCycleState == _ElementLifeCycle.active' is not true"
+            : DividerTheme(
+                data: const DividerThemeData(
+                  indent: 15,
+                  endIndent: 15,
                 ),
-                title: Text(episode.episode),
-                subtitle: Text(episode.name),
+                child: SliverList.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    final episode = episodes[index];
+                    return ListTile(
+                      trailing: IconButton(
+                        onPressed: () {
+                          context.router.navigate(
+                            EpisodeTab(children: [
+                              EpisodeItemPageRoute(
+                                  id: episode.id, episode: episode),
+                            ]),
+                          );
+                          // не работает, спросить, как сделать в этой же табе
+                          // context.router.navigate(
+                          //   EpisodeItemPageRoute(episode: episode),
+                          // );
+                        },
+                        icon: const Icon(Icons.keyboard_arrow_right_outlined),
+                      ),
+                      title: Text(episode.episode),
+                      subtitle: Text(episode.name),
+                    );
+                  },
+                  separatorBuilder: (_, __) => const Divider(),
+                ),
               );
-            },
-            separatorBuilder: (_, __) => const Divider(),
-          ),
-        );
       },
     );
   }

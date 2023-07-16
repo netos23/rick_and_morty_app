@@ -46,7 +46,12 @@ class _EpisodeItemPageState extends State<EpisodeItemPage> {
           builder: (context, snapshot) {
             final episode = snapshot.data;
             if (episode != null) {
-             return Center(child: Text(episode.name),);
+             return Column(
+               children: [
+                 const ArrowBackTile(),
+                 Text(episode.name),
+               ],
+             );
             }
             return Center(child: Text(snapshot.error.toString()));
           },

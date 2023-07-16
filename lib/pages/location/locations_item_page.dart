@@ -31,6 +31,7 @@ class _LocationItemPageState extends State<LocationItemPage> {
 
   Future<Location> getLocation() async {
     final res = await _locationRepository.getLocation(widget.id);
+    print(res.name);
     return res;
   }
 
@@ -46,7 +47,12 @@ class _LocationItemPageState extends State<LocationItemPage> {
           builder: (context, snapshot) {
             final location = snapshot.data;
             if (location != null) {
-              return Center (child: Text(location.name),);
+              return Column(
+                children: [
+                  const ArrowBackTile(),
+                  Text(location.name),
+                ],
+              );
             }
             return Center(child: Text(snapshot.error.toString()));
           },
