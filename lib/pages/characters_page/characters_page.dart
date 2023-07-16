@@ -90,11 +90,13 @@ class _CharactersPageState extends State<CharactersPage> {
               itemBuilder: (context, index) {
                 final character = characters[index];
                 return GestureDetector(
-                  onTap: () =>
-                      NavigationGenerator.currentTabNavigator()?.pushNamed(
-                    '/character',
-                    arguments: character.id,
-                  ),
+                  onTap: () {
+                    // TODO(netos23): dobavil
+                    NavigationGenerator.currentTabNavigator()?.pushNamed(
+                      '/character',
+                      arguments: character.id,
+                    );
+                  },
                   child: CharacterCard(
                     character: character,
                   ),

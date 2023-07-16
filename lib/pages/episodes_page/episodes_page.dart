@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/navigator/navigation_generator.dart';
 import 'package:rick_and_morty/util/pagination_builder.dart';
 
 class EpisodesPage extends StatefulWidget {
@@ -54,7 +55,18 @@ class _EpisodesPageState extends State<EpisodesPage> {
               ),
               itemBuilder: (context, index) {
                 final episode = episodes[index];
-                return EpisodeCard(episode: episode);
+                return GestureDetector(
+                  onTap: () {
+                    // TODO(netos23): dobavil
+                    NavigationGenerator.currentTabNavigator()?.pushNamed(
+                      '/episode',
+                      arguments: episode.id,
+                    );
+                  },
+                  child: EpisodeCard(
+                    episode: episode,
+                  ),
+                );
               },
               itemCount: episodes.length,
             );

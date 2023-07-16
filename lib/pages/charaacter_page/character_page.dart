@@ -143,13 +143,13 @@ class CharacterPage extends StatelessWidget {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
+                          // TODO(netos23): dobavil
                           NavigationGenerator.tabNavigator.currentState?.tab =
                               2;
                           NavigationGenerator.currentTabNavigator()?.pushNamed(
                             '/location',
                             arguments: character.origin.url.id,
                           );
-                          // TODO(netos23): implement
                         },
                       ),
                       const Divider(),
@@ -167,13 +167,13 @@ class CharacterPage extends StatelessWidget {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
+                          // TODO(netos23): dobavil
                           NavigationGenerator.tabNavigator.currentState?.tab =
                               2;
                           NavigationGenerator.currentTabNavigator()?.pushNamed(
                             '/location',
                             arguments: character.location.url.id,
                           );
-                          // TODO(netos23): implement
                         },
                       ),
                       const Divider(),
@@ -211,7 +211,19 @@ class CharacterPage extends StatelessWidget {
                           ),
                           itemBuilder: (context, index) {
                             final episode = episodes[index];
-                            return EpisodeCard(episode: episode);
+
+                            return GestureDetector(
+                                onTap: () {
+                                  // TODO(netos23): dobavil
+                                  NavigationGenerator
+                                      .tabNavigator.currentState?.tab = 1;
+                                  NavigationGenerator.currentTabNavigator()
+                                      ?.pushNamed(
+                                    '/episode',
+                                    arguments: character.id,
+                                  );
+                                },
+                                child: EpisodeCard(episode: episode));
                           },
                           itemCount: episodes.length,
                         ),

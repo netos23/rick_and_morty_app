@@ -34,6 +34,7 @@ class HomePageState extends State<HomePage> {
           body: IndexedStack(
             index: index,
             children: [
+              // TODO(netos23): dobavil
               Navigator(
                 key: NavigationGenerator.inPageNavigation[0],
                 onGenerateRoute: NavigationGenerator.onGenRouteCharacter,

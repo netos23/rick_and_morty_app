@@ -4,6 +4,7 @@ import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/navigator/navigation_generator.dart';
 import 'package:rick_and_morty/pages/characters_page/widgets/character_card.dart';
 import 'package:rick_and_morty/util/path_id.dart';
 
@@ -75,7 +76,7 @@ class EpisodePage extends StatelessWidget {
                 slivers: [
                   SliverAppBar(
                     pinned: true,
-                    title: Text(episode.name),
+                    title: Text("Episode - ${episode.name}"),
                   ),
                   SliverList.list(
                     children: [
@@ -129,8 +130,20 @@ class EpisodePage extends StatelessWidget {
                         sliver: SliverList.separated(
                           itemBuilder: (context, index) {
                             final character = characters[index];
-                            return CharacterCard(
-                              character: character,
+                            return GestureDetector(
+                              onTap: () {
+                                // TODO(netos23): dobavil
+                                NavigationGenerator
+                                    .tabNavigator.currentState?.tab = 0;
+                                NavigationGenerator.currentTabNavigator()
+                                    ?.pushNamed(
+                                  '/character',
+                                  arguments: character.id,
+                                );
+                              },
+                              child: CharacterCard(
+                                character: character,
+                              ),
                             );
                           },
                           separatorBuilder: (_, __) => const SizedBox(

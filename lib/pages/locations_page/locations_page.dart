@@ -57,11 +57,13 @@ class _LocationsPageState extends State<LocationsPage> {
                     Expanded(
                       flex: 4,
                       child: GestureDetector(
-                        onTap: () => NavigationGenerator.currentTabNavigator()
-                            ?.pushNamed(
-                          '/location',
-                          arguments: location.id,
-                        ),
+                        onTap: () {
+                          // TODO(netos23): dobavil
+                          NavigationGenerator.currentTabNavigator()?.pushNamed(
+                            '/location',
+                            arguments: location.id,
+                          );
+                        },
                         child: const CircleAvatar(
                           radius: 150,
                           backgroundImage: CachedNetworkImageProvider(
