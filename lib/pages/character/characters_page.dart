@@ -1,20 +1,22 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/network/data/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/network/data/repository/character_repository.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
 import 'package:rick_and_morty/network/util/dio_util.dart';
-import 'package:rick_and_morty/pages/character/character_item_page.dart';
 import 'package:rick_and_morty/pages/character/widgets/character_list.dart';
 import 'package:rick_and_morty/pages/widgets/app_bar_widget.dart';
+import 'package:rick_and_morty/router/app_router.dart';
 
-class CharacterPage extends StatefulWidget {
-  const CharacterPage({Key? key}) : super(key: key);
+@RoutePage()
+class CharactersPage extends StatefulWidget {
+  const CharactersPage({super.key});
 
   @override
-  State<CharacterPage> createState() => _CharacterPageState();
+  State<CharactersPage> createState() => _CharactersPageState();
 }
 
-class _CharacterPageState extends State<CharacterPage> {
+class _CharactersPageState extends State<CharactersPage> {
   final CharacterRepository _characterRepository =
       DioUtil().characterRepository;
 
@@ -45,28 +47,25 @@ class _CharacterPageState extends State<CharacterPage> {
           }
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              // не знаю, как сделать так чтобы картинка улетала вверх при сколле списка без использования CustomScrollView
-              children: [
-                Image.asset(
-                  'assets/images/Rick_and_Morty.png',
-                  fit: BoxFit.fitWidth,
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Image.asset(
+                    'assets/images/rick_and_morty.png',
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: characters.results.length,
-                    itemBuilder: (BuildContext context, int index) {
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
                       final char = characters.results[index];
                       return GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  CharacterItemPage(character: char),
-                            ),
-                          );
+                          context.router.push(CharacterItemPageRoute(character: char));
                         },
-                        child: CharacterItem(character: char),
+                        child: CharacterItem(
+                          character: char,
+                        ),
                       );
                     },
                   ),
