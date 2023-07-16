@@ -18,47 +18,35 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          
           initial: true,
           page: HomeRoute.page,
           children: [
-            AutoRoute(
-                
-                initial: true,
-                page: CharacterTab.page,
-                children: [
-                  AutoRoute(
-                    
-                    initial: true,
-                    page: CharactersRoute.page,
-                  ),
-                  AutoRoute(
-                    
-                    page: CharacterRoute.page,
-                  ),
-                ]),
-            AutoRoute( page: EpisodeTab.page, children: [
+            AutoRoute(initial: true, page: CharacterTab.page, children: [
               AutoRoute(
-                
+                initial: true,
+                page: CharactersRoute.page,
+              ),
+              AutoRoute(
+                page: CharacterRoute.page,
+              ),
+            ]),
+            AutoRoute(page: EpisodeTab.page, children: [
+              AutoRoute(
                 initial: true,
                 page: EpisodesRoute.page,
               ),
               AutoRoute(
-                
                 page: EpisodeRoute.page,
               ),
             ]),
             AutoRoute(
-              
               page: LocationTab.page,
               children: [
                 AutoRoute(
-                  
                   initial: true,
                   page: LocationsRoute.page,
                 ),
                 AutoRoute(
-                  
                   page: LocationRoute.page,
                 ),
               ],

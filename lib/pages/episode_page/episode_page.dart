@@ -6,6 +6,7 @@ import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/pages/characters_page/widgets/character_card.dart';
 import 'package:rick_and_morty/util/path_id.dart';
 
@@ -17,7 +18,6 @@ class EpisodePage extends StatefulWidget {
     required this.id,
   });
 
-
   final Episode? preview;
   final int id;
 
@@ -26,10 +26,9 @@ class EpisodePage extends StatefulWidget {
 }
 
 class _EpisodePageState extends State<EpisodePage> {
+  EpisodeClient get episodeClient => context.read();
 
-
-   EpisodeClient get episodeClient => context.read();
-   CharacterClient get characterClient => context.read();
+  CharacterClient get characterClient => context.read();
 
   Future<List<Character>> _loadCharacter(List<String> characters) async {
     final ids = characters.map((ch) => ch.id).join(',');
@@ -105,6 +104,11 @@ class _EpisodePageState extends State<EpisodePage> {
                       ),
                       const Divider(),
                       ListTile(
+                        title: const Text('Episode'),
+                        subtitle: Text(episode.episode),
+                      ),
+                      const Divider(),
+                      ListTile(
                         title: const Text('AirDate'),
                         subtitle: Text(episode.airDate),
                       ),
@@ -138,8 +142,21 @@ class _EpisodePageState extends State<EpisodePage> {
                         sliver: SliverList.separated(
                           itemBuilder: (context, index) {
                             final character = characters[index];
-                            return CharacterCard(
-                              character: character,
+                            return GestureDetector(
+                              onTap: () async {
+                                // before
+                                context.router.navigate(
+                                  CharacterTab(children: [
+                                    CharacterRoute(
+                                      id: character.id,
+                                    ),
+                                  ]),
+                                );
+                                // after
+                              },
+                              child: CharacterCard(
+                                character: character,
+                              ),
                             );
                           },
                           separatorBuilder: (_, __) => const SizedBox(

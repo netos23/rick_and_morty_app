@@ -65,12 +65,6 @@ class _EpisodesPageState extends State<EpisodesPage> {
                           id: episode.id,
                         ),
                       );
-                      context.router.push(
-                        EpisodeRoute(
-                          id: episode.id,
-                        ),
-                      );
-
                       // after
                     },
                     child: EpisodeCard(episode: episode));

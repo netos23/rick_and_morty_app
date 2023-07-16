@@ -5,6 +5,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.2 <4.0.0'
+  flutter: ^3.10.0-10.0.pre.17 # Keep relatively close to master channel version
 
 dependencies:
   flutter:

@@ -33,12 +33,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LocationTabPage(),
       );
     },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
     CharacterRoute.name: (routeData) {
       final args = routeData.argsAs<CharacterRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -50,16 +44,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    EpisodesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const EpisodesPage(),
-      );
-    },
     CharactersRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const CharactersPage(),
+      );
+    },
+    EpisodesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EpisodesPage(),
       );
     },
     EpisodeRoute.name: (routeData) {
@@ -73,6 +67,18 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomePage(),
+      );
+    },
+    LocationsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LocationsPage(),
+      );
+    },
     LocationRoute.name: (routeData) {
       final args = routeData.argsAs<LocationRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -82,12 +88,6 @@ abstract class _$AppRouter extends RootStackRouter {
           preview: args.preview,
           id: args.id,
         ),
-      );
-    },
-    LocationsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const LocationsPage(),
       );
     },
   };
@@ -136,20 +136,6 @@ class LocationTab extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [CharacterPage]
 class CharacterRoute extends PageRouteInfo<CharacterRouteArgs> {
   CharacterRoute({
@@ -193,20 +179,6 @@ class CharacterRouteArgs {
 }
 
 /// generated route for
-/// [EpisodesPage]
-class EpisodesRoute extends PageRouteInfo<void> {
-  const EpisodesRoute({List<PageRouteInfo>? children})
-      : super(
-          EpisodesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'EpisodesRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [CharactersPage]
 class CharactersRoute extends PageRouteInfo<void> {
   const CharactersRoute({List<PageRouteInfo>? children})
@@ -216,6 +188,20 @@ class CharactersRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CharactersRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EpisodesPage]
+class EpisodesRoute extends PageRouteInfo<void> {
+  const EpisodesRoute({List<PageRouteInfo>? children})
+      : super(
+          EpisodesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EpisodesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -264,6 +250,34 @@ class EpisodeRouteArgs {
 }
 
 /// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LocationsPage]
+class LocationsRoute extends PageRouteInfo<void> {
+  const LocationsRoute({List<PageRouteInfo>? children})
+      : super(
+          LocationsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LocationsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LocationPage]
 class LocationRoute extends PageRouteInfo<LocationRouteArgs> {
   LocationRoute({
@@ -304,18 +318,4 @@ class LocationRouteArgs {
   String toString() {
     return 'LocationRouteArgs{key: $key, preview: $preview, id: $id}';
   }
-}
-
-/// generated route for
-/// [LocationsPage]
-class LocationsRoute extends PageRouteInfo<void> {
-  const LocationsRoute({List<PageRouteInfo>? children})
-      : super(
-          LocationsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'LocationsRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }

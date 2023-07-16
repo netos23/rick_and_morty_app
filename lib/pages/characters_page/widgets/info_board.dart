@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/model/character.dart';
-
+import 'package:rick_and_morty/navigation/app_router.dart';
+import 'package:rick_and_morty/util/path_id.dart';
 import 'first_episode_tile.dart';
 import 'last_location_tile.dart';
 import 'status_tile.dart';
@@ -31,12 +33,38 @@ class InfoBoard extends StatelessWidget {
             StatusTile(
               character: character,
             ),
-            LastLocationTile(
-              character: character,
+            GestureDetector(
+              onTap: () async {
+                // before
+                context.router.navigate(
+                  LocationTab(children: [
+                    LocationRoute(
+                      id: character.location.url.id,
+                    ),
+                  ]),
+                );
+                // after
+              },
+              child: LastLocationTile(
+                character: character,
+              ),
             ),
-            FirstEpisodeTile(
-              character: character,
-            ),
+            GestureDetector(
+              onTap: () async {
+                // before
+                context.router.navigate(
+                  EpisodeTab(children: [
+                    EpisodeRoute(
+                      id: character.episode.first.id,
+                    ),
+                  ]),
+                );
+                // after
+              },
+              child: FirstEpisodeTile(
+                character: character,
+              ),
+            )
           ],
         ),
       ),

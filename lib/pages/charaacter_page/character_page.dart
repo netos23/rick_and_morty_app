@@ -45,10 +45,10 @@ class _CharacterPageState extends State<CharacterPage> {
     List<String> episodes,
   ) async {
     final ids = episodes.map((e) => e.id).join(',');
-
     try {
-      final episodes = await episodeClient.getMultipleEpisode(ids);
-      return episodes;
+      return ids.split(',').length == 1
+          ? [await episodeClient.getEpisode(int.parse(ids))]
+          : await episodeClient.getMultipleEpisode(ids);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -109,9 +109,14 @@ class _CharacterPageState extends State<CharacterPage> {
                           ],
                           tileMode: TileMode.mirror,
                         ).createShader(bounds),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: character.image,
+                        child: SizedBox(
+                          child: Hero(
+                            tag: character.id,
+                            child: Image.network(
+                              character.image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -150,13 +155,11 @@ class _CharacterPageState extends State<CharacterPage> {
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
                           context.router.navigate(
-                            LocationTab(
-                                children: [
-                                  LocationRoute(
-                                    id: character.origin.url.id,
-                                  ),
-                                ]
-                            ),
+                            LocationTab(children: [
+                              LocationRoute(
+                                id: character.origin.url.id,
+                              ),
+                            ]),
                           );
                         },
                       ),
@@ -172,17 +175,15 @@ class _CharacterPageState extends State<CharacterPage> {
                       const Divider(),
                       ListTile(
                         title: const Text('Location'),
-                        subtitle: Text(character.origin.name),
+                        subtitle: Text(character.location.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
-                           context.router.navigate(
-                             LocationTab(
-                              children: [
-                                LocationRoute(
-                                  id: character.origin.url.id,
-                                ),
-                              ]
-                            ),
+                          context.router.navigate(
+                            LocationTab(children: [
+                              LocationRoute(
+                                id: character.location.url.id,
+                              ),
+                            ]),
                           );
                         },
                       ),
@@ -221,7 +222,19 @@ class _CharacterPageState extends State<CharacterPage> {
                           ),
                           itemBuilder: (context, index) {
                             final episode = episodes[index];
-                            return EpisodeCard(episode: episode);
+                            return GestureDetector(
+                                onTap: () async {
+                                  // before
+                                  context.router.navigate(
+                                    EpisodeTab(children: [
+                                      EpisodeRoute(
+                                        id: episode.id,
+                                      ),
+                                    ]),
+                                  );
+                                  // after
+                                },
+                                child: EpisodeCard(episode: episode));
                           },
                           itemCount: episodes.length,
                         ),
