@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/dto/rick_and_morty_dto.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/pages/components/character_page.dart';
 import 'package:rick_and_morty/pages/components/filter_button.dart';
@@ -9,8 +8,8 @@ import 'package:rick_and_morty/pages/components/filter_text_form.dart';
 import 'package:rick_and_morty/pages/components/pagination_list.dart';
 import 'package:rick_and_morty/pages/components/rick_and_morty_app_bar.dart';
 import 'package:rick_and_morty/pages/filter/filter_dialog.dart';
+import 'package:rick_and_morty/pages/filter/filter_dto.dart';
 import 'package:rick_and_morty/repositories/character_rep.dart';
-import 'package:rick_and_morty/route/app_router.dart';
 
 @RoutePage()
 class CharactersPage extends StatefulWidget {
@@ -24,6 +23,7 @@ class _CharactersPageState extends State<CharactersPage> {
   String species = '';
   String gender = '';
   String status = '';
+  String name = '';
   int page = 1;
 
   @override
@@ -57,19 +57,29 @@ class _CharactersPageState extends State<CharactersPage> {
             Flexible(
                 flex: 3,
                 child: FilterTextForm(
-                  onFieldSubmitted: (_) {},
+                  onFieldSubmitted: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
                 )),
             Flexible(
               flex: 4,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: FilterButton(onPressedCallBack: () {
-                  showDialog(
+                child: FilterButton(onPressedCallBack: () async {
+                  var dto = await showDialog<FilterDto>(
                     context: context,
                     builder: (context) {
                       return const FilterDialog();
                     },
                   );
+                  if (dto == null) return;
+                  setState(() {
+                    status = dto.status;
+                    gender = dto.gender;
+                    species = dto.species;
+                  });
                 }),
               ),
             ),
@@ -79,7 +89,8 @@ class _CharactersPageState extends State<CharactersPage> {
                   queries: {
                     "species": species,
                     "status": status,
-                    "gender": gender
+                    "gender": gender,
+                    "name": name,
                   },
                   sliverGridDelegate:
                       const SliverGridDelegateWithMaxCrossAxisExtent(

@@ -44,6 +44,16 @@ class _PaginationListState<T> extends State<PaginationList<T>> {
     getData();
   }
 
+  @override
+  void didUpdateWidget(PaginationList<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // как-то это криво выглядит
+    // и что-то с контроллерами надо делать (наверно)
+    lastPagesData.clear();
+    _page = 1;
+    getData();
+  }
+
   void _listenScroll() {
     final extent = _scrollController.position.maxScrollExtent;
     final loadFactor = widget.loadFactor;
