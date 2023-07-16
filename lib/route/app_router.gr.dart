@@ -67,6 +67,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LocationsPage(),
       );
     },
+    LocationRoute.name: (routeData) {
+      final args = routeData.argsAs<LocationRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LocationPage(
+          key: args.key,
+          location: args.location,
+        ),
+      );
+    },
   };
 }
 
@@ -204,4 +214,42 @@ class LocationsRoute extends PageRouteInfo<void> {
   static const String name = 'LocationsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LocationPage]
+class LocationRoute extends PageRouteInfo<LocationRouteArgs> {
+  LocationRoute({
+    Key? key,
+    required Location location,
+    List<PageRouteInfo>? children,
+  }) : super(
+          LocationRoute.name,
+          args: LocationRouteArgs(
+            key: key,
+            location: location,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'LocationRoute';
+
+  static const PageInfo<LocationRouteArgs> page =
+      PageInfo<LocationRouteArgs>(name);
+}
+
+class LocationRouteArgs {
+  const LocationRouteArgs({
+    this.key,
+    required this.location,
+  });
+
+  final Key? key;
+
+  final Location location;
+
+  @override
+  String toString() {
+    return 'LocationRouteArgs{key: $key, location: $location}';
+  }
 }

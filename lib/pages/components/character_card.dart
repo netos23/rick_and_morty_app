@@ -16,7 +16,8 @@ class CharacterCard extends StatelessWidget {
     var theme = Theme.of(context);
     return InkWell(
       onTap: () {
-        AutoRouter.of(context).navigate(CharacterRoute(character: character));
+        AutoRouter.of(context).navigate(
+            CharacterTab(children: [CharacterRoute(character: character)]));
       },
       child: Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,

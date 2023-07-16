@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/model/character.dart';
-import 'package:rick_and_morty/pages/components/character_page.dart';
+import 'package:rick_and_morty/pages/components/character_card.dart';
 import 'package:rick_and_morty/pages/components/filter_button.dart';
 import 'package:rick_and_morty/pages/components/filter_text_form.dart';
 import 'package:rick_and_morty/pages/components/pagination_list.dart';
 import 'package:rick_and_morty/pages/components/rick_and_morty_app_bar.dart';
-import 'package:rick_and_morty/pages/filter/filter_dialog.dart';
+import 'package:rick_and_morty/pages/filter/filter_character_dialog.dart';
 import 'package:rick_and_morty/pages/filter/filter_dto.dart';
 import 'package:rick_and_morty/repositories/character_rep.dart';
 
@@ -24,17 +24,7 @@ class _CharactersPageState extends State<CharactersPage> {
   String gender = '';
   String status = '';
   String name = '';
-  int page = 1;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +61,7 @@ class _CharactersPageState extends State<CharactersPage> {
                   var dto = await showDialog<FilterDto>(
                     context: context,
                     builder: (context) {
-                      return const FilterDialog();
+                      return const FilterCharacterDialog();
                     },
                   );
                   if (dto == null) return;

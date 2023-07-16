@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/pages/filter/filter_dto.dart';
 
 
-class FilterDialog extends StatefulWidget {
-  const FilterDialog({Key? key}) : super(key: key);
+class FilterCharacterDialog extends StatefulWidget {
+  const FilterCharacterDialog({Key? key}) : super(key: key);
 
   @override
-  State<FilterDialog> createState() => _FilterDialogState();
+  State<FilterCharacterDialog> createState() => _FilterCharacterDialogState();
 }
 
-class _FilterDialogState extends State<FilterDialog> {
+class _FilterCharacterDialogState extends State<FilterCharacterDialog> {
   String species = '';
   String gender = '';
   String status = '';
@@ -92,7 +92,7 @@ class _FilterDialogState extends State<FilterDialog> {
             DropdownMenu(
                 width: 240,
                 textStyle: theme.textTheme.bodyLarge,
-                hintText: 'gender',
+                hintText: 'Gender',
                 dropdownMenuEntries: genderEntries,
                 onSelected: (value) {
                   setState(() {
