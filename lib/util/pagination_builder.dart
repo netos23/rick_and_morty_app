@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 typedef ScrollableWidgetBuilder<T, S extends ScrollController> = Widget
-    Function(
-  BuildContext,
-  S,
-  AsyncSnapshot<UnmodifiableListView<T>>,
-);
+Function(
+    BuildContext,
+    S,
+    AsyncSnapshot<UnmodifiableListView<T>>,
+    );
 
 typedef PaginationCallback<T> = Future<(List<T>, bool)> Function(int);
 
@@ -28,15 +28,17 @@ class PaginationBuilder<T> extends StatefulWidget {
   final ScrollableWidgetBuilder<T, ScrollController> builder;
 
   @override
-  State<PaginationBuilder<T>> createState() => _PaginationBuilderState<T>();
+  State<PaginationBuilder<T>> createState() =>
+      _PaginationBuilderState<T>();
 }
 
-class _PaginationBuilderState<T> extends State<PaginationBuilder<T>> {
+class _PaginationBuilderState<T>
+    extends State<PaginationBuilder<T>> {
   final BehaviorSubject<int> _paginationController = BehaviorSubject();
   final ScrollController _scrollController = ScrollController();
 
   late final Stream<UnmodifiableListView<T>> _dataStream =
-      _paginationController.stream.distinct().asyncExpand(_loadData);
+  _paginationController.stream.distinct().asyncExpand(_loadData);
 
   int? _page;
 
@@ -89,6 +91,7 @@ class _PaginationBuilderState<T> extends State<PaginationBuilder<T>> {
   }
 }
 
+
 class PagePaginationBuilder<T> extends StatefulWidget {
   const PagePaginationBuilder({
     super.key,
@@ -108,12 +111,13 @@ class PagePaginationBuilder<T> extends StatefulWidget {
       _PagePaginationBuilderState<T>();
 }
 
-class _PagePaginationBuilderState<T> extends State<PagePaginationBuilder<T>> {
+class _PagePaginationBuilderState<T>
+    extends State<PagePaginationBuilder<T>> {
   final BehaviorSubject<int> _paginationController = BehaviorSubject();
   final PageController _scrollController = PageController();
 
   late final Stream<UnmodifiableListView<T>> _dataStream =
-      _paginationController.stream.distinct().asyncExpand(_loadData);
+  _paginationController.stream.distinct().asyncExpand(_loadData);
 
   int? _page;
 

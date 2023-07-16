@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/network/data/dto/pagination/pagination.dart';
 import 'package:rick_and_morty/network/data/repository/character_repository.dart';
 import 'package:rick_and_morty/network/model/character/character.dart';
 import 'package:rick_and_morty/network/util/dio_util.dart';
@@ -48,7 +47,7 @@ class _CharactersPageState extends State<CharactersPage> {
     return Scaffold(
       appBar: const AppBarWidget(),
       body: SafeArea(
-        child: PaginationBuilder<Character>(
+        child: PaginationBuilder<Character>( // у меня не работает PaginationBuilder ((((((
           paginationCallback: _loadCharacters,
           builder: (context, controller, snapshot) {
             final characters = snapshot.data;
