@@ -1,54 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:rick_and_morty/screens/find_screen/find_screen_widget.dart';
+import 'package:rick_and_morty/asset/fonts.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 
 class RickAndMortyApiApp extends StatelessWidget {
-  const RickAndMortyApiApp({Key? key}) : super(key: key);
+  RickAndMortyApiApp({Key? key}) : super(key: key);
+
+  final _router = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router.config(),
       theme: ThemeData(
         useMaterial3: true,
         textTheme: TextTheme(
-          headlineLarge: GoogleFonts.montserrat(
-            fontSize: 32,
-            height: 32 / 40,
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-          ),
-          headlineSmall: GoogleFonts.montserrat(
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-            height: 24 / 32,
-            color: Colors.white,
-          ),
-          bodyLarge: GoogleFonts.montserrat(
-            fontSize: 16,
-            height: 16 / 20,
-            fontWeight: FontWeight.w400,
-            color: Colors.white,
-          ),
-          bodyMedium: GoogleFonts.montserrat(
-            fontSize: 14,
-            height: 14 / 20,
-            fontWeight: FontWeight.w400,
-            color: Colors.white54,
-          ),
+          headlineLarge: Fonts.headlineLarge,
+          headlineSmall: Fonts.headlineSmall,
+          bodyLarge: Fonts.bodyLarge,
+          bodyMedium: Fonts.bodyMedium,
         ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.black,
           onBackground: Colors.black,
           background: Colors.white,
           primary: Colors.grey[800],
-          secondary: Colors.white30,
+          primaryContainer: Colors.grey[200],
           onSecondary: Colors.grey[900],
           onPrimary: Colors.white,
           error: Colors.red,
-          tertiary: Colors.green,
+          secondary: Colors.green,
+          tertiary: Colors.blue,
         ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          titleTextStyle: Fonts.headlineLarge,
+          centerTitle: true,
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          )
+        )
       ),
-      home: const FindScreenWidget(),
     );
   }
 }

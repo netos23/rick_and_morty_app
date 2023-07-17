@@ -13,9 +13,13 @@ class SearchWidget extends StatelessWidget {
       controller: controller,
       style: textTheme.bodyLarge?.copyWith(color: colorScheme.onBackground),
       decoration: InputDecoration(
-        fillColor: colorScheme.secondary,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+
+        ),
+        fillColor: colorScheme.primaryContainer,
         filled: true,
-        icon: Icon(
+        suffixIcon: Icon(
           Icons.search,
           color: colorScheme.onBackground,
         ),

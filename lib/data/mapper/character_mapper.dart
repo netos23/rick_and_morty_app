@@ -11,18 +11,17 @@ class CharacterMapper {
       status: dto.status,
       species: dto.species,
       type: dto.type,
-      gender: dto.type,
+      gender: dto.gender,
       origin: ShortOrigin(
         dto.origin.name,
-        _parseId(dto.origin.url),
+        dto.origin.url.isEmpty ? null : _parseId(dto.origin.url),
       ),
       location: ShortLocation(
         dto.location.name,
-        _parseId(dto.location.url),
+        dto.location.url.isEmpty ? null : _parseId(dto.location.url),
       ),
       image: dto.image,
-      episodeIds:
-          dto.episode.map((episodeUrl) => _parseId(episodeUrl)).toList(),
+      episodeIds: _parseIdList(dto.episode),
       created: dto.created,
     );
   }
@@ -30,7 +29,14 @@ class CharacterMapper {
   static int _parseId(String url) {
     final domens = url.split('/');
 
-
     return int.parse(domens[domens.length - 1]);
+  }
+
+  static List<int> _parseIdList(List<String> urls) {
+    if (urls.isEmpty) {
+      return [];
+    }
+
+    return urls.map(_parseId).toList();
   }
 }

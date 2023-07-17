@@ -21,7 +21,7 @@ class _EpisodeRepo implements EpisodeRepo {
   @override
   Future<ResponseWrapper<EpisodeDto>> getPage(int pageNo) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': pageNo};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -32,7 +32,7 @@ class _EpisodeRepo implements EpisodeRepo {
     )
             .compose(
               _dio.options,
-              '/episode/?page=${pageNo}',
+              '/episode',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -72,6 +72,35 @@ class _EpisodeRepo implements EpisodeRepo {
               baseUrl,
             ))));
     final value = EpisodeDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<EpisodeDto>> getMultipleEpisode(String ids) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<EpisodeDto>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/episode/${ids}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => EpisodeDto.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

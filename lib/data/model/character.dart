@@ -28,20 +28,78 @@ class Character {
     required this.created,
   });
 
+
+  //грязный файл получился, я что-то не нашёл как freezed генерирует  equals
+  //но хочется какой-то аналог ломбока
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Character &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          status == other.status &&
+          species == other.species &&
+          type == other.type &&
+          gender == other.gender &&
+          origin == other.origin &&
+          location == other.location &&
+          image == other.image &&
+          episodeIds == other.episodeIds &&
+          created == other.created;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      status.hashCode ^
+      species.hashCode ^
+      type.hashCode ^
+      gender.hashCode ^
+      origin.hashCode ^
+      location.hashCode ^
+      image.hashCode ^
+      episodeIds.hashCode ^
+      created.hashCode;
+
   factory Character.fromDto(CharacterDto dto) =>
       CharacterMapper.mapFromDto(dto);
 }
 
 class ShortOrigin {
   final String name;
-  final int id;
+  final int? id;
+
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ShortOrigin &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          id == other.id;
+
+  @override
+  int get hashCode => name.hashCode ^ id.hashCode;
 
   ShortOrigin(this.name, this.id);
 }
 
 class ShortLocation {
   final String name;
-  final int id;
+  final int? id;
+
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ShortLocation &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          id == other.id;
+
+  @override
+  int get hashCode => name.hashCode ^ id.hashCode;
 
   ShortLocation(this.name, this.id);
 }

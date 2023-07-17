@@ -6,7 +6,7 @@ class EpisodeParser {
     return Episode(
       id: dto.id,
       name: dto.name,
-      airDate: dto.air_date,
+      airDate: dto.airDate,
       episode: dto.episode,
       created: dto.created,
     );

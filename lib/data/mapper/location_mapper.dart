@@ -8,7 +8,8 @@ class LocationMapper {
       name: dto.name,
       type: dto.type,
       dimension: dto.dimension,
-      residentsIds: dto.residents.map(_parseId).toList(),
+      residentsIds:
+          dto.residents.isEmpty ? [] : dto.residents.map(_parseId).toList(),
       created: dto.created,
     );
   }

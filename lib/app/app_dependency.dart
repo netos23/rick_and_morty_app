@@ -35,7 +35,7 @@ class AppDependency extends StatelessWidget {
             create: (context) => LocationRepo(context.read()),
           ),
         ],
-        child: const RickAndMortyApiApp(),
+        child: RickAndMortyApiApp(),
     );
   }
 }

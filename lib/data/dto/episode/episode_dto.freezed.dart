@@ -21,10 +21,9 @@ EpisodeDto _$EpisodeDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EpisodeDto {
   int get id => throw _privateConstructorUsedError;
-  String get name =>
-      throw _privateConstructorUsedError; //чтобы не бесился, что не camelCase
-// ignore: non_constant_identifier_names
-  String get air_date => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "air_date")
+  String get airDate => throw _privateConstructorUsedError;
   String get episode => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get created => throw _privateConstructorUsedError;
@@ -44,7 +43,7 @@ abstract class $EpisodeDtoCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      String air_date,
+      @JsonKey(name: "air_date") String airDate,
       String episode,
       String url,
       String created});
@@ -65,7 +64,7 @@ class _$EpisodeDtoCopyWithImpl<$Res, $Val extends EpisodeDto>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? air_date = null,
+    Object? airDate = null,
     Object? episode = null,
     Object? url = null,
     Object? created = null,
@@ -79,9 +78,9 @@ class _$EpisodeDtoCopyWithImpl<$Res, $Val extends EpisodeDto>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      air_date: null == air_date
-          ? _value.air_date
-          : air_date // ignore: cast_nullable_to_non_nullable
+      airDate: null == airDate
+          ? _value.airDate
+          : airDate // ignore: cast_nullable_to_non_nullable
               as String,
       episode: null == episode
           ? _value.episode
@@ -110,7 +109,7 @@ abstract class _$$_EpisodeDtoCopyWith<$Res>
   $Res call(
       {int id,
       String name,
-      String air_date,
+      @JsonKey(name: "air_date") String airDate,
       String episode,
       String url,
       String created});
@@ -129,7 +128,7 @@ class __$$_EpisodeDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? air_date = null,
+    Object? airDate = null,
     Object? episode = null,
     Object? url = null,
     Object? created = null,
@@ -143,9 +142,9 @@ class __$$_EpisodeDtoCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      air_date: null == air_date
-          ? _value.air_date
-          : air_date // ignore: cast_nullable_to_non_nullable
+      airDate: null == airDate
+          ? _value.airDate
+          : airDate // ignore: cast_nullable_to_non_nullable
               as String,
       episode: null == episode
           ? _value.episode
@@ -169,7 +168,7 @@ class _$_EpisodeDto implements _EpisodeDto {
   const _$_EpisodeDto(
       {required this.id,
       required this.name,
-      required this.air_date,
+      @JsonKey(name: "air_date") required this.airDate,
       required this.episode,
       required this.url,
       required this.created});
@@ -181,10 +180,9 @@ class _$_EpisodeDto implements _EpisodeDto {
   final int id;
   @override
   final String name;
-//чтобы не бесился, что не camelCase
-// ignore: non_constant_identifier_names
   @override
-  final String air_date;
+  @JsonKey(name: "air_date")
+  final String airDate;
   @override
   final String episode;
   @override
@@ -194,7 +192,7 @@ class _$_EpisodeDto implements _EpisodeDto {
 
   @override
   String toString() {
-    return 'EpisodeDto(id: $id, name: $name, air_date: $air_date, episode: $episode, url: $url, created: $created)';
+    return 'EpisodeDto(id: $id, name: $name, airDate: $airDate, episode: $episode, url: $url, created: $created)';
   }
 
   @override
@@ -204,8 +202,7 @@ class _$_EpisodeDto implements _EpisodeDto {
             other is _$_EpisodeDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.air_date, air_date) ||
-                other.air_date == air_date) &&
+            (identical(other.airDate, airDate) || other.airDate == airDate) &&
             (identical(other.episode, episode) || other.episode == episode) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.created, created) || other.created == created));
@@ -214,7 +211,7 @@ class _$_EpisodeDto implements _EpisodeDto {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, air_date, episode, url, created);
+      Object.hash(runtimeType, id, name, airDate, episode, url, created);
 
   @JsonKey(ignore: true)
   @override
@@ -234,7 +231,7 @@ abstract class _EpisodeDto implements EpisodeDto {
   const factory _EpisodeDto(
       {required final int id,
       required final String name,
-      required final String air_date,
+      @JsonKey(name: "air_date") required final String airDate,
       required final String episode,
       required final String url,
       required final String created}) = _$_EpisodeDto;
@@ -246,9 +243,9 @@ abstract class _EpisodeDto implements EpisodeDto {
   int get id;
   @override
   String get name;
-  @override //чтобы не бесился, что не camelCase
-// ignore: non_constant_identifier_names
-  String get air_date;
+  @override
+  @JsonKey(name: "air_date")
+  String get airDate;
   @override
   String get episode;
   @override

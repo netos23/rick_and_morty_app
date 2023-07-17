@@ -33,13 +33,13 @@ class _FutureUpdaterState<T> extends State<FutureUpdater<T>> {
     _throwFuture();
   }
 
-  _handleError(error) {
+  void _handleError(error) {
     setState(() {
       _error = error;
     });
   }
 
-  _handleValue(value){
+  void _handleValue(value){
     setState(() {
       _data = value;
     });

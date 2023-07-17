@@ -9,9 +9,14 @@ part 'episode_repo.g.dart';
 abstract class EpisodeRepo {
   factory EpisodeRepo(Dio dio, {String baseUrl}) = _EpisodeRepo;
 
-  @GET('/episode/?page={pageNo}')
-  Future<ResponseWrapper<EpisodeDto>> getPage(@Path() int pageNo);
+  @GET('/episode')
+  Future<ResponseWrapper<EpisodeDto>> getPage(@Query('page') int pageNo);
 
   @GET('/episode/{id}')
   Future<EpisodeDto> get(@Path() int id);
+
+  @GET("/episode/{ids}")
+  Future<List<EpisodeDto>> getMultipleEpisode(
+    @Path() String ids,
+  );
 }
