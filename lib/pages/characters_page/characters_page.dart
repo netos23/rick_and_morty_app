@@ -91,10 +91,10 @@ class _CharactersPageState extends State<CharactersPage> {
               ),
               itemBuilder: (context, index) {
                 final character = characters[index];
-                return GestureDetector(
-                  onTap: () async {
+                return CharacterCard(
+                  onTap: () {
                     // before
-                    context.router.push(
+                    context.router.navigate(
                       CharacterRoute(
                         id: character.id,
                         preview: character,
@@ -102,9 +102,7 @@ class _CharactersPageState extends State<CharactersPage> {
                     );
                     // after
                   },
-                  child: CharacterCard(
-                    character: character,
-                  ),
+                  character: character,
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(

@@ -18,47 +18,53 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          
+          path: '/',
           initial: true,
           page: HomeRoute.page,
           children: [
             AutoRoute(
-                
-                initial: true,
-                page: CharacterTab.page,
-                children: [
-                  AutoRoute(
-                    
-                    initial: true,
-                    page: CharactersRoute.page,
-                  ),
-                  AutoRoute(
-                    
-                    page: CharacterRoute.page,
-                  ),
-                ]),
-            AutoRoute( page: EpisodeTab.page, children: [
-              AutoRoute(
-                
-                initial: true,
-                page: EpisodesRoute.page,
-              ),
-              AutoRoute(
-                
-                page: EpisodeRoute.page,
-              ),
-            ]),
+              path: 'charater-tab',
+              initial: true,
+              page: CharacterTab.page,
+              children: [
+                AutoRoute(
+                  path: 'characters',
+                  initial: true,
+                  page: CharactersRoute.page,
+                ),
+                CustomRoute(
+                  path: 'character:id',
+                  customRouteBuilder: buildTransition,
+                  page: CharacterRoute.page,
+                ),
+              ],
+            ),
             AutoRoute(
-              
+              path: 'episode-tab',
+              page: EpisodeTab.page,
+              children: [
+                AutoRoute(
+                  path: 'episodes',
+                  initial: true,
+                  page: EpisodesRoute.page,
+                ),
+                AutoRoute(
+                  path: 'episode',
+                  page: EpisodeRoute.page,
+                ),
+              ],
+            ),
+            AutoRoute(
+              path: 'location-tab',
               page: LocationTab.page,
               children: [
                 AutoRoute(
-                  
+                  path: 'locations',
                   initial: true,
                   page: LocationsRoute.page,
                 ),
                 AutoRoute(
-                  
+                  path: 'location',
                   page: LocationRoute.page,
                 ),
               ],
@@ -66,6 +72,18 @@ class AppRouter extends _$AppRouter {
           ],
         ),
       ];
+
+  Route<T> buildTransition<T>(
+    BuildContext context,
+    Widget child,
+    AutoRoutePage<T> page,
+  ) {
+    return ModalBottomSheetRoute(
+      settings: page,
+      builder: (_) => child,
+      isScrollControlled: true,
+    );
+  }
 }
 
 @RoutePage(name: 'CharacterTab')

@@ -8,40 +8,45 @@ class CharacterCard extends StatelessWidget {
   const CharacterCard({
     super.key,
     required this.character,
+    this.onTap,
   });
 
   final Character character;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 3 / 5,
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
+    return GestureDetector(
+      onTap: onTap,
+      child: AspectRatio(
+        aspectRatio: 3 / 5,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
           ),
-        ),
-        margin: EdgeInsets.zero,
-        child: DefaultTextStyle(
-          style: TextStyle(),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 3,
-                child: CachedNetworkImage(
-                  imageUrl: character.image,
-                  fit: BoxFit.fitWidth,
+          margin: EdgeInsets.zero,
+          child: DefaultTextStyle(
+            style: TextStyle(),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: CachedNetworkImage(
+                    imageUrl: character.image,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: InfoBoard(
-                  character: character,
+                Expanded(
+                  flex: 2,
+                  child: InfoBoard(
+                    character: character,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

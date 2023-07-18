@@ -40,7 +40,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CharacterRoute.name: (routeData) {
-      final args = routeData.argsAs<CharacterRouteArgs>();
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<CharacterRouteArgs>(
+          orElse: () => CharacterRouteArgs(
+                  id: queryParams.getInt(
+                'id',
+                1,
+              )));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: CharacterPage(
@@ -155,7 +161,7 @@ class CharacterRoute extends PageRouteInfo<CharacterRouteArgs> {
   CharacterRoute({
     Key? key,
     Character? preview,
-    required int id,
+    int id = 1,
     List<PageRouteInfo>? children,
   }) : super(
           CharacterRoute.name,
@@ -164,6 +170,7 @@ class CharacterRoute extends PageRouteInfo<CharacterRouteArgs> {
             preview: preview,
             id: id,
           ),
+          rawQueryParams: {'id': id},
           initialChildren: children,
         );
 
@@ -177,7 +184,7 @@ class CharacterRouteArgs {
   const CharacterRouteArgs({
     this.key,
     this.preview,
-    required this.id,
+    this.id = 1,
   });
 
   final Key? key;

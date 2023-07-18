@@ -40,6 +40,9 @@ class AppDependencies extends StatelessWidget {
             context.read(),
           ),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ValueNotifier(ThemeMode.dark),
+        ),
       ],
       child: child,
     );

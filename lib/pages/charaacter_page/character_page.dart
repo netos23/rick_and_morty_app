@@ -16,7 +16,7 @@ class CharacterPage extends StatefulWidget {
   const CharacterPage({
     super.key,
     this.preview,
-    required this.id,
+    @PathParam('id') this.id = 1,
   });
 
   final Character? preview;
@@ -151,11 +151,11 @@ class _CharacterPageState extends State<CharacterPage> {
                         onTap: () {
                           context.router.navigate(
                             LocationTab(
-                                children: [
-                                  LocationRoute(
-                                    id: character.origin.url.id,
-                                  ),
-                                ]
+                              children: [
+                                LocationRoute(
+                                  id: character.origin.url.id,
+                                ),
+                              ],
                             ),
                           );
                         },
@@ -175,15 +175,13 @@ class _CharacterPageState extends State<CharacterPage> {
                         subtitle: Text(character.origin.name),
                         trailing: const Icon(Icons.navigate_next),
                         onTap: () {
-                           context.router.navigate(
-                             LocationTab(
-                              children: [
-                                LocationRoute(
-                                  id: character.origin.url.id,
-                                ),
-                              ]
-                            ),
-                          );
+                          context.router.push(HomeRoute(children: [
+                            LocationTab(children: [
+                              LocationRoute(
+                                id: character.origin.url.id,
+                              ),
+                            ]),
+                          ]));
                         },
                       ),
                       const Divider(),

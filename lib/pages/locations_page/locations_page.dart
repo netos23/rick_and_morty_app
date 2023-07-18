@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/assets/theme_swatch.dart';
 import 'package:rick_and_morty/data/service/location_client.dart';
 import 'package:rick_and_morty/model/location.dart';
 import 'package:rick_and_morty/navigation/app_router.dart';
@@ -38,6 +39,11 @@ class _LocationsPageState extends State<LocationsPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      appBar: AppBar(
+        actions: const [
+          ThemeSwatch(),
+        ],
+      ),
       body: SafeArea(
         child: PagePaginationBuilder<Location>(
           paginationCallback: _loadLocations,
