@@ -26,6 +26,7 @@ class AppDependencies extends StatelessWidget {
             ..options.baseUrl = 'https://rickandmortyapi.com',
         ),
         Provider(
+          lazy: false,
           create: (context) => CharacterClient(
             context.read(),
           ),

@@ -6,7 +6,7 @@ class ThemeSwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final thmeNotifer = context.watch<ValueNotifier<ThemeMode>>();
+    final thmeNotifer = Provider.of<ValueNotifier<ThemeMode>>(context);
     return IconButton(
       onPressed: () {
         thmeNotifer.value = thmeNotifer.value == ThemeMode.dark
