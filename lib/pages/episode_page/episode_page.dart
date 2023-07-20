@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
+import 'package:rick_and_morty/favourites/favourites.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
+import 'package:rick_and_morty/navigation/app_router.dart';
 import 'package:rick_and_morty/pages/characters_page/widgets/character_card.dart';
 import 'package:rick_and_morty/util/path_id.dart';
 
@@ -17,7 +20,6 @@ class EpisodePage extends StatefulWidget {
     required this.id,
   });
 
-
   final Episode? preview;
   final int id;
 
@@ -26,10 +28,9 @@ class EpisodePage extends StatefulWidget {
 }
 
 class _EpisodePageState extends State<EpisodePage> {
+  EpisodeClient get episodeClient => context.read();
 
-
-   EpisodeClient get episodeClient => context.read();
-   CharacterClient get characterClient => context.read();
+  CharacterClient get characterClient => context.read();
 
   Future<List<Character>> _loadCharacter(List<String> characters) async {
     final ids = characters.map((ch) => ch.id).join(',');
@@ -138,8 +139,44 @@ class _EpisodePageState extends State<EpisodePage> {
                         sliver: SliverList.separated(
                           itemBuilder: (context, index) {
                             final character = characters[index];
-                            return CharacterCard(
-                              character: character,
+                            return StoreConnector<Set<int>, bool>(
+                              builder: (context, isFavourites) {
+                                return StoreConnector<Set<int>, VoidCallback>(
+                                  builder: (context, callback) {
+                                    return CharacterCard(
+                                      onFavouriteTap: callback,
+                                      isFavourites: isFavourites,
+                                      onTap: () {
+                                        // before
+                                        context.router.navigate(
+                                          CharacterTab(
+                                            children: [
+                                              CharacterRoute(
+                                                id: character.id,
+                                                preview: character,
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                        // after
+                                      },
+                                      character: character,
+                                    );
+                                  },
+                                  converter: (store) => () {
+                                    final favourite =
+                                        store.state.contains(character.id);
+                                    if (favourite) {
+                                      store
+                                          .dispatch(RemoveAction(character.id));
+                                    } else {
+                                      store.dispatch(AddAction(character.id));
+                                    }
+                                  },
+                                );
+                              },
+                              converter: (store) =>
+                                  store.state.contains(character.id),
                             );
                           },
                           separatorBuilder: (_, __) => const SizedBox(

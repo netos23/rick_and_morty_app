@@ -9,8 +9,12 @@ class CharacterCard extends StatelessWidget {
     super.key,
     required this.character,
     this.onTap,
+    required this.isFavourites,
+    this.onFavouriteTap,
   });
 
+  final bool isFavourites;
+  final VoidCallback? onFavouriteTap;
   final Character character;
   final VoidCallback? onTap;
 
@@ -42,6 +46,8 @@ class CharacterCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: InfoBoard(
+                    isFavourites: isFavourites,
+                    onFavouriteTap: onFavouriteTap,
                     character: character,
                   ),
                 ),

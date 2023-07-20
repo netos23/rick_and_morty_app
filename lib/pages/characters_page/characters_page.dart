@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
+import 'package:rick_and_morty/favourites/favourites.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
 import 'package:rick_and_morty/navigation/app_router.dart';
@@ -72,6 +74,16 @@ class _CharactersPageState extends State<CharactersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.router.push(const FavouritesRoute());
+            },
+            icon: const Icon(Icons.favorite),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: PaginationBuilder<Character>(
           paginationCallback: _loadCharacters,
@@ -91,18 +103,37 @@ class _CharactersPageState extends State<CharactersPage> {
               ),
               itemBuilder: (context, index) {
                 final character = characters[index];
-                return CharacterCard(
-                  onTap: () {
-                    // before
-                    context.router.navigate(
-                      CharacterRoute(
-                        id: character.id,
-                        preview: character,
-                      ),
+                return StoreConnector<Set<int>, bool>(
+                  builder: (context, isFavourites) {
+                    return StoreConnector<Set<int>, VoidCallback>(
+                      builder: (context, callback) {
+                        return CharacterCard(
+                          onFavouriteTap: callback,
+                          isFavourites: isFavourites,
+                          onTap: () {
+                            // before
+                            context.router.navigate(
+                              CharacterRoute(
+                                id: character.id,
+                                preview: character,
+                              ),
+                            );
+                            // after
+                          },
+                          character: character,
+                        );
+                      },
+                      converter: (store) => () {
+                        final favourite = store.state.contains(character.id);
+                        if (favourite) {
+                          store.dispatch(RemoveAction(character.id));
+                        } else {
+                          store.dispatch(AddAction(character.id));
+                        }
+                      },
                     );
-                    // after
                   },
-                  character: character,
+                  converter: (store) => store.state.contains(character.id),
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(

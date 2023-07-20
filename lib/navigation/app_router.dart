@@ -7,6 +7,7 @@ import 'package:rick_and_morty/pages/charaacter_page/character_page.dart';
 import 'package:rick_and_morty/pages/characters_page/characters_page.dart';
 import 'package:rick_and_morty/pages/episode_page/episode_page.dart';
 import 'package:rick_and_morty/pages/episodes_page/episodes_page.dart';
+import 'package:rick_and_morty/pages/favourite_page/favourite_page.dart';
 import 'package:rick_and_morty/pages/home_page/home_page.dart';
 import 'package:rick_and_morty/pages/location_page/location_page.dart';
 import 'package:rick_and_morty/pages/locations_page/locations_page.dart';
@@ -27,6 +28,10 @@ class AppRouter extends _$AppRouter {
               initial: true,
               page: CharacterTab.page,
               children: [
+                AutoRoute(
+                  path: 'favourites',
+                  page: FavouritesRoute.page,
+                ),
                 AutoRoute(
                   path: 'characters',
                   initial: true,

@@ -5,8 +5,12 @@ class StatusTile extends StatelessWidget {
   const StatusTile({
     super.key,
     required this.character,
+    required this.isFavourites,
+    this.onFavouriteTap,
   });
 
+  final bool isFavourites;
+  final VoidCallback? onFavouriteTap;
   final Character character;
 
   @override
@@ -16,11 +20,22 @@ class StatusTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          character.name,
-          style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onSurface,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              character.name,
+              style: theme.textTheme.headlineSmall?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+            IconButton(
+              onPressed: onFavouriteTap,
+              icon: Icon(
+                isFavourites ? Icons.favorite : Icons.favorite_outline,
+              ),
+            ),
+          ],
         ),
         Row(
           children: [

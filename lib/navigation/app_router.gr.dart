@@ -33,6 +33,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LocationTabPage(),
       );
     },
+    FavouritesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FavouritesPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -40,10 +46,10 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CharacterRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
+      final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<CharacterRouteArgs>(
           orElse: () => CharacterRouteArgs(
-                  id: queryParams.getInt(
+                  id: pathParams.getInt(
                 'id',
                 1,
               )));
@@ -142,6 +148,20 @@ class LocationTab extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [FavouritesPage]
+class FavouritesRoute extends PageRouteInfo<void> {
+  const FavouritesRoute({List<PageRouteInfo>? children})
+      : super(
+          FavouritesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FavouritesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -170,7 +190,7 @@ class CharacterRoute extends PageRouteInfo<CharacterRouteArgs> {
             preview: preview,
             id: id,
           ),
-          rawQueryParams: {'id': id},
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 

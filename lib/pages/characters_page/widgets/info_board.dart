@@ -9,8 +9,12 @@ class InfoBoard extends StatelessWidget {
   const InfoBoard({
     super.key,
     required this.character,
+    required this.isFavourites,
+    this.onFavouriteTap,
   });
 
+  final bool isFavourites;
+  final VoidCallback? onFavouriteTap;
   final Character character;
 
   @override
@@ -30,6 +34,8 @@ class InfoBoard extends StatelessWidget {
           children: [
             StatusTile(
               character: character,
+              isFavourites: isFavourites,
+              onFavouriteTap: onFavouriteTap,
             ),
             LastLocationTile(
               character: character,
