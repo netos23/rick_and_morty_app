@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
@@ -62,6 +63,8 @@ class CharacterPage extends StatelessWidget {
             );
           }
 
+          final idController = context.read<ValueNotifier<int?>>();
+
           return DividerTheme(
             data: const DividerThemeData(
               indent: 30,
@@ -77,6 +80,10 @@ class CharacterPage extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
+                    leading: BackButton(
+                      onPressed: () => idController.value = null,
+                    ),
+                    automaticallyImplyLeading: false,
                     pinned: true,
                     expandedHeight: 400,
                     flexibleSpace: FlexibleSpaceBar(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/service/character_client.dart';
 import 'package:rick_and_morty/data/service/episode_client.dart';
 import 'package:rick_and_morty/model/character.dart';
@@ -63,6 +64,7 @@ class CharactersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final idController = context.read<ValueNotifier<int?>>();
     return Scaffold(
       body: SafeArea(
         child: PaginationBuilder<Character>(
@@ -83,8 +85,11 @@ class CharactersPage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final character = characters[index];
-                return CharacterCard(
-                  character: character,
+                return InkWell(
+                  onTap: () => idController.value = character.id,
+                  child: CharacterCard(
+                    character: character,
+                  ),
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(

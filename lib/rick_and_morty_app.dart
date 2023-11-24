@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/pages/charaacter_page/character_page.dart';
 import 'package:rick_and_morty/pages/characters_page/characters_page.dart';
-import 'package:rick_and_morty/pages/episodes_page/episodes_page.dart';
-import 'package:rick_and_morty/pages/location_page/location_page.dart';
 
 import 'assets/color_schemes.g.dart';
-import 'pages/charaacter_page/character_page.dart';
-import 'pages/locations_page/locations_page.dart';
 
 class RickAndMortyApp extends StatelessWidget {
   const RickAndMortyApp({super.key});
@@ -27,21 +23,43 @@ class RickAndMortyApp extends StatelessWidget {
         colorScheme: darkColorScheme,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      home: CharacterPage(
-        id: 1,
-        characterClient: context.read(),
-        episodeClient: context.read(),
-      ),
+      // home: CharacterPage(
+      //   id: 1,
+      //   characterClient: context.read(),
+      //   episodeClient: context.read(),
+      // ),
       // home: LocationsPage(
       //   locationClient: context.read(),
       // ),
       // home: EpisodesPage(
       //   episodeClient: context.read(),
       // ),
-      // home: CharactersPage(
-      //   characterClient: context.read(),
-      //   episodeClient: context.read(),
-      // ),
+      home: ChangeNotifierProvider(
+        create: (_) => ValueNotifier<int?>(null),
+        builder: (context, _) {
+          final idController = context.watch<ValueNotifier<int?>>();
+          final id = idController.value;
+          return Navigator(
+            onPopPage: (route, val) => true,
+            pages: [
+              MaterialPage(
+                child: CharactersPage(
+                  characterClient: context.read(),
+                  episodeClient: context.read(),
+                ),
+              ),
+              if (id != null)
+                MaterialPage(
+                  child: CharacterPage(
+                    id: id,
+                    characterClient: context.read(),
+                    episodeClient: context.read(),
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
