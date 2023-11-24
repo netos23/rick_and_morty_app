@@ -334,6 +334,20 @@ class LocationRouteArgs {
 }
 
 /// generated route for
+/// [SwipePage]
+class SwipeRoute extends PageRouteInfo<void> {
+  const SwipeRoute({List<PageRouteInfo>? children})
+      : super(
+          SwipeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SwipeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LocationsPage]
 class LocationsRoute extends PageRouteInfo<void> {
   const LocationsRoute({List<PageRouteInfo>? children})

@@ -20,38 +20,41 @@ class CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AspectRatio(
-        aspectRatio: 3 / 5,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
+    return Hero(
+      tag: character.url,
+      child: InkResponse(
+        onTap: onTap,
+        child: AspectRatio(
+          aspectRatio: 3 / 5,
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
-          ),
-          margin: EdgeInsets.zero,
-          child: DefaultTextStyle(
-            style: TextStyle(),
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: CachedNetworkImage(
-                    imageUrl: character.image,
-                    fit: BoxFit.fitWidth,
+            margin: EdgeInsets.zero,
+            child: DefaultTextStyle(
+              style: TextStyle(),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: CachedNetworkImage(
+                      imageUrl: character.image,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: InfoBoard(
-                    isFavourites: isFavourites,
-                    onFavouriteTap: onFavouriteTap,
-                    character: character,
+                  Expanded(
+                    flex: 2,
+                    child: InfoBoard(
+                      isFavourites: isFavourites,
+                      onFavouriteTap: onFavouriteTap,
+                      character: character,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

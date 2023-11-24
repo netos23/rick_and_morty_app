@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/model/character.dart';
 import 'package:rick_and_morty/model/episode.dart';
@@ -32,10 +33,16 @@ class AppRouter extends _$AppRouter {
                   path: 'favourites',
                   page: FavouritesRoute.page,
                 ),
-                AutoRoute(
+                CustomRoute(
                   path: 'characters',
-                  initial: true,
+                  customRouteBuilder: buildTransition,
                   page: CharactersRoute.page,
+                ),
+                CustomRoute(
+                  path: 'swipes',
+                  initial: true,
+                  customRouteBuilder: buildTransition,
+                  page: SwipeRoute.page,
                 ),
                 CustomRoute(
                   path: 'character:id',
@@ -83,10 +90,9 @@ class AppRouter extends _$AppRouter {
     Widget child,
     AutoRoutePage<T> page,
   ) {
-    return ModalBottomSheetRoute(
+    return MaterialPageRoute(
       settings: page,
       builder: (_) => child,
-      isScrollControlled: true,
     );
   }
 }

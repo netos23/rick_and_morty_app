@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +19,11 @@ class RickAndMortyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeNotifer = context.watch<ValueNotifier<ThemeMode>>();
     return MaterialApp.router(
-      routerConfig: _router.config(),
+      routerConfig: _router.config(
+        navigatorObservers: () => [
+          HeroController(),
+        ],
+      ),
       themeMode: themeNotifer.value,
       theme: ThemeData(
         useMaterial3: true,
@@ -29,6 +35,36 @@ class RickAndMortyApp extends StatelessWidget {
         colorScheme: darkColorScheme,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
+    );
+  }
+}
+
+class WrongWidget extends StatefulWidget {
+  WrongWidget({
+    super.key,
+    required this.id,
+  }) {
+    controller.add(id);
+    controller.stream.listen((event) {
+      print(event);
+    });
+  }
+
+  int id;
+  StreamController<int> controller = StreamController();
+
+  @override
+  State<WrongWidget> createState() => _WrongWidgetState();
+}
+
+class _WrongWidgetState extends State<WrongWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: widget.controller.stream,
+      builder: (context, snapshot) {
+        return Text(snapshot.data!.toString());
+      },
     );
   }
 }

@@ -60,177 +60,180 @@ class _CharacterPageState extends State<CharacterPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      body: FutureBuilder(
-        initialData: widget.preview,
-        future: _loadCharacter(),
-        builder: (context, snapshot) {
-          final character = snapshot.data;
-          if (character == null) {
-            return const Center(
-              child: CupertinoActivityIndicator(),
-            );
-          }
+      body: Hero(
+        tag: widget.preview?.url ?? '',
+        child: FutureBuilder(
+          initialData: widget.preview,
+          future: _loadCharacter(),
+          builder: (context, snapshot) {
+            final character = snapshot.data;
+            if (character == null) {
+              return const Center(
+                child: CupertinoActivityIndicator(),
+              );
+            }
 
-          return DividerTheme(
-            data: const DividerThemeData(
-              indent: 30,
-              endIndent: 30,
-            ),
-            child: ListTileTheme.merge(
-              contentPadding: const EdgeInsets.only(left: 30, right: 20),
-              titleTextStyle: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.onBackground,
+            return DividerTheme(
+              data: const DividerThemeData(
+                indent: 30,
+                endIndent: 30,
               ),
-              subtitleTextStyle: theme.textTheme.bodyMedium,
-              textColor: theme.colorScheme.onBackground,
-              child: CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    pinned: true,
-                    expandedHeight: 400,
-                    flexibleSpace: FlexibleSpaceBar(
-                      title: Text(character.name),
-                      background: ShaderMask(
-                        blendMode: BlendMode.srcATop,
-                        shaderCallback: (bounds) => LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.5),
-                            Colors.black.withOpacity(0.7),
-                            Colors.black,
-                          ],
-                          stops: const [
-                            0.6,
-                            0.75,
-                            0.8,
-                            1.0,
-                          ],
-                          tileMode: TileMode.mirror,
-                        ).createShader(bounds),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: character.image,
+              child: ListTileTheme.merge(
+                contentPadding: const EdgeInsets.only(left: 30, right: 20),
+                titleTextStyle: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
+                subtitleTextStyle: theme.textTheme.bodyMedium,
+                textColor: theme.colorScheme.onBackground,
+                child: CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      pinned: true,
+                      expandedHeight: 400,
+                      flexibleSpace: FlexibleSpaceBar(
+                        title: Text(character.name),
+                        background: ShaderMask(
+                          blendMode: BlendMode.srcATop,
+                          shaderCallback: (bounds) => LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[
+                              Colors.transparent,
+                              Colors.black.withOpacity(0.5),
+                              Colors.black.withOpacity(0.7),
+                              Colors.black,
+                            ],
+                            stops: const [
+                              0.6,
+                              0.75,
+                              0.8,
+                              1.0,
+                            ],
+                            tileMode: TileMode.mirror,
+                          ).createShader(bounds),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.fill,
+                            imageUrl: character.image,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SliverList.list(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        child: Text(
-                          'Informations',
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            color: theme.colorScheme.onSurface,
+                    SliverList.list(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: Text(
+                            'Informations',
+                            style: theme.textTheme.headlineSmall?.copyWith(
+                              color: theme.colorScheme.onSurface,
+                            ),
                           ),
                         ),
-                      ),
-                      ListTile(
-                        title: const Text('Gender'),
-                        subtitle: Text(character.gender),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: const Text('Status'),
-                        subtitle: Text(character.status),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: const Text('Specie'),
-                        subtitle: Text(character.species),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: const Text('Origin'),
-                        subtitle: Text(character.origin.name),
-                        trailing: const Icon(Icons.navigate_next),
-                        onTap: () {
-                          context.router.navigate(
-                            LocationTab(
-                              children: [
+                        ListTile(
+                          title: const Text('Gender'),
+                          subtitle: Text(character.gender),
+                        ),
+                        const Divider(),
+                        ListTile(
+                          title: const Text('Status'),
+                          subtitle: Text(character.status),
+                        ),
+                        const Divider(),
+                        ListTile(
+                          title: const Text('Specie'),
+                          subtitle: Text(character.species),
+                        ),
+                        const Divider(),
+                        ListTile(
+                          title: const Text('Origin'),
+                          subtitle: Text(character.origin.name),
+                          trailing: const Icon(Icons.navigate_next),
+                          onTap: () {
+                            context.router.navigate(
+                              LocationTab(
+                                children: [
+                                  LocationRoute(
+                                    id: character.origin.url.id,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        const Divider(),
+                        ListTile(
+                          title: const Text('Type'),
+                          subtitle: Text(
+                            character.type.isNotEmpty
+                                ? character.type
+                                : 'Missing',
+                          ),
+                        ),
+                        const Divider(),
+                        ListTile(
+                          title: const Text('Location'),
+                          subtitle: Text(character.origin.name),
+                          trailing: const Icon(Icons.navigate_next),
+                          onTap: () {
+                            context.router.push(HomeRoute(children: [
+                              LocationTab(children: [
                                 LocationRoute(
                                   id: character.origin.url.id,
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: const Text('Type'),
-                        subtitle: Text(
-                          character.type.isNotEmpty
-                              ? character.type
-                              : 'Missing',
-                        ),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: const Text('Location'),
-                        subtitle: Text(character.origin.name),
-                        trailing: const Icon(Icons.navigate_next),
-                        onTap: () {
-                          context.router.push(HomeRoute(children: [
-                            LocationTab(children: [
-                              LocationRoute(
-                                id: character.origin.url.id,
-                              ),
-                            ]),
-                          ]));
-                        },
-                      ),
-                      const Divider(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        child: Text(
-                          'Episodes',
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            color: theme.colorScheme.onSurface,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  FutureBuilder(
-                    future: _loadEpisodes(character.episode),
-                    builder: (context, snapshot) {
-                      final episodes = snapshot.data;
-                      if (episodes == null) {
-                        return SliverToBoxAdapter(
-                          child: Container(),
-                        );
-                      }
-
-                      return SliverPadding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 20),
-                        sliver: SliverGrid.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
-                            childAspectRatio: 5 / 4,
-                          ),
-                          itemBuilder: (context, index) {
-                            final episode = episodes[index];
-                            return EpisodeCard(episode: episode);
+                              ]),
+                            ]));
                           },
-                          itemCount: episodes.length,
                         ),
-                      );
-                    },
-                  ),
-                ],
+                        const Divider(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: Text(
+                            'Episodes',
+                            style: theme.textTheme.headlineSmall?.copyWith(
+                              color: theme.colorScheme.onSurface,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    FutureBuilder(
+                      future: _loadEpisodes(character.episode),
+                      builder: (context, snapshot) {
+                        final episodes = snapshot.data;
+                        if (episodes == null) {
+                          return SliverToBoxAdapter(
+                            child: Container(),
+                          );
+                        }
+
+                        return SliverPadding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 20),
+                          sliver: SliverGrid.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 200,
+                              childAspectRatio: 5 / 4,
+                            ),
+                            itemBuilder: (context, index) {
+                              final episode = episodes[index];
+                              return EpisodeCard(episode: episode);
+                            },
+                            itemCount: episodes.length,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
